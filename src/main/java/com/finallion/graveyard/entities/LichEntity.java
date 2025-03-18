@@ -395,7 +395,7 @@ public class LichEntity extends Monster implements GeoEntity {
         }
 
         if (!canHuntStart() && random.nextInt(5) == 0) {
-            level().playSound(null, this.blockPosition(), SoundEvents.SOUL_ESCAPE, SoundSource.HOSTILE, 4.0F, -10.0F);
+            level().playSound(null, this.blockPosition(), SoundEvents.SOUL_ESCAPE.value(), SoundSource.HOSTILE, 4.0F, -10.0F);
         }
 
         if (getMusicDelay() < 85) {

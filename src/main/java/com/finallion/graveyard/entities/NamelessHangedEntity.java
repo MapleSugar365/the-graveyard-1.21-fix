@@ -190,11 +190,11 @@ public class NamelessHangedEntity extends AbstractVillager implements GeoEntity 
 
 
     public SoundEvent getNotifyTradeSound() {
-        return SoundEvents.SOUL_ESCAPE;
+        return SoundEvents.SOUL_ESCAPE.value();
     }
 
     protected SoundEvent getTradeUpdatedSound(boolean p_35890_) {
-        return SoundEvents.SOUL_ESCAPE;
+        return SoundEvents.SOUL_ESCAPE.value();
     }
 
 
