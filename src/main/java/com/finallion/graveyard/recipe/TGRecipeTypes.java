@@ -1,23 +1,24 @@
 package com.finallion.graveyard.recipe;
 
 import com.finallion.graveyard.TheGraveyard;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
 
 public class TGRecipeTypes {
 
-    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, TheGraveyard.MOD_ID);
-    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, TheGraveyard.MOD_ID);
+    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(BuiltInRegistries.RECIPE_TYPE, TheGraveyard.MOD_ID);
+    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(BuiltInRegistries.RECIPE_SERIALIZER, TheGraveyard.MOD_ID);
 
-    public final static RegistryObject<RecipeType<OssuaryRecipe>> OSSUARY_CARVING = RECIPE_TYPES.register("ossuary_carving", () ->
+    public final static Supplier<RecipeType<OssuaryRecipe>> OSSUARY_CARVING = RECIPE_TYPES.register("ossuary_carving", () ->
             Type.INSTANCE
     );
 
-    public final static RegistryObject<RecipeSerializer<OssuaryRecipe>> OSSUARY_CARVING_SERIALIZER = RECIPE_SERIALIZERS.register("ossuary_carving", () ->
+    public final static Supplier<RecipeSerializer<OssuaryRecipe>> OSSUARY_CARVING_SERIALIZER = RECIPE_SERIALIZERS.register("ossuary_carving", () ->
             new CarvingRecipe.Serializer<>(OssuaryRecipe::new)
     );
 
