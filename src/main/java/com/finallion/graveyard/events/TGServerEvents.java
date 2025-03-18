@@ -5,19 +5,20 @@ import com.finallion.graveyard.entities.horde.GraveyardHordeSpawner;
 import com.finallion.graveyard.util.TGFileWriterReader;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.level.LevelEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.event.server.ServerStoppedEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.neoforged.neoforge.event.level.LevelEvent;
+import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.neoforged.neoforge.event.server.ServerStoppedEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.LogicalSide;
+import net.neoforged.fml.common.EventBusSubscriber;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Mod.EventBusSubscriber(modid = TheGraveyard.MOD_ID)
+@EventBusSubscriber(modid = TheGraveyard.MOD_ID)
 public class TGServerEvents {
     private static Map<ResourceLocation, GraveyardHordeSpawner> spawners = new HashMap<>();
 
@@ -53,21 +54,12 @@ public class TGServerEvents {
     }
 
     @SubscribeEvent
-    public static void onWorldTick(TickEvent.LevelTickEvent event) {
-        if (event.phase != TickEvent.Phase.START)
-            return;
-
-        if (event.side != LogicalSide.SERVER)
-            return;
-
-        GraveyardHordeSpawner spawner = spawners.get(event.level.dimension().location());
-        if (spawner != null) {
-            spawner.tick(event.level);
+    public static void afterServerTickEvent(ServerTickEvent.Post event) {
+        for (ServerLevel level : event.getServer().getAllLevels()) {
+            GraveyardHordeSpawner spawner = spawners.get(level.dimension().location());
+            if (spawner != null) {
+                spawner.tick(level);
+            }
         }
     }
-
-    //@SubscribeEvent
-    //public void registerCommands(RegisterCommandsEvent event) {
-    //    event.getDispatcher().register(TGCommands.register(event.getDispatcher()));
-    //}
 }
