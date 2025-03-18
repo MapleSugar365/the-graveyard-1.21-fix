@@ -16,12 +16,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.MapItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 
 //@Mod.EventBusSubscriber(modid = TheGraveyard.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -135,7 +138,7 @@ public class NamelessHangedTradeOffers {
         }
 
         public MerchantOffer getOffer(Entity entity, RandomSource random) {
-            return new MerchantOffer(new ItemStack(TGItems.CORRUPTION.get(), this.price), new ItemStack(this.sell.getItem(), this.count), this.maxUses, this.experience, this.multiplier);
+            return new MerchantOffer(new ItemCost(TGItems.CORRUPTION.get(), this.price), new ItemStack(this.sell.getItem(), this.count), this.maxUses, this.experience, this.multiplier);
         }
     }
 
@@ -168,7 +171,7 @@ public class NamelessHangedTradeOffers {
                     MapItem.renderBiomePreviewMap(serverWorld, itemStack);
                     MapItemSavedData.addTargetDecoration(itemStack, blockPos, "+", this.iconType);
                     itemStack.setHoverName(Component.translatable(this.nameKey));
-                    return new MerchantOffer(new ItemStack(TGItems.CORRUPTION.get(), this.price), new ItemStack(Items.COMPASS), itemStack, this.maxUses, this.experience, 0.2F);
+                    return new MerchantOffer(new ItemCost(TGItems.CORRUPTION.get(), this.price), Optional.of(new ItemCost(Items.COMPASS)), itemStack, this.maxUses, this.experience, 0.2F);
                 } else {
                     return null;
                 }

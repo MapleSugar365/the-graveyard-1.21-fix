@@ -15,33 +15,35 @@ import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.minecraft.core.registries.BuiltInRegistries;
 
+import java.util.function.Supplier;
+
 @EventBusSubscriber(modid = TheGraveyard.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class TGEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, TheGraveyard.MOD_ID);
 
-    public static final RegistryObject<EntityType<SkeletonCreeper>> SKELETON_CREEPER = ENTITIES.register("skeleton_creeper", () -> EntityType.Builder.of(SkeletonCreeper::new, MobCategory.MONSTER).sized(0.6F, 1.7F).build(TheGraveyard.MOD_ID + ":skeleton_creeper"));
-    public static final RegistryObject<EntityType<AcolyteEntity>> ACOLYTE = ENTITIES.register("acolyte", () -> EntityType.Builder.of(AcolyteEntity::new, MobCategory.MONSTER).sized(0.6F, 1.9F).build(TheGraveyard.MOD_ID + ":acolyte"));
+    public static final Supplier<EntityType<SkeletonCreeper>> SKELETON_CREEPER = ENTITIES.register("skeleton_creeper", () -> EntityType.Builder.of(SkeletonCreeper::new, MobCategory.MONSTER).sized(0.6F, 1.7F).build(TheGraveyard.MOD_ID + ":skeleton_creeper"));
+    public static final Supplier<EntityType<AcolyteEntity>> ACOLYTE = ENTITIES.register("acolyte", () -> EntityType.Builder.of(AcolyteEntity::new, MobCategory.MONSTER).sized(0.6F, 1.9F).build(TheGraveyard.MOD_ID + ":acolyte"));
 
-    public static final RegistryObject<EntityType<ReaperEntity>> REAPER = ENTITIES.register("reaper", () -> EntityType.Builder.of(ReaperEntity::new, MobCategory.MONSTER).sized(0.5F, 1.4F).build(TheGraveyard.MOD_ID + ":reaper"));
-    public static final RegistryObject<EntityType<GhoulEntity>> GHOUL = ENTITIES.register("ghoul", () -> EntityType.Builder.of(GhoulEntity::new, MobCategory.MONSTER).sized(0.8F, 2.1F).build(TheGraveyard.MOD_ID + ":ghoul")); // if hitbox is set to 0.9 the ghoul wont move
-    public static final RegistryObject<EntityType<NightmareEntity>> NIGHTMARE = ENTITIES.register("nightmare", () -> EntityType.Builder.of(NightmareEntity::new, MobCategory.MONSTER).sized(0.6F, 2.6F).build(TheGraveyard.MOD_ID + ":nightmare"));
-    public static final RegistryObject<EntityType<RevenantEntity>> REVENANT = ENTITIES.register("revenant", () -> EntityType.Builder.of(RevenantEntity::new, MobCategory.MONSTER).sized(0.6F, 1.9F).build(TheGraveyard.MOD_ID + ":revenant"));
-    public static final RegistryObject<EntityType<FallingCorpse>> FALLING_CORPSE = ENTITIES.register("falling_corpse", () -> EntityType.Builder.of(FallingCorpse::new, MobCategory.MONSTER).sized(0.4F, 0.5F).build(TheGraveyard.MOD_ID + ":falling_corpse"));
-    public static final RegistryObject<EntityType<LichEntity>> LICH = ENTITIES.register("lich", () -> EntityType.Builder.of(LichEntity::new, MobCategory.MONSTER).sized(0.9F, 4.0F).build(TheGraveyard.MOD_ID + ":lich"));
+    public static final Supplier<EntityType<ReaperEntity>> REAPER = ENTITIES.register("reaper", () -> EntityType.Builder.of(ReaperEntity::new, MobCategory.MONSTER).sized(0.5F, 1.4F).build(TheGraveyard.MOD_ID + ":reaper"));
+    public static final Supplier<EntityType<GhoulEntity>> GHOUL = ENTITIES.register("ghoul", () -> EntityType.Builder.of(GhoulEntity::new, MobCategory.MONSTER).sized(0.8F, 2.1F).build(TheGraveyard.MOD_ID + ":ghoul")); // if hitbox is set to 0.9 the ghoul wont move
+    public static final Supplier<EntityType<NightmareEntity>> NIGHTMARE = ENTITIES.register("nightmare", () -> EntityType.Builder.of(NightmareEntity::new, MobCategory.MONSTER).sized(0.6F, 2.6F).build(TheGraveyard.MOD_ID + ":nightmare"));
+    public static final Supplier<EntityType<RevenantEntity>> REVENANT = ENTITIES.register("revenant", () -> EntityType.Builder.of(RevenantEntity::new, MobCategory.MONSTER).sized(0.6F, 1.9F).build(TheGraveyard.MOD_ID + ":revenant"));
+    public static final Supplier<EntityType<FallingCorpse>> FALLING_CORPSE = ENTITIES.register("falling_corpse", () -> EntityType.Builder.of(FallingCorpse::new, MobCategory.MONSTER).sized(0.4F, 0.5F).build(TheGraveyard.MOD_ID + ":falling_corpse"));
+    public static final Supplier<EntityType<LichEntity>> LICH = ENTITIES.register("lich", () -> EntityType.Builder.of(LichEntity::new, MobCategory.MONSTER).sized(0.9F, 4.0F).build(TheGraveyard.MOD_ID + ":lich"));
 
-    public static final RegistryObject<EntityType<WraithEntity>> WRAITH = ENTITIES.register("wraith", () -> EntityType.Builder.of(WraithEntity::new, MobCategory.MONSTER).sized(0.6F, 1.8F).build(TheGraveyard.MOD_ID + ":wraith"));
-    public static final RegistryObject<EntityType<CorruptedPillager>> CORRUPTED_PILLAGER = ENTITIES.register("corrupted_pillager", () -> EntityType.Builder.of(CorruptedPillager::new, MobCategory.MONSTER).sized(0.6F, 1.9F).build(TheGraveyard.MOD_ID + ":corrupted_pillager"));
-    public static final RegistryObject<EntityType<CorruptedVindicator>> CORRUPTED_VINDICATOR = ENTITIES.register("corrupted_vindicator", () -> EntityType.Builder.of(CorruptedVindicator::new, MobCategory.MONSTER).sized(0.6F, 1.9F).build(TheGraveyard.MOD_ID + ":corrupted_vindicator"));
+    public static final Supplier<EntityType<WraithEntity>> WRAITH = ENTITIES.register("wraith", () -> EntityType.Builder.of(WraithEntity::new, MobCategory.MONSTER).sized(0.6F, 1.8F).build(TheGraveyard.MOD_ID + ":wraith"));
+    public static final Supplier<EntityType<CorruptedPillager>> CORRUPTED_PILLAGER = ENTITIES.register("corrupted_pillager", () -> EntityType.Builder.of(CorruptedPillager::new, MobCategory.MONSTER).sized(0.6F, 1.9F).build(TheGraveyard.MOD_ID + ":corrupted_pillager"));
+    public static final Supplier<EntityType<CorruptedVindicator>> CORRUPTED_VINDICATOR = ENTITIES.register("corrupted_vindicator", () -> EntityType.Builder.of(CorruptedVindicator::new, MobCategory.MONSTER).sized(0.6F, 1.9F).build(TheGraveyard.MOD_ID + ":corrupted_vindicator"));
 
-    public static final RegistryObject<EntityType<GhoulingEntity>> GHOULING = ENTITIES.register("ghouling", () -> EntityType.Builder.of(GhoulingEntity::new, MobCategory.CREATURE).sized(0.7F, 2.0F).build(TheGraveyard.MOD_ID + ":ghouling"));
-    public static final RegistryObject<EntityType<SkullEntity>> SKULL = ENTITIES.register("skull", () -> EntityType.Builder
+    public static final Supplier<EntityType<GhoulingEntity>> GHOULING = ENTITIES.register("ghouling", () -> EntityType.Builder.of(GhoulingEntity::new, MobCategory.CREATURE).sized(0.7F, 2.0F).build(TheGraveyard.MOD_ID + ":ghouling"));
+    public static final Supplier<EntityType<SkullEntity>> SKULL = ENTITIES.register("skull", () -> EntityType.Builder
             .<SkullEntity>of(SkullEntity::new, MobCategory.MISC)
             .setTrackingRange(4)
             .updateInterval(10)
             .sized(0.25F, 0.25F)
             .build(TheGraveyard.MOD_ID + ":skull"));
 
-    public static final RegistryObject<EntityType<NamelessHangedEntity>> NAMELESS_HANGED = ENTITIES.register("nameless_hanged", () -> EntityType.Builder
+    public static final Supplier<EntityType<NamelessHangedEntity>> NAMELESS_HANGED = ENTITIES.register("nameless_hanged", () -> EntityType.Builder
             .of(NamelessHangedEntity::new, MobCategory.CREATURE)
             .sized(0.8F, 2.5F)
             .build(TheGraveyard.MOD_ID + ":nameless_hanged"));
