@@ -1,26 +1,35 @@
-package com.finallion.graveyard.util;
+package com.finallion.graveyard.init;
 
 import com.finallion.graveyard.TheGraveyard;
 import com.finallion.graveyard.config.GraveyardConfig;
-import com.finallion.graveyard.init.TGEntities;
-import com.mojang.serialization.Codec;
+import com.finallion.graveyard.util.TGTags;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.neoforged.neoforge.common.world.BiomeModifier;
-import net.minecraftforge.common.world.ModifiableBiomeInfo;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.world.ModifiableBiomeInfo;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
-public class SpawnRules {
+import java.util.function.Supplier;
+
+public class TGBiomeModifiers {
+    public static final DeferredRegister<MapCodec<? extends BiomeModifier>> BIOME_MODIFIERS = DeferredRegister.create(NeoForgeRegistries.BIOME_MODIFIER_SERIALIZERS, TheGraveyard.MOD_ID);
+    public static final Supplier<MapCodec<ModSpawnModifier>> MOB_SPAWN_MODIFIER =
+            BIOME_MODIFIERS.register("mob_spawn_modifier", () ->
+                    RecordCodecBuilder.mapCodec(instance ->
+                    instance.group(
+                            Biome.LIST_CODEC.fieldOf("biomes").forGetter(ModSpawnModifier::biomes),
+                            MobSpawnSettings.SpawnerData.CODEC.fieldOf("spawn").forGetter(TGBiomeModifiers.ModSpawnModifier::spawn)
+                    ).apply(instance, ModSpawnModifier::new)
+            ));
 
     public record ModSpawnModifier(HolderSet<Biome> biomes,
                                    MobSpawnSettings.SpawnerData spawn) implements BiomeModifier {
-        private static final RegistryObject<Codec<? extends BiomeModifier>> SERIALIZER = RegistryObject.create(ResourceLocation.fromNamespaceAndPath(TheGraveyard.MOD_ID, "mobspawns"), ForgeRegistries.Keys.BIOME_MODIFIER_SERIALIZERS, TheGraveyard.MOD_ID);
 
         @Override
         public void modify(Holder<Biome> biome, Phase phase, ModifiableBiomeInfo.BiomeInfo.Builder builder) {
@@ -50,15 +59,8 @@ public class SpawnRules {
         }
 
         @Override
-        public Codec<? extends BiomeModifier> codec() {
-            return SERIALIZER.get();
-        }
-
-        public static Codec<ModSpawnModifier> makeCodec() {
-            return RecordCodecBuilder.create(builder -> builder.group(
-                    Biome.LIST_CODEC.fieldOf("biomes").forGetter(SpawnRules.ModSpawnModifier::biomes),
-                    MobSpawnSettings.SpawnerData.CODEC.fieldOf("spawn").forGetter(SpawnRules.ModSpawnModifier::spawn)
-            ).apply(builder, ModSpawnModifier::new));
+        public MapCodec<? extends BiomeModifier> codec() {
+            return MOB_SPAWN_MODIFIER.get();
         }
     }
 }
