@@ -13,7 +13,7 @@ import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 public class RevenantEyesFeatureRenderer extends GeoRenderLayer<RevenantEntity> {
-    private final RenderType TEXTURE = RenderType.eyes(new ResourceLocation("graveyard:textures/entity/revenant_eyes.png"));
+    private final RenderType TEXTURE = RenderType.eyes(ResourceLocation.parse("graveyard:textures/entity/revenant_eyes.png"));
     private final GeoRenderer<RevenantEntity> renderer;
 
     public RevenantEyesFeatureRenderer(GeoRenderer<RevenantEntity> entityRendererIn) {

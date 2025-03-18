@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
 public class CorruptedPillagerRenderer extends CorruptedIllagerRenderer<CorruptedPillager> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation("graveyard:textures/entity/corrupted_pillager.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.parse("graveyard:textures/entity/corrupted_pillager.png");
 
     public CorruptedPillagerRenderer(EntityRendererProvider.Context ctx) {
         super(ctx, new CorruptedIllagerModel<>(ctx.bakeLayer(TheGraveyardClient.CORRUPTED_ILLAGER_MODEL_LAYER)), 0.5F);

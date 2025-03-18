@@ -15,13 +15,13 @@ import com.finallion.graveyard.particles.GraveyardHandParticle;
 import com.finallion.graveyard.particles.GraveyardSoulParticle;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemColors;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.particle.SonicBoomParticle;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.GrassColor;
@@ -30,6 +30,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -42,8 +43,8 @@ public class TheGraveyardClient {
     private static final RenderType CUTOUT_MIPPED = RenderType.cutoutMipped();
 
     @SubscribeEvent
-    public static void initScreens(final FMLClientSetupEvent event) {
-        event.enqueueWork(() -> MenuScreens.register(TGScreens.OSSUARY_SCREEN_HANDLER.get(), OssuaryScreen::new));
+    private void registerScreens(RegisterMenuScreensEvent event) {
+        event.register(TGScreens.OSSUARY_SCREEN_HANDLER.get(), OssuaryScreen::new);
     }
 
     @SubscribeEvent
@@ -111,13 +112,13 @@ public class TheGraveyardClient {
 
     @SubscribeEvent
     public static void registerEntityModels(ModelEvent.RegisterAdditional event) {
-        event.register(new ResourceLocation(TheGraveyard.MOD_ID, "item/sarcophagus_base"));
-        event.register(new ResourceLocation(TheGraveyard.MOD_ID, "item/sarcophagus_lid"));
+        event.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(TheGraveyard.MOD_ID, "item/sarcophagus_base")));
+        event.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(TheGraveyard.MOD_ID, "item/sarcophagus_lid")));
 
         for (Block block : TGBlocks.getCoffins()) {
             String woodType = block.getDescriptionId().split("\\.")[2];
-            event.register(new ResourceLocation(TheGraveyard.MOD_ID, "item/" + woodType + "_base"));
-            event.register(new ResourceLocation(TheGraveyard.MOD_ID, "item/" + woodType + "_lid"));
+            event.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(TheGraveyard.MOD_ID, "item/" + woodType + "_base")));
+            event.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(TheGraveyard.MOD_ID, "item/" + woodType + "_lid")));
         }
 
     }

@@ -21,7 +21,7 @@ public class PillagerEyes extends RenderLayer<CorruptedPillager, CorruptedIllage
 
     @Override
     public void render(PoseStack matrices, MultiBufferSource vertexConsumer, int p_117351_, CorruptedPillager p_117352_, float p_117353_, float p_117354_, float p_117355_, float p_117356_, float p_117357_, float p_117358_) {
-        VertexConsumer vertex = vertexConsumer.getBuffer(RenderType.eyes(new ResourceLocation("graveyard:textures/entity/corrupted_illager_eyes.png")));
+        VertexConsumer vertex = vertexConsumer.getBuffer(RenderType.eyes(ResourceLocation.parse("graveyard:textures/entity/corrupted_illager_eyes.png")));
 
         this.getParentModel().renderToBuffer(matrices, vertex, 15728640, OverlayTexture.NO_OVERLAY, 1F, 1F, 1F, 1F);
 

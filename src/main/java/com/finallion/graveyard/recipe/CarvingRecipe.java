@@ -85,7 +85,7 @@ public abstract class CarvingRecipe implements Recipe<Container> {
 
             String s1 = GsonHelper.getAsString(p_44450_, "result");
             int i = GsonHelper.getAsInt(p_44450_, "count");
-            ItemStack itemstack = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(s1)), i);
+            ItemStack itemstack = new ItemStack(ForgeRegistries.ITEMS.getValue(ResourceLocation.parse(s1)), i);
             return this.factory.create(p_44449_, s, ingredient, itemstack);
         }
 

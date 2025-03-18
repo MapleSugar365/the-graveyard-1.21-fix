@@ -15,7 +15,7 @@ import net.minecraft.util.Mth;
 
 
 public class SkullEntityRenderer extends EntityRenderer<SkullEntity> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation("textures/entity/skeleton/skeleton.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.withDefaultNamespace("textures/entity/skeleton/skeleton.png");
     private final SkullModel model;
 
     public SkullEntityRenderer(EntityRendererProvider.Context context) {

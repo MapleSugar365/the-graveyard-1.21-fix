@@ -26,6 +26,6 @@ public class TGRecipeTypes {
         }
 
         public static final Type INSTANCE = new Type();
-        public static final ResourceLocation IDENTIFIER = new ResourceLocation("graveyard:ossuary_carving");
+        public static final ResourceLocation IDENTIFIER = ResourceLocation.parse("graveyard:ossuary_carving");
     }
 }

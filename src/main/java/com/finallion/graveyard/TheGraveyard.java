@@ -65,7 +65,7 @@ public class TheGraveyard {
         event.enqueueWork(() -> {
             /* CHANGING ITEM TEXTURE */
             // TODO Fix resource locations
-            ItemProperties.register(TGItems.VIAL_OF_BLOOD.get(), new ResourceLocation("charged"), (stack, world, entity, seed) -> {
+            ItemProperties.register(TGItems.VIAL_OF_BLOOD.get(), ResourceLocation.withDefaultNamespace("charged"), (stack, world, entity, seed) -> {
                 if (entity != null && stack.is(TGItems.VIAL_OF_BLOOD.get())) {
                     return VialOfBlood.getBlood(stack);
                 }
