@@ -60,7 +60,7 @@ public class AcolyteEntity extends CorruptedIllager {
     public void createWitherRose(@Nullable LivingEntity adversary) {
         if (adversary instanceof ServerPlayer player) {
             if (player.getMainHandItem().getItem() instanceof DaggerItem) {
-                TGAdvancements.KILLED_BY_BONE_DAGGER.trigger(player);
+                TGAdvancements.KILLED_BY_BONE_DAGGER.get().trigger(player);
             }
         }
         super.setLastHurtByMob(adversary);

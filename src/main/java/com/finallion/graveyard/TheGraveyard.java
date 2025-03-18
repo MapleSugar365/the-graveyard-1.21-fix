@@ -5,7 +5,6 @@ import com.finallion.graveyard.init.*;
 import com.finallion.graveyard.item.VialOfBlood;
 import com.finallion.graveyard.recipe.TGRecipeTypes;
 import com.finallion.graveyard.init.TGBiomeModifiers;
-import com.finallion.graveyard.util.TGTags;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
@@ -35,6 +34,7 @@ public class TheGraveyard {
         TGTileEntities.TILE_ENTITIES.register(modEventBus);
         TGParticles.PARTICLES.register(modEventBus);
         TGBiomeModifiers.BIOME_MODIFIERS.register(modEventBus);
+        TGAdvancements.TRIGGER_TYPES.register(modEventBus);
 
         modEventBus.addListener(this::setupClient);
 
@@ -57,9 +57,6 @@ public class TheGraveyard {
 
     public void setup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            TGAdvancements.init();
-            TGTags.init();
-            TGStructureType.init();
             TGProcessors.registerProcessors();
         });
     }

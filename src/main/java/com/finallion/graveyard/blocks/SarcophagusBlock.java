@@ -161,7 +161,7 @@ public class SarcophagusBlock extends AbstractCoffinBlock<SarcophagusBlockEntity
             BlockPos otherPartPos = pos.relative(getDirectionTowardsOtherPart(state.getValue(PART), state.getValue(FACING)));
             BlockState otherPart = world.getBlockState(otherPartPos);
             if (player instanceof ServerPlayer) {
-                TGAdvancements.SPAWN_WRAITH.trigger((ServerPlayer) player);
+                TGAdvancements.SPAWN_WRAITH.get().trigger((ServerPlayer) player);
             }
             world.setBlock(otherPartPos, otherPart.setValue(PLAYER_PLACED, true), 3);
         }

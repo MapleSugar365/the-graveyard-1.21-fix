@@ -468,7 +468,7 @@ public class WraithEntity extends HostileGraveyardEntity implements GeoEntity {
         if (bool) {
             Player player = wraith.level().getNearestPlayer(wraith, 10.0D);
             if (player instanceof ServerPlayer) {
-                TGAdvancements.DIM_LIGHT.trigger((ServerPlayer) player);
+                TGAdvancements.DIM_LIGHT.get().trigger((ServerPlayer) player);
             }
         }
     }

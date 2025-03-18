@@ -393,7 +393,7 @@ public class NightmareEntity extends HostileGraveyardEntity implements GeoEntity
     public void createWitherRose(@Nullable LivingEntity adversary) {
         if (adversary instanceof ServerPlayer player) {
             if (player.hasEffect(MobEffects.BLINDNESS)) {
-                TGAdvancements.KILL_WHILE_BLINDED.trigger(player);
+                TGAdvancements.KILL_WHILE_BLINDED.get().trigger(player);
             }
         }
         super.setLastHurtByMob(adversary);

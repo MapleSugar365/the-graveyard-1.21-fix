@@ -133,7 +133,7 @@ public abstract class HordeGraveyardEntity extends HostileGraveyardEntity {
     public void createWitherRose(@Nullable LivingEntity adversary) {
         if (adversary instanceof ServerPlayer player) {
             if (this.patrolLeader) {
-                TGAdvancements.KILL_HORDE.trigger(player);
+                TGAdvancements.KILL_HORDE.get().trigger(player);
             }
         }
         super.setLastHurtByMob(adversary);

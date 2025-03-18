@@ -1,45 +1,44 @@
 package com.finallion.graveyard.advancements;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Optional;
 
 
-public class TGAdvancementTrigger extends SimpleCriterionTrigger<TGAdvancementTrigger.Condition> {
+public class TGAdvancementTrigger extends SimpleCriterionTrigger<TGAdvancementTrigger.TGTriggerInstance> {
     public final ResourceLocation identifier;
 
     public TGAdvancementTrigger(ResourceLocation identifier) {
         this.identifier = identifier;
     }
 
-    @Override
-    protected Condition createInstance(JsonObject p_66248_, ContextAwarePredicate p_286603_, DeserializationContext p_66250_) {
-        return new Condition(p_286603_, identifier);
-    }
-
-
-    public void trigger(ServerPlayer p_148030_) {
-        this.trigger(p_148030_, (p_148028_) -> {
-            return true;
-        });
+    public void trigger(ServerPlayer player) {
+        this.trigger(player, (triggerInstance) -> true);
     }
 
     @Override
-    public ResourceLocation getId() {
-        return identifier;
+    public @NotNull Codec<TGTriggerInstance> codec() {
+        return TGTriggerInstance.CODEC;
     }
 
+    @Override
+    public @NotNull Criterion<TGTriggerInstance> createCriterion(@NotNull TGTriggerInstance triggerInstance) {
+        return super.createCriterion(triggerInstance);
+    }
 
-    public static class Condition extends AbstractCriterionTriggerInstance {
-
-        public Condition(ContextAwarePredicate player, ResourceLocation identifier) {
-            super(identifier, player);
-        }
-
-        public JsonObject serializeToJson(SerializationContext predicateSerializer) {
-            JsonObject jsonObject = super.serializeToJson(predicateSerializer);
-            return jsonObject;
-        }
+    public record TGTriggerInstance(
+            Optional<ContextAwarePredicate> player,
+            ResourceLocation location
+    ) implements SimpleCriterionTrigger.SimpleInstance {
+        public static final Codec<TGTriggerInstance> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(TGTriggerInstance::player),
+                ResourceLocation.CODEC.fieldOf("location").forGetter(TGTriggerInstance::location)
+        ).apply(instance, TGTriggerInstance::new));
     }
 }

@@ -7,11 +7,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 
 public class TGTags {
-
-    public static void init() {
-    }
-
-
     public static final TagKey<Biome> GHOUL_SPAWNS = biomeTag("ghoul_spawns");
     public static final TagKey<Biome> NIGHTMARE_SPAWNS = biomeTag("nightmare_spawns");
     public static final TagKey<Biome> REAPER_SPAWNS = biomeTag("reaper_spawns");
