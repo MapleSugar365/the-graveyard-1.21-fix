@@ -75,9 +75,9 @@ public class LichEntity extends Monster implements GeoEntity {
     private static final ResourceLocation SPEED_MODIFIER_ATTACKING_ID = ResourceLocation.withDefaultNamespace("attacking");
     private static final ResourceLocation DAMAGE_BOOST_ID = ResourceLocation.withDefaultNamespace("effect.strength");
     private static final ResourceLocation CRAWL_SPEED_BOOST_ID = ResourceLocation.withDefaultNamespace("enchantment.swift_sneak");
-    private static final AttributeModifier CRAWL_SPEED_BOOST = new AttributeModifier(CRAWL_SPEED_BOOST_ID, 0.18D, AttributeModifier.Operation.ADD_VALUE);;
-    private static final AttributeModifier ATTACKING_SPEED_BOOST = new AttributeModifier(SPEED_MODIFIER_ATTACKING_ID, GraveyardConfig.COMMON.speedInHuntPhase.get(), AttributeModifier.Operation.ADD_VALUE);
-    private static final AttributeModifier DMG_BOOST = new AttributeModifier(DAMAGE_BOOST_ID, GraveyardConfig.COMMON.damageHuntingPhaseAddition.get(), AttributeModifier.Operation.ADD_VALUE);
+    private static final AttributeModifier CRAWL_SPEED_BOOST = new AttributeModifier(CRAWL_SPEED_BOOST_ID, 0.18D, AttributeModifier.Operation.ADD_VALUE);
+    private static final AttributeModifier ATTACKING_SPEED_BOOST = new AttributeModifier(SPEED_MODIFIER_ATTACKING_ID, 0.15D, AttributeModifier.Operation.ADD_VALUE); // TODO: Value was loaded from GraveyardConfig.COMMON.speedInHuntPhase
+    private static final AttributeModifier DMG_BOOST = new AttributeModifier(DAMAGE_BOOST_ID, 40.0D, AttributeModifier.Operation.ADD_VALUE); // TODO: Value was loaded from GraveyardConfig.COMMON.damageHuntingPhaseAddition
     // animation
     private final RawAnimation SPAWN_ANIMATION = RawAnimation.begin().then("spawn", Animation.LoopType.PLAY_ONCE);
     private final RawAnimation IDLE_ANIMATION = RawAnimation.begin().then("idle", Animation.LoopType.LOOP);
@@ -296,14 +296,13 @@ public class LichEntity extends Monster implements GeoEntity {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        // TODO: You cant use configs in this method because the event that triggers this method is in a setup phase that does not support that anymore https://forums.minecraftforge.net/topic/99026-1165-entityattributecreationevent-with-config-values/
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, GraveyardConfig.COMMON.healthInCastingPhase.get())
+                .add(Attributes.MAX_HEALTH, 400.0D) // TODO: This used to be loaded from GraveyardConfig.COMMON.healthInCastingPhase
                 .add(Attributes.MOVEMENT_SPEED, 0.0D)
-                .add(Attributes.ATTACK_DAMAGE, GraveyardConfig.COMMON.damageCastingPhase.get())
+                .add(Attributes.ATTACK_DAMAGE, 30.0D) // TODO: This used to be loaded from GraveyardConfig.COMMON.damageCastingPhase
                 .add(Attributes.FOLLOW_RANGE, 25.0D)
-                .add(Attributes.ARMOR, GraveyardConfig.COMMON.armor.get())
-                .add(Attributes.ARMOR_TOUGHNESS, GraveyardConfig.COMMON.armorToughness.get())
+                .add(Attributes.ARMOR, 18.0D) // TODO: This used to be loaded from GraveyardConfig.COMMON.armor
+                .add(Attributes.ARMOR_TOUGHNESS, 14.0D) // TODO: This used to be loaded from GraveyardConfig.COMMON.armorToughness
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D);
     }
 

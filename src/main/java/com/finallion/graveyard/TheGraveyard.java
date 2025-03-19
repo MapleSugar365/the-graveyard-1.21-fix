@@ -20,8 +20,6 @@ public class TheGraveyard {
     public static final String MOD_ID = "graveyard";
 
     public TheGraveyard(IEventBus modEventBus, ModContainer modContainer) {
-        modEventBus.addListener(this::setup);
-
         TGCreativeModeTabs.CREATIVE_MODE_TAB.register(modEventBus);
         TGBlocks.BLOCKS.register(modEventBus);
         TGItems.ITEMS.register(modEventBus);
@@ -51,12 +49,6 @@ public class TheGraveyard {
                 return 0.0F;
             });
 
-        });
-    }
-
-    public void setup(final FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> {
-            TGProcessors.registerProcessors();
         });
     }
 }
