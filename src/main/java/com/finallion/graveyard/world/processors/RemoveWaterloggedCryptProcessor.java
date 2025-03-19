@@ -1,7 +1,7 @@
 package com.finallion.graveyard.world.processors;
 
 import com.finallion.graveyard.init.TGProcessors;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.SectionPos;
@@ -28,7 +28,7 @@ public class RemoveWaterloggedCryptProcessor extends StructureProcessor {
     // Better method to remove waterlogged bocks on structure gen
     // credit: https://github.com/YUNG-GANG/YUNGs-API/blob/multiloader/1.18/Common/src/main/java/com/yungnickyoung/minecraft/yungsapi/world/processor/ISafeWorldModifier.java
 
-    public static final Codec<RemoveWaterloggedCryptProcessor> CODEC = Codec.unit(RemoveWaterloggedCryptProcessor::new);
+    public static final MapCodec<RemoveWaterloggedCryptProcessor> CODEC = MapCodec.unit(RemoveWaterloggedCryptProcessor::new);
 
     public RemoveWaterloggedCryptProcessor() { }
 

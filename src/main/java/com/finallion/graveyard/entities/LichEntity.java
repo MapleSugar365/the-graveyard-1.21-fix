@@ -43,6 +43,7 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.EvokerFangs;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -684,23 +685,13 @@ public class LichEntity extends Monster implements GeoEntity {
     }
 
     @Override
-    protected float getStandingEyeHeight(Pose pose, EntityDimensions dimensions) {
+    public EntityDimensions getDefaultDimensions(Pose pose) {
         if (pose == Pose.CROUCHING) {
-            return 2.0F;
+            return CRAWL_DIMENSIONS.scale(this.getAgeScale());
         } else {
-            return 4.0F;
+            return super.getDefaultDimensions(pose);
         }
     }
-
-    @Override
-    public EntityDimensions getDimensions(Pose pose) {
-        if (pose == Pose.CROUCHING) {
-            setPose(Pose.CROUCHING);
-            return CRAWL_DIMENSIONS;
-        }
-        return super.getDimensions(pose);
-    }
-
 
     @Override
     public boolean causeFallDamage(float p_147187_, float p_147188_, DamageSource p_147189_) {
@@ -772,7 +763,7 @@ public class LichEntity extends Monster implements GeoEntity {
         setHealth(HEALTH_PHASE_02);
         setAttackAnimTimer(0);
         if (getPhase() == 4 || getPhase() == 5) {
-            getDimensions(Pose.CROUCHING);
+            setPose(Pose.CROUCHING);
         }
     }
 
@@ -822,10 +813,9 @@ public class LichEntity extends Monster implements GeoEntity {
     }
 
     @Override
-    public boolean ignoreExplosion() {
+    public boolean ignoreExplosion(Explosion explosion) {
         return true;
     }
-
 
     private boolean summonMob(boolean hard) {
         if (this.getHuntTimer() <= 1) { // do not summon mobs when lich is hunting

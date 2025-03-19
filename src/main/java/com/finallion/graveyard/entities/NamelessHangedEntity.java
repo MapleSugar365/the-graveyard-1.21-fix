@@ -22,6 +22,7 @@ import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -95,11 +96,10 @@ public class NamelessHangedEntity extends AbstractVillager implements GeoEntity 
     public void thunderHit(ServerLevel p_19927_, LightningBolt p_19928_) {
     }
 
-    // TODO: Reintroduce this
-//    @Override
-//    public boolean ignoreExplosion() {
-//        return true;
-//    }
+    @Override
+    public boolean ignoreExplosion(Explosion explosion) {
+        return true;
+    }
 
     @Override
     public boolean isAffectedByPotions() {
@@ -184,11 +184,10 @@ public class NamelessHangedEntity extends AbstractVillager implements GeoEntity 
         }
     }
 
-    // TODO: Reintroduce this
-//    @Override
-//    protected float getStandingEyeHeight(Pose p_35297_, EntityDimensions p_35298_) {
-//        return 2.0F;
-//    }
+    @Override
+    public EntityDimensions getDefaultDimensions(Pose pose) {
+        return super.getDefaultDimensions(pose).withEyeHeight(2.0f);
+    }
 
 
     public SoundEvent getNotifyTradeSound() {

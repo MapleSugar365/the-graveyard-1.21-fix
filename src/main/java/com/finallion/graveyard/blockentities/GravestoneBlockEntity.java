@@ -171,7 +171,7 @@ public class GravestoneBlockEntity extends BlockEntity {
 
     private static CommandSourceStack createCommandSourceStack(@Nullable Player p_279428_, Level p_279359_, BlockPos p_279430_) {
         String s = p_279428_ == null ? "Sign" : p_279428_.getName().getString();
-        Component component = (Component)(p_279428_ == null ? Component.literal("Sign") : p_279428_.getDisplayName());
+        Component component = p_279428_ == null ? Component.literal("Sign") : p_279428_.getDisplayName();
         return new CommandSourceStack(CommandSource.NULL, Vec3.atCenterOf(p_279430_), Vec2.ZERO, (ServerLevel)p_279359_, 2, s, component, p_279359_.getServer(), p_279428_);
     }
 
@@ -179,8 +179,9 @@ public class GravestoneBlockEntity extends BlockEntity {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
-    public CompoundTag getUpdateTag() {
-        return this.saveWithoutMetadata();
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        return this.saveWithoutMetadata(registries);
     }
 
     public boolean onlyOpCanSetNbt() {
@@ -230,7 +231,7 @@ public class GravestoneBlockEntity extends BlockEntity {
 
     private void clearInvalidPlayerWhoMayEdit(GravestoneBlockEntity p_277656_, Level p_277853_, UUID p_277849_) {
         if (p_277656_.playerIsTooFarAwayToEdit(p_277849_)) {
-            p_277656_.setAllowedPlayerEditor((UUID)null);
+            p_277656_.setAllowedPlayerEditor(null);
         }
 
     }

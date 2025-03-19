@@ -2,7 +2,7 @@ package com.finallion.graveyard.world.processors;
 
 import com.finallion.graveyard.config.GraveyardConfig;
 import com.finallion.graveyard.init.TGProcessors;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EntityType;
@@ -17,7 +17,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 import org.jetbrains.annotations.Nullable;
 
 public class SwitchSpawnerProcessor extends StructureProcessor {
-    public static final Codec<SwitchSpawnerProcessor> CODEC = Codec.unit(SwitchSpawnerProcessor::new);
+    public static final MapCodec<SwitchSpawnerProcessor> CODEC = MapCodec.unit(SwitchSpawnerProcessor::new);
 
     @Nullable
     @Override

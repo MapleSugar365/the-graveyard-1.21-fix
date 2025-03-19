@@ -1,7 +1,7 @@
 package com.finallion.graveyard.world.processors;
 
 import com.finallion.graveyard.init.TGProcessors;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelReader;
@@ -15,7 +15,7 @@ import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.Nullable;
 
 public class RemoveWaterloggedProcessor extends StructureProcessor {
-    public static final Codec<RemoveWaterloggedProcessor> CODEC = Codec.unit(RemoveWaterloggedProcessor::new);
+    public static final MapCodec<RemoveWaterloggedProcessor> CODEC = MapCodec.unit(RemoveWaterloggedProcessor::new);
 
     // removes waterlogged blockstate
 

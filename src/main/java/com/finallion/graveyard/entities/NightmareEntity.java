@@ -296,8 +296,10 @@ public class NightmareEntity extends HostileGraveyardEntity implements GeoEntity
 
         }
     }
-    protected float getStandingEyeHeight(Pose p_32517_, EntityDimensions p_32518_) {
-        return 2.55F;
+
+    @Override
+    public EntityDimensions getDefaultDimensions(Pose pose) {
+        return super.getDefaultDimensions(pose).withEyeHeight(2.55f);
     }
 
     boolean teleportTowards(Entity entity) {

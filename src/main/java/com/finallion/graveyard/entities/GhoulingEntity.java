@@ -1,6 +1,10 @@
 package com.finallion.graveyard.entities;
 
-import com.finallion.graveyard.entities.ai.goals.*;
+import com.finallion.graveyard.entities.ai.goals.AttackWithOwnerGoal;
+import com.finallion.graveyard.entities.ai.goals.FollowOwnerGoal;
+import com.finallion.graveyard.entities.ai.goals.GhoulingMeleeAttackGoal;
+import com.finallion.graveyard.entities.ai.goals.SitGoal;
+import com.finallion.graveyard.entities.ai.goals.TrackOwnerAttackerGoal;
 import com.finallion.graveyard.init.TGAdvancements;
 import com.finallion.graveyard.init.TGBlocks;
 import com.finallion.graveyard.init.TGParticles;
@@ -10,6 +14,7 @@ import com.finallion.graveyard.util.MathUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
@@ -44,7 +49,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
@@ -55,8 +59,8 @@ import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.animation.Animation;
 import software.bernie.geckolib.animation.AnimationController;
-import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.ArrayList;
@@ -396,7 +400,11 @@ public class GhoulingEntity extends GraveyardMinionEntity implements GeoEntity, 
                 if (this.inventory != null) {
                     for (int i = 0; i < this.inventory.getContainerSize(); i++) {
                         ItemStack stack = this.inventory.getItem(i);
-                        if (!stack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(stack)) {
+                        // TODO: Fix this
+//                        if (!stack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(stack)) {
+//                            this.spawnAtLocation(stack);
+//                        }
+                        if (!stack.isEmpty() && !stack.getEnchantmentLevel(Registries.ENCHANTMENT)) {
                             this.spawnAtLocation(stack);
                         }
                     }

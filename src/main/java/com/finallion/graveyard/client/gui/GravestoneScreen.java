@@ -106,30 +106,31 @@ public class GravestoneScreen extends Screen {
         }
     }
 
-    public void render(GuiGraphics p_230430_1_, int p_230430_2_, int p_230430_3_, float p_230430_4_) {
+    @Override
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         Lighting.setupForFlatItems();
-        this.renderBackground(p_230430_1_);
-        p_230430_1_.drawCenteredString(this.font, this.title, this.width / 2, 40, 16777215);
+        this.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
+        guiGraphics.drawCenteredString(this.font, this.title, this.width / 2, 40, 16777215);
 
-        p_230430_1_.pose().pushPose();
-        p_230430_1_.pose().translate((double)(this.width / 2), 0.0D, 50.0D);
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate((double)(this.width / 2), 0.0D, 50.0D);
         float f = 93.75F;
-        p_230430_1_.pose().scale(93.75F, -93.75F, 93.75F);
-        p_230430_1_.pose().translate(0.0D, -1.3125D, 0.0D);
+        guiGraphics.pose().scale(93.75F, -93.75F, 93.75F);
+        guiGraphics.pose().translate(0.0D, -1.3125D, 0.0D);
 
         boolean flag1 = this.frame / 6 % 2 == 0;
         float f1 = 0.6666667F;
-        p_230430_1_.pose().pushPose();
-        p_230430_1_.pose().scale(0.6666667F, -0.6666667F, -0.6666667F);
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(0.6666667F, -0.6666667F, -0.6666667F);
         MultiBufferSource.BufferSource irendertypebuffer$impl = this.minecraft.renderBuffers().bufferSource();
         VertexConsumer ivertexbuilder = GravestoneBlockEntityRenderer.getConsumer(irendertypebuffer$impl, sign.getBlockState().getBlock());
         this.model.stick.visible = false;
-        this.model.root.render(p_230430_1_.pose(), ivertexbuilder, 15728880, OverlayTexture.NO_OVERLAY);
+        this.model.root.render(guiGraphics.pose(), ivertexbuilder, 15728880, OverlayTexture.NO_OVERLAY);
 
-        p_230430_1_.pose().popPose();
+        guiGraphics.pose().popPose();
         float f2 = 0.010416667F;
-        p_230430_1_.pose().translate(0.0D, (double)0.33333334F, (double)0.046666667F);
-        p_230430_1_.pose().scale(0.010416667F, -0.010416667F, 0.010416667F);
+        guiGraphics.pose().translate(0.0D, (double)0.33333334F, (double)0.046666667F);
+        guiGraphics.pose().scale(0.010416667F, -0.010416667F, 0.010416667F);
 
 
         int i = this.text.getColor().getTextColor();
@@ -147,12 +148,12 @@ public class GravestoneScreen extends Screen {
                 }
 
                 int k1 = -this.font.width(s) / 2;
-                p_230430_1_.drawString(this.font, s, k1, j1 * this.sign.getTextLineHeight() - l, i, false);
+                guiGraphics.drawString(this.font, s, k1, j1 * this.sign.getTextLineHeight() - l, i, false);
                 if (j1 == this.line && j >= 0 && flag) {
                     int l1 = this.font.width(s.substring(0, Math.max(Math.min(j, s.length()), 0)));
                     int i2 = l1 - this.font.width(s) / 2;
                     if (j >= s.length()) {
-                        p_230430_1_.drawString(this.font, "_", i2, i1, i, false);
+                        guiGraphics.drawString(this.font, "_", i2, i1, i, false);
                     }
                 }
             }
@@ -164,7 +165,7 @@ public class GravestoneScreen extends Screen {
                 int l3 = this.font.width(s1.substring(0, Math.max(Math.min(j, s1.length()), 0)));
                 int i4 = l3 - this.font.width(s1) / 2;
                 if (flag && j < s1.length()) {
-                    p_230430_1_.fill(i4, i1 - 1, i4 + 1, i1 + this.sign.getTextLineHeight(), -16777216 | i);
+                    guiGraphics.fill(i4, i1 - 1, i4 + 1, i1 + this.sign.getTextLineHeight(), -16777216 | i);
                 }
 
                 if (k != j) {
@@ -174,13 +175,13 @@ public class GravestoneScreen extends Screen {
                     int l2 = this.font.width(s1.substring(0, j2)) - this.font.width(s1) / 2;
                     int i3 = Math.min(k2, l2);
                     int j3 = Math.max(k2, l2);
-                    p_230430_1_.fill(RenderType.guiTextHighlight(), i3, i1, j3, i1 + this.sign.getTextLineHeight(), -16776961);
+                    guiGraphics.fill(RenderType.guiTextHighlight(), i3, i1, j3, i1 + this.sign.getTextLineHeight(), -16776961);
                 }
             }
         }
-        p_230430_1_.pose().popPose();
+        guiGraphics.pose().popPose();
         Lighting.setupFor3DItems();
-        super.render(p_230430_1_, p_230430_2_, p_230430_3_, p_230430_4_);
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
     }
 
 }

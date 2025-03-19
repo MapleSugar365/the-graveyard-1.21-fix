@@ -32,7 +32,7 @@ public class SkullEntity extends AbstractHurtingProjectile {
     }
 
     public SkullEntity(Level world, LivingEntity owner, double directionX, double directionY, double directionZ) {
-        super(TGEntities.SKULL.get(), owner, directionX, directionY, directionZ, world);
+        super(TGEntities.SKULL.get(), owner, new Vec3(directionX, directionY, directionZ), world);
     }
 
     /*
@@ -47,7 +47,7 @@ public class SkullEntity extends AbstractHurtingProjectile {
     public Packet<ClientGamePacketListener> getAddEntityPacket() {
         Entity entity = this.getOwner();
         int i = entity == null ? 0 : entity.getId();
-        return new ClientboundAddEntityPacket(this.getId(), this.uuid, this.getX(), this.getY(), this.getZ(), 1, 1, this.getType(), i, new Vec3(this.xPower, this.yPower, this.zPower), 0);
+        return new ClientboundAddEntityPacket(this.getId(), this.uuid, this.getX(), this.getY(), this.getZ(), 1, 1, this.getType(), i, this.getDeltaMovement(), 0);
     }
 
 
