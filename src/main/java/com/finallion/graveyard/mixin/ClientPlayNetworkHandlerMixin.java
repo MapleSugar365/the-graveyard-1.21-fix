@@ -28,19 +28,11 @@ public class ClientPlayNetworkHandlerMixin {
     @Shadow
     private ClientLevel level;
 
-    @Final
-    @Shadow
-    private Connection connection;
-
-    @Final
-    @Shadow
-    private Minecraft minecraft;
-
     @Shadow @Final private RegistryAccess.Frozen registryAccess;
 
     @Inject(method = "handleOpenSignEditor", at = @At(value = "HEAD"), cancellable = true)
     public void handleOpenSignEditor(ClientboundOpenSignEditorPacket packet, CallbackInfo info) {
-        PacketUtils.ensureRunningOnSameThread(packet, (ClientGamePacketListener) this, this.minecraft);
+        PacketUtils.ensureRunningOnSameThread(packet, (ClientGamePacketListener) this, Minecraft.getInstance());
         BlockPos blockpos = packet.getPos();
         BlockEntity blockentity = this.level.getBlockEntity(blockpos);
         if (blockentity instanceof GravestoneBlockEntity) {
@@ -55,7 +47,7 @@ public class ClientPlayNetworkHandlerMixin {
 
     @Inject(method = "handleBlockEntityData", at = @At(value = "HEAD"), cancellable = true)
     public void handleBlockEntityData(ClientboundBlockEntityDataPacket p_104976_, CallbackInfo info) {
-      PacketUtils.ensureRunningOnSameThread(p_104976_, (ClientGamePacketListener) this, this.minecraft);
+      PacketUtils.ensureRunningOnSameThread(p_104976_, (ClientGamePacketListener) this, Minecraft.getInstance());
       BlockPos blockpos = p_104976_.getPos();
       BlockEntity blockEntity = this.level.getBlockEntity(blockpos);
         if (blockEntity instanceof GravestoneBlockEntity) {

@@ -39,7 +39,6 @@ public class TheGraveyard {
         modEventBus.addListener(this::setupClient);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, GraveyardConfig.COMMON_SPEC, MOD_ID + "-1.19.x-common.toml");
-        modEventBus.register(GraveyardConfig.class);
     }
 
     public void setupClient(final FMLClientSetupEvent event) {

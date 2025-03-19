@@ -296,6 +296,7 @@ public class LichEntity extends Monster implements GeoEntity {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
+        // TODO: You cant use configs in this method because the event that triggers this method is in a setup phase that does not support that anymore https://forums.minecraftforge.net/topic/99026-1165-entityattributecreationevent-with-config-values/
         return Monster.createMonsterAttributes()
                 .add(Attributes.MAX_HEALTH, GraveyardConfig.COMMON.healthInCastingPhase.get())
                 .add(Attributes.MOVEMENT_SPEED, 0.0D)

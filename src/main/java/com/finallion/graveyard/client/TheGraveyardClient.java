@@ -43,7 +43,7 @@ public class TheGraveyardClient {
     private static final RenderType CUTOUT_MIPPED = RenderType.cutoutMipped();
 
     @SubscribeEvent
-    private void registerScreens(RegisterMenuScreensEvent event) {
+    private static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(TGScreens.OSSUARY_SCREEN_HANDLER.get(), OssuaryScreen::new);
     }
 
