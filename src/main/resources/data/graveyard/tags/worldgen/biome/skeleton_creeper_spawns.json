@@ -1,11 +1,11 @@
 {
   "replace": false,
   "values": [
-    "#forge:is_cold/overworld",
-    "#forge:is_dense/overworld",
-    "#forge:is_dry/overworld",
-    "#forge:is_hot/overworld",
-    "#forge:is_sparse/overworld",
-    "#forge:is_wet/overworld"
+    "#c:is_cold/overworld",
+    "#c:is_dense_vegetation/overworld",
+    "#c:is_dry/overworld",
+    "#c:is_hot/overworld",
+    "#c:is_sparse_vegetation/overworld",
+    "#c:is_wet/overworld"
   ]
 }

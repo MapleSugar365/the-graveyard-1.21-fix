@@ -2,8 +2,8 @@
   "replace": false,
   "values": [
     "minecraft:forest",
-    "#forge:is_dense/overworld",
-    "#forge:is_coniferous",
-    "#forge:is_swamp"
+    "#c:is_dense_vegetation/overworld",
+    "#c:is_tree/coniferous",
+    "#c:is_swamp"
   ]
 }

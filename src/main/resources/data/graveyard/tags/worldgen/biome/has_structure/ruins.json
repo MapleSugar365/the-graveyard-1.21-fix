@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#forge:is_dense/overworld",
+    "#c:is_dense_vegetation/overworld",
     "minecraft:forest"
   ]
 }

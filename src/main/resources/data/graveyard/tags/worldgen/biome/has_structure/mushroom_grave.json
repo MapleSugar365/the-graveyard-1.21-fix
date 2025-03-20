@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
-    "#forge:is_mushroom",
+    "#c:is_mushroom",
     "minecraft:jungle",
     "minecraft:sparse_jungle",
     "minecraft:bamboo_jungle",
-    "#forge:is_swamp"
+    "#c:is_swamp"
   ]
 }
