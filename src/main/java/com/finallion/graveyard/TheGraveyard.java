@@ -4,7 +4,6 @@ import com.finallion.graveyard.config.GraveyardConfig;
 import com.finallion.graveyard.init.*;
 import com.finallion.graveyard.item.VialOfBlood;
 import com.finallion.graveyard.recipe.TGRecipeTypes;
-import com.finallion.graveyard.init.TGBiomeModifiers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
@@ -12,7 +11,6 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 
 
 @Mod("graveyard")
@@ -20,6 +18,7 @@ public class TheGraveyard {
     public static final String MOD_ID = "graveyard";
 
     public TheGraveyard(IEventBus modEventBus, ModContainer modContainer) {
+        TGProcessors.PROCESSORS.register(modEventBus);
         TGCreativeModeTabs.CREATIVE_MODE_TAB.register(modEventBus);
         TGBlocks.BLOCKS.register(modEventBus);
         TGItems.ITEMS.register(modEventBus);

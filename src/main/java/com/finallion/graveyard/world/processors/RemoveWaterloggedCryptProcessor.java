@@ -19,21 +19,23 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
 public class RemoveWaterloggedCryptProcessor extends StructureProcessor {
-
-    // Better method to remove waterlogged bocks on structure gen
-    // credit: https://github.com/YUNG-GANG/YUNGs-API/blob/multiloader/1.18/Common/src/main/java/com/yungnickyoung/minecraft/yungsapi/world/processor/ISafeWorldModifier.java
-
-    public static final MapCodec<RemoveWaterloggedCryptProcessor> CODEC = MapCodec.unit(RemoveWaterloggedCryptProcessor::new);
-
-    public RemoveWaterloggedCryptProcessor() { }
+    public static final MapCodec<RemoveWaterloggedCryptProcessor> CODEC = MapCodec.unit(() -> RemoveWaterloggedCryptProcessor.INSTANCE);
+    public static final RemoveWaterloggedCryptProcessor INSTANCE = new RemoveWaterloggedCryptProcessor();
 
     @Override
-    public StructureTemplate.StructureBlockInfo process(LevelReader world, BlockPos pos, BlockPos pos2, StructureTemplate.StructureBlockInfo infoIn1, StructureTemplate.StructureBlockInfo infoIn2, StructurePlaceSettings settings, @Nullable StructureTemplate template) {
+    public StructureTemplate.StructureBlockInfo process(
+            LevelReader world,
+            BlockPos pos,
+            BlockPos pos2,
+            StructureTemplate.StructureBlockInfo infoIn1,
+            StructureTemplate.StructureBlockInfo infoIn2,
+            StructurePlaceSettings settings,
+            StructureTemplate template) {
+
         if (infoIn2.state().hasProperty(BlockStateProperties.WATERLOGGED) && !infoIn2.state().getValue(BlockStateProperties.WATERLOGGED)) {
             ChunkPos currentChunkPos = new ChunkPos(infoIn2.pos());
             ChunkAccess currentChunk = world.getChunk(currentChunkPos.x, currentChunkPos.z);
@@ -76,7 +78,7 @@ public class RemoveWaterloggedCryptProcessor extends StructureProcessor {
 
     @Override
     protected StructureProcessorType<?> getType() {
-        return TGProcessors.REMOVE_WATERLOGGED_CRYPT;
+        return TGProcessors.REMOVE_WATERLOGGED_CRYPT.get();
     }
 
     private FluidState getFluidState(LevelReader world, BlockPos pos) {
@@ -95,16 +97,15 @@ public class RemoveWaterloggedCryptProcessor extends StructureProcessor {
                 SectionPos.sectionRelative(pos.getZ()));
     }
 
-    private Optional<BlockState> setBlockState(LevelChunkSection chunkSection, BlockPos pos, BlockState state) {
-        if (chunkSection == null) return Optional.empty();
-        return Optional.of(chunkSection.setBlockState(
+    private void setBlockState(LevelChunkSection chunkSection, BlockPos pos, BlockState state) {
+        if (chunkSection == null) return;
+        chunkSection.setBlockState(
                 SectionPos.sectionRelative(pos.getX()),
                 SectionPos.sectionRelative(pos.getY()),
                 SectionPos.sectionRelative(pos.getZ()),
                 state,
-                false));
+                false);
     }
-
 
     private Optional<BlockState> getBlockState(LevelChunkSection chunkSection, BlockPos pos) {
         if (chunkSection == null) return Optional.empty();
@@ -113,6 +114,4 @@ public class RemoveWaterloggedCryptProcessor extends StructureProcessor {
                 SectionPos.sectionRelative(pos.getY()),
                 SectionPos.sectionRelative(pos.getZ())));
     }
-
-
 }

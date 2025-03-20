@@ -14,15 +14,24 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlac
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
-import org.jetbrains.annotations.Nullable;
 
 public class SwitchSpawnerProcessor extends StructureProcessor {
-    public static final MapCodec<SwitchSpawnerProcessor> CODEC = MapCodec.unit(SwitchSpawnerProcessor::new);
+    public static final MapCodec<SwitchSpawnerProcessor> CODEC = MapCodec.unit(() -> SwitchSpawnerProcessor.INSTANCE);
+    public static final SwitchSpawnerProcessor INSTANCE = new SwitchSpawnerProcessor();
 
-    @Nullable
     @Override
-    public StructureTemplate.StructureBlockInfo process(LevelReader worldReader, BlockPos pos, BlockPos pos2, StructureTemplate.StructureBlockInfo infoIn1, StructureTemplate.StructureBlockInfo structureBlockInfo2, StructurePlaceSettings settings, @Nullable StructureTemplate template) {
-        if (structureBlockInfo2.state().getBlock() instanceof SpawnerBlock && GraveyardConfig.COMMON.disableWitherSkeletonSpawner.get()) {
+    public StructureTemplate.StructureBlockInfo process(
+            LevelReader worldReader,
+            BlockPos pos,
+            BlockPos pos2,
+            StructureTemplate.StructureBlockInfo infoIn1,
+            StructureTemplate.StructureBlockInfo structureBlockInfo2,
+            StructurePlaceSettings settings,
+            StructureTemplate template) {
+
+        if (structureBlockInfo2.state().getBlock() instanceof SpawnerBlock &&
+            GraveyardConfig.COMMON.disableWitherSkeletonSpawner.get()) {
+
             BlockPos worldPos = structureBlockInfo2.pos();
             BlockEntity blockEntity = worldReader.getBlockEntity(worldPos);
             if (blockEntity instanceof SpawnerBlockEntity) {
@@ -40,7 +49,7 @@ public class SwitchSpawnerProcessor extends StructureProcessor {
 
     @Override
     protected StructureProcessorType<?> getType() {
-        return TGProcessors.SWITCH_SPAWNER;
+        return TGProcessors.SWITCH_SPAWNER.get();
     }
 }
 
