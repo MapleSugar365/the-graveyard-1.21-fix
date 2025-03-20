@@ -2,7 +2,7 @@
   "parent": "graveyard:graveyard/medium_graveyard",
   "display": {
     "icon": {
-      "item": "graveyard:deepslate_gravestone"
+      "id": "graveyard:deepslate_gravestone"
     },
     "title": {
       "translate": "advancements.graveyard.large_graveyard.title"

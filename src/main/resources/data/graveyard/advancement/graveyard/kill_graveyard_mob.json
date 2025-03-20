@@ -2,7 +2,7 @@
   "parent": "graveyard:graveyard/root",
   "display": {
     "icon": {
-      "item": "minecraft:stone_sword"
+      "id": "minecraft:stone_sword"
     },
     "title": {
       "translate": "advancements.graveyard.kill_graveyard_mob.title"

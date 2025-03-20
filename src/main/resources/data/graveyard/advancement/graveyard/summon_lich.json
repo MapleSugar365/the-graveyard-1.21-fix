@@ -24,7 +24,7 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "minecraft:spawner"
+      "id": "minecraft:spawner"
     },
     "show_toast": true,
     "title": {

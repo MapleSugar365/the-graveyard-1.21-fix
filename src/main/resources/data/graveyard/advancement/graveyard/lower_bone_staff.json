@@ -2,7 +2,7 @@
   "parent": "graveyard:graveyard/vial_of_blood",
   "display": {
     "icon": {
-      "item": "graveyard:lower_bone_staff"
+      "id": "graveyard:lower_bone_staff"
     },
     "title": {
       "translate": "advancements.graveyard.lower_bone_staff.title"

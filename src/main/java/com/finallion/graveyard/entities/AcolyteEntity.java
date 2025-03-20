@@ -1,12 +1,9 @@
 package com.finallion.graveyard.entities;
 
 import com.finallion.graveyard.TheGraveyard;
-import com.finallion.graveyard.init.TGAdvancements;
 import com.finallion.graveyard.init.TGSounds;
-import com.finallion.graveyard.item.DaggerItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
@@ -58,11 +55,6 @@ public class AcolyteEntity extends CorruptedIllager {
 
     @Override
     public void createWitherRose(@Nullable LivingEntity adversary) {
-        if (adversary instanceof ServerPlayer player) {
-            if (player.getMainHandItem().getItem() instanceof DaggerItem) {
-                TGAdvancements.KILLED_BY_BONE_DAGGER.get().trigger(player);
-            }
-        }
         super.setLastHurtByMob(adversary);
     }
 }

@@ -2,7 +2,7 @@
   "parent": "graveyard:graveyard/corruption",
   "display": {
     "icon": {
-      "item": "graveyard:dark_iron_ingot"
+      "id": "graveyard:dark_iron_ingot"
     },
     "title": {
       "translate": "advancements.graveyard.dark_iron.title"

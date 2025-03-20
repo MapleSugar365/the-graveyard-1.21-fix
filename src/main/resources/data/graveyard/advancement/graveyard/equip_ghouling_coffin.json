@@ -2,7 +2,7 @@
   "parent": "graveyard:graveyard/white_bone_staff",
   "display": {
     "icon": {
-      "item": "graveyard:sarcophagus"
+      "id": "graveyard:sarcophagus"
     },
     "title": {
       "translate": "advancements.graveyard.equip_coffin.title"

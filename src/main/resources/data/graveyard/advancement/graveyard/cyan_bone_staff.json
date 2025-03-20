@@ -2,7 +2,7 @@
   "parent": "graveyard:graveyard/summon_lich",
   "display": {
     "icon": {
-      "item": "graveyard:cyan_bone_staff"
+      "id": "graveyard:cyan_bone_staff"
     },
     "title": {
       "translate": "advancements.graveyard.cyan_bone_staff.title"

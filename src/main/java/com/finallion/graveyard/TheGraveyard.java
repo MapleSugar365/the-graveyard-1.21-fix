@@ -19,6 +19,7 @@ public class TheGraveyard {
 
     public TheGraveyard(IEventBus modEventBus, ModContainer modContainer) {
         TGProcessors.PROCESSORS.register(modEventBus);
+        TGAdvancements.TRIGGER_TYPES.register(modEventBus);
         TGCreativeModeTabs.CREATIVE_MODE_TAB.register(modEventBus);
         TGBlocks.BLOCKS.register(modEventBus);
         TGItems.ITEMS.register(modEventBus);
@@ -31,7 +32,6 @@ public class TheGraveyard {
         TGTileEntities.TILE_ENTITIES.register(modEventBus);
         TGParticles.PARTICLES.register(modEventBus);
         TGBiomeModifiers.BIOME_MODIFIERS.register(modEventBus);
-        TGAdvancements.TRIGGER_TYPES.register(modEventBus);
 
         modEventBus.addListener(this::setupClient);
 

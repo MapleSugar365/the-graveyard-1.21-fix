@@ -2,7 +2,7 @@
   "parent": "graveyard:graveyard/dark_iron",
   "display": {
     "icon": {
-      "item": "graveyard:oak_coffin"
+      "id": "graveyard:oak_coffin"
     },
     "title": {
       "translate": "advancements.graveyard.craft_coffin.title"

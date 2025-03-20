@@ -2,7 +2,7 @@
   "parent": "graveyard:graveyard/crypt",
   "display": {
     "icon": {
-      "item": "minecraft:soul_lantern"
+      "id": "minecraft:soul_lantern"
     },
     "title": {
       "translate": "advancements.graveyard.dim_light.title"

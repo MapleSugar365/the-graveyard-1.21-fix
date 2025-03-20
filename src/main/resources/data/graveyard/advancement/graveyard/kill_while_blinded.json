@@ -2,7 +2,7 @@
   "parent": "graveyard:graveyard/root",
   "display": {
     "icon": {
-      "item": "minecraft:ender_eye"
+      "id": "minecraft:ender_eye"
     },
     "title": {
       "translate": "advancements.graveyard.kill_while_blinded.title"

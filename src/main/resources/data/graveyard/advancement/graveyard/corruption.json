@@ -2,7 +2,7 @@
   "parent": "graveyard:graveyard/root",
   "display": {
     "icon": {
-      "item": "graveyard:corruption"
+      "id": "graveyard:corruption"
     },
     "title": {
       "translate": "advancements.graveyard.corruption.title"

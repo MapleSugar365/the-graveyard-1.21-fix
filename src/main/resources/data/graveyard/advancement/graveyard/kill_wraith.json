@@ -2,7 +2,7 @@
   "parent": "graveyard:graveyard/crypt",
   "display": {
     "icon": {
-      "item": "minecraft:gold_ingot"
+      "id": "minecraft:gold_ingot"
     },
     "title": {
       "translate": "advancements.graveyard.kill_wraith.title"

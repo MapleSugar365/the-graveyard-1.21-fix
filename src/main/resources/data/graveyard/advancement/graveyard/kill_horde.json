@@ -2,7 +2,7 @@
   "parent": "graveyard:graveyard/kill_graveyard_mob",
   "display": {
     "icon": {
-      "item": "minecraft:zombie_head"
+      "id": "minecraft:zombie_head"
     },
     "title": {
       "translate": "advancements.graveyard.kill_horde.title"

@@ -2,7 +2,7 @@
   "parent": "graveyard:graveyard/haunted_house",
   "display": {
     "icon": {
-      "item": "graveyard:bone_dagger"
+      "id": "graveyard:bone_dagger"
     },
     "title": {
       "translate": "advancements.graveyard.kill_acolyte_bone_dagger.title"

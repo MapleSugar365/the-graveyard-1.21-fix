@@ -2,7 +2,7 @@
   "parent": "graveyard:graveyard/root",
   "display": {
     "icon": {
-      "item": "minecraft:red_mushroom"
+      "id": "minecraft:red_mushroom"
     },
     "title": {
       "translate": "advancements.graveyard.giant_mushroom.title"
