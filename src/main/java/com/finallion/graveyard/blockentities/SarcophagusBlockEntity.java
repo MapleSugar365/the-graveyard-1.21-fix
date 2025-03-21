@@ -1,8 +1,8 @@
 package com.finallion.graveyard.blockentities;
 
 import com.finallion.graveyard.blockentities.animation.SarcophagusLidAnimator;
-import com.finallion.graveyard.init.TGSounds;
 import com.finallion.graveyard.init.TGBlockEntities;
+import com.finallion.graveyard.init.TGSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -27,52 +27,58 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class SarcophagusBlockEntity extends RandomizableContainerBlockEntity implements LidBlockEntity {
-    private static final int EVENT_SET_OPEN_COUNT = 1;
-    private NonNullList<ItemStack> items = NonNullList.withSize(54, ItemStack.EMPTY);
+    private static final int CONTAINER_SIZE = 54;
 
+    private NonNullList<ItemStack> items = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY);
+    private final SarcophagusLidAnimator chestLidController = new SarcophagusLidAnimator();
+
+    // Adapted from ChestBlockEntity#openersCounter
     private final ContainerOpenersCounter openersCounter = new ContainerOpenersCounter() {
-        protected void onOpen(Level p_155357_, BlockPos p_155358_, BlockState state) {
+        protected void onOpen(Level level, BlockPos pos, BlockState state) {
+            // TODO: Find a different way of differentiating between coffins and sarcophagi than
+            //  checking for BlockStateProperties.LIT, which is only set for coffins.
             if (state.getValue(BlockStateProperties.LIT)) {
-                SarcophagusBlockEntity.playSound(p_155357_, p_155358_, state, TGSounds.COFFIN_OPEN.get());
+                SarcophagusBlockEntity.playSound(level, pos, state, TGSounds.COFFIN_OPEN.get());
             } else {
-                SarcophagusBlockEntity.playSound(p_155357_, p_155358_, state, TGSounds.SARCOPHAGUS_USE.get());
+                SarcophagusBlockEntity.playSound(level, pos, state, TGSounds.SARCOPHAGUS_USE.get());
             }
         }
 
-        protected void onClose(Level p_155367_, BlockPos p_155368_, BlockState state) {
+        protected void onClose(Level level, BlockPos pos, BlockState state) {
             if (state.getValue(BlockStateProperties.LIT)) {
-                SarcophagusBlockEntity.playSound(p_155367_, p_155368_, state, TGSounds.COFFIN_CLOSE.get());
+                SarcophagusBlockEntity.playSound(level, pos, state, TGSounds.COFFIN_CLOSE.get());
             } else {
-                SarcophagusBlockEntity.playSound(p_155367_, p_155368_, state, TGSounds.SARCOPHAGUS_USE.get());
+                SarcophagusBlockEntity.playSound(level, pos, state, TGSounds.SARCOPHAGUS_USE.get());
             }
         }
 
-        protected void openerCountChanged(Level p_155361_, BlockPos p_155362_, BlockState p_155363_, int p_155364_, int p_155365_) {
-            SarcophagusBlockEntity.this.signalOpenCount(p_155361_, p_155362_, p_155363_, p_155364_, p_155365_);
+        protected void openerCountChanged(Level level, BlockPos pos, BlockState state, int eventId, int eventParam) {
+            SarcophagusBlockEntity.this.signalOpenCount(level, pos, state, eventId, eventParam);
         }
 
-        protected boolean isOwnContainer(Player p_155355_) {
-            if (!(p_155355_.containerMenu instanceof ChestMenu)) {
+        protected boolean isOwnContainer(Player player) {
+            if (!(player.containerMenu instanceof ChestMenu)) {
                 return false;
             } else {
-                Container container = ((ChestMenu)p_155355_.containerMenu).getContainer();
-                return container == SarcophagusBlockEntity.this || container instanceof CompoundContainer && ((CompoundContainer)container).contains(SarcophagusBlockEntity.this);
+                Container container = ((ChestMenu) player.containerMenu).getContainer();
+                return container == SarcophagusBlockEntity.this || container instanceof CompoundContainer && ((CompoundContainer) container).contains(SarcophagusBlockEntity.this);
             }
         }
     };
-    private final SarcophagusLidAnimator chestLidController = new SarcophagusLidAnimator();
 
 
-    public SarcophagusBlockEntity(BlockPos p_155331_, BlockState p_155332_) {
-        super(TGBlockEntities.SARCOPHAGUS_BLOCK_ENTITY.get(), p_155331_, p_155332_);
+    public SarcophagusBlockEntity(BlockPos pos, BlockState state) {
+        super(TGBlockEntities.SARCOPHAGUS_BLOCK_ENTITY.get(), pos, state);
     }
 
+    @Override
     public int getContainerSize() {
-        return 54;
+        return CONTAINER_SIZE;
     }
 
+    @Override
     protected Component getDefaultName() {
-        if (this.getBlockState().getValue(BlockStateProperties.LIT)) {
+        if (getBlockState().getValue(BlockStateProperties.LIT)) {
             return Component.translatable("container.coffin");
         }
         return Component.translatable("container.sarcophagus");
@@ -97,79 +103,74 @@ public class SarcophagusBlockEntity extends RandomizableContainerBlockEntity imp
 
     }
 
+    // Adapted from ChestBlockEntity#triggerEvent
+    @Override
+    public boolean triggerEvent(int id, int type) {
+        if (id == 1) {
+            this.chestLidController.shouldBeOpen(type > 0);
+            return true;
+        } else {
+            return super.triggerEvent(id, type);
+        }
+    }
+
+    // Adapted from ChestBlockEntity#startOpen
+    @Override
+    public void startOpen(Player player) {
+        if (!this.remove && !player.isSpectator()) {
+            this.openersCounter.incrementOpeners(player, this.getLevel(), this.getBlockPos(), this.getBlockState());
+        }
+    }
+
+    // Adapted from ChestBlockEntity#stopOpen
+    @Override
+    public void stopOpen(Player player) {
+        if (!this.remove && !player.isSpectator()) {
+            this.openersCounter.decrementOpeners(player, this.getLevel(), this.getBlockPos(), this.getBlockState());
+        }
+    }
+
+    @Override
     protected NonNullList<ItemStack> getItems() {
         return this.items;
     }
 
-    protected void setItems(NonNullList<ItemStack> p_59110_) {
-        this.items = p_59110_;
+    @Override
+    protected void setItems(NonNullList<ItemStack> items) {
+        this.items = items;
     }
 
-
-    protected AbstractContainerMenu createMenu(int p_59082_, Inventory p_59083_) {
-        return ChestMenu.sixRows(p_59082_, p_59083_, this);
+    @Override
+    protected AbstractContainerMenu createMenu(int id, Inventory player) {
+        return ChestMenu.sixRows(id, player, this);
     }
 
-
-    public void startOpen(Player p_59120_) {
-        if (!this.remove && !p_59120_.isSpectator()) {
-            this.openersCounter.incrementOpeners(p_59120_, this.getLevel(), this.getBlockPos(), this.getBlockState());
-        }
-
+    // Adapted from ChestBlockEntity#signalOpenCount
+    protected void signalOpenCount(Level level, BlockPos pos, BlockState state, int eventId, int eventParam) {
+        Block block = state.getBlock();
+        level.blockEvent(pos, block, 1, eventParam);
     }
 
-    public void stopOpen(Player p_59118_) {
-        if (!this.remove && !p_59118_.isSpectator()) {
-            this.openersCounter.decrementOpeners(p_59118_, this.getLevel(), this.getBlockPos(), this.getBlockState());
-        }
+    // Adapted from ChestBlockEntity#lidAnimateTick
+    public static void lidAnimateTick(Level level, BlockPos pos, BlockState state, SarcophagusBlockEntity blockEntity) {
+        blockEntity.chestLidController.tickLid();
+    }
 
+    static void playSound(Level level, BlockPos pos, BlockState state, SoundEvent sound) {
+        double dx = (double) pos.getX() + 0.5D;
+        double dy = (double) pos.getY() + 0.5D;
+        double dz = (double) pos.getZ() + 0.5D;
+
+        level.playSound(null, dx, dy, dz, sound, SoundSource.BLOCKS, 0.75F, level.random.nextFloat() * 0.1F - 70.0F);
+    }
+
+    public float getOpenNess(float partialTicks) {
+        return this.chestLidController.getOpenness(partialTicks);
     }
 
     public void recheckOpen() {
         if (!this.remove) {
             this.openersCounter.recheckOpeners(this.getLevel(), this.getBlockPos(), this.getBlockState());
         }
-
-    }
-
-
-    protected void signalOpenCount(Level p_155333_, BlockPos p_155334_, BlockState p_155335_, int p_155336_, int p_155337_) {
-        Block block = p_155335_.getBlock();
-        p_155333_.blockEvent(p_155334_, block, 1, p_155337_);
-    }
-
-
-    static void playSound(Level p_155339_, BlockPos p_155340_, BlockState p_155341_, SoundEvent p_155342_) {
-        double d = (double) p_155340_.getX() + 0.5D;
-        double e = (double) p_155340_.getY() + 0.5D;
-        double f = (double) p_155340_.getZ() + 0.5D;
-
-        p_155339_.playSound((Player)null, d, e, f, p_155342_, SoundSource.BLOCKS, 0.75F, -70.0F);
-    }
-
-    /*
-    ANIMATION STUFF
-     */
-
-    public boolean triggerEvent(int p_59114_, int p_59115_) {
-        if (p_59114_ == 1) {
-            this.chestLidController.shouldBeOpen(p_59115_ > 0);
-            return true;
-        } else {
-            return super.triggerEvent(p_59114_, p_59115_);
-        }
-    }
-
-    public float getOpenNess(float p_59080_) {
-        return this.chestLidController.getOpenness(p_59080_);
-    }
-
-
-    public static void lidAnimateTick(Level p_155344_, BlockPos p_155345_, BlockState p_155346_, SarcophagusBlockEntity p_155347_) {
-        p_155347_.chestLidController.tickLid();
-    }
-
-    public boolean isCoffin() {
-        return this.getBlockState().getValue(BlockStateProperties.LIT);
     }
 }

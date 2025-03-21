@@ -26,33 +26,23 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 
 @OnlyIn(Dist.CLIENT)
-public class SarcophagusBlockEntityRenderer<T extends BlockEntity & LidBlockEntity> implements BlockEntityRenderer<SarcophagusBlockEntity> {
-    private final ModelManager modelManager;
+public class SarcophagusBlockEntityRenderer implements BlockEntityRenderer<SarcophagusBlockEntity> {
     private final ModelBlockRenderer modelBlockRenderer;
-    private BakedModel baseModel;
-    private BakedModel lidModel;
 
     public SarcophagusBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
-        modelManager = Minecraft.getInstance().getModelManager();
-        modelBlockRenderer = Minecraft.getInstance().getBlockRenderer().getModelRenderer();
+        modelBlockRenderer = ctx.getBlockRenderDispatcher().getModelRenderer();
     }
 
     @Override
     public void render(SarcophagusBlockEntity entity, float tickDelta, PoseStack matrixStack, MultiBufferSource vertexConsumers, int light, int overlay) {
-        if (baseModel == null) {
-            BlockState blockState = entity.getBlockState();
-            baseModel = modelManager.getModel(((SarcophagusBlock)blockState.getBlock()).getBaseModel());
-            lidModel = modelManager.getModel(((SarcophagusBlock)blockState.getBlock()).getLidModel());
-        }
-
         if (entity.getLevel() != null && entity.getBlockState().getValue(SarcophagusBlock.PART) == SarcophagusPart.HEAD) {
             renderLid(entity, matrixStack, vertexConsumers, light, overlay, tickDelta);
             renderBase(entity, matrixStack, vertexConsumers, light, overlay);
         }
     }
-    // prevents model from clipping to invis when in the corner of the screen, needs to override getRenderBoundingBox in the blockEntity
+    // prevents model from clipping to invis when in the corner of the screen TODO: Need to override getRenderBoundingBox in the blockEntity
     @Override
-    public boolean shouldRenderOffScreen(SarcophagusBlockEntity p_112306_) {
+    public boolean shouldRenderOffScreen(SarcophagusBlockEntity blockEntity) {
         return true;
     }
 
@@ -74,7 +64,8 @@ public class SarcophagusBlockEntityRenderer<T extends BlockEntity & LidBlockEnti
             case NORTH -> matrixStack.translate(-1.0F, 0F, 0F);
         }
 
-        modelBlockRenderer.renderModel(matrixStack.last(), vertexConsumer.getBuffer(ItemBlockRenderTypes.getRenderType(entity.getBlockState(), true)), entity.getBlockState(), baseModel, 1.0F, 1.0F, 1.0F, light, overlay);
+        BakedModel model = ((SarcophagusBlock) entity.getBlockState().getBlock()).getBaseModel();
+        modelBlockRenderer.renderModel(matrixStack.last(), vertexConsumer.getBuffer(ItemBlockRenderTypes.getRenderType(entity.getBlockState(), true)), entity.getBlockState(), model, 1.0F, 1.0F, 1.0F, light, overlay);
 
         matrixStack.popPose();
     }
@@ -92,14 +83,15 @@ public class SarcophagusBlockEntityRenderer<T extends BlockEntity & LidBlockEnti
             case NORTH -> matrixStack.translate(-1.0F, 0F, 0F);
         }
 
-        DoubleBlockCombiner.NeighborCombineResult<? extends SarcophagusBlockEntity> propertySource = DoubleBlockCombiner.combineWithNeigbour(TGBlockEntities.SARCOPHAGUS_BLOCK_ENTITY.get(), SarcophagusBlock::getBlockType, SarcophagusBlock::getConnectedDirection, ChestBlock.FACING, entity.getBlockState(), entity.getLevel(), entity.getBlockPos(), (worldx, pos) -> false);
+        DoubleBlockCombiner.NeighborCombineResult<? extends SarcophagusBlockEntity> propertySource = DoubleBlockCombiner.combineWithNeigbour(TGBlockEntities.SARCOPHAGUS_BLOCK_ENTITY.get(), SarcophagusBlock::getBlockType, SarcophagusBlock::getConnectedDirection, HorizontalDirectionalBlock.FACING, entity.getBlockState(), entity.getLevel(), entity.getBlockPos(), (worldx, pos) -> false);
         float g = 1.0F - propertySource.apply(SarcophagusBlock.opennessCombiner(entity)).get(tickDelta);
         g = 1.0F - g * g * g;
 
         matrixStack.translate(g * 0.3, g * 0.3, 0.0F); // lid offset to the ground and away from body
         matrixStack.mulPose(Axis.ZN.rotationDegrees(g * 45)); // lid rotation
 
-        modelBlockRenderer.renderModel(matrixStack.last(), vertexConsumer.getBuffer(ItemBlockRenderTypes.getRenderType(entity.getBlockState(), true)), entity.getBlockState(), lidModel, 1.0F, 1.0F, 1.0F, light, overlay);
+        BakedModel model = ((SarcophagusBlock) entity.getBlockState().getBlock()).getLidModel();
+        modelBlockRenderer.renderModel(matrixStack.last(), vertexConsumer.getBuffer(ItemBlockRenderTypes.getRenderType(entity.getBlockState(), true)), entity.getBlockState(), model, 1.0F, 1.0F, 1.0F, light, overlay);
 
         matrixStack.popPose();
     }
