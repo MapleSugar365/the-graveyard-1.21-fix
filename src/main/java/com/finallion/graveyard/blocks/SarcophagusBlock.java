@@ -61,8 +61,8 @@ public class SarcophagusBlock extends BaseEntityBlock implements SimpleWaterlogg
             instance -> instance.group(
                     propertiesCodec(),
                     Codec.BOOL.fieldOf("isCoffin").forGetter(block -> block.isCoffin),
-                    ResourceLocation.CODEC.fieldOf("lidModel").forGetter(block -> block.lidModel),
-                    ResourceLocation.CODEC.fieldOf("bodyModel").forGetter(block -> block.bodyModel)
+                    ResourceLocation.CODEC.fieldOf("lidModelLocation").forGetter(block -> block.lidModelLocation),
+                    ResourceLocation.CODEC.fieldOf("baseModelLocation").forGetter(block -> block.baseModelLocation)
             ).apply(instance, SarcophagusBlock::new)
     );
 
@@ -73,14 +73,16 @@ public class SarcophagusBlock extends BaseEntityBlock implements SimpleWaterlogg
     public static final EnumProperty<SarcophagusPart> PART = EnumProperty.create("part", SarcophagusPart.class);
 
     public final boolean isCoffin;
-    public final ResourceLocation lidModel;
-    public final ResourceLocation bodyModel;
+    public final ResourceLocation lidModelLocation;
+    public final ResourceLocation baseModelLocation;
+    public BakedModel lidModel;
+    public BakedModel baseModel;
 
-    public SarcophagusBlock(Properties properties, boolean isCoffin, ResourceLocation lidModel, ResourceLocation bodyModel) {
+    public SarcophagusBlock(Properties properties, boolean isCoffin, ResourceLocation lidModelLocation, ResourceLocation baseModelLocation) {
         super(properties);
         this.isCoffin = isCoffin;
-        this.lidModel = lidModel;
-        this.bodyModel = bodyModel;
+        this.lidModelLocation = lidModelLocation;
+        this.baseModelLocation = baseModelLocation;
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(PART, SarcophagusPart.FOOT)
                 .setValue(BlockStateProperties.WATERLOGGED, false)
@@ -258,11 +260,11 @@ public class SarcophagusBlock extends BaseEntityBlock implements SimpleWaterlogg
     }
 
     public BakedModel getLidModel() {
-        return Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(lidModel));
+        return lidModel != null ? lidModel : (lidModel = Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(lidModelLocation)));
     }
 
     public BakedModel getBaseModel() {
-        return Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(bodyModel));
+        return baseModel != null ? baseModel : (baseModel = Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(baseModelLocation)));
     }
 
     // Adapted from BedBlock#getBlockType
