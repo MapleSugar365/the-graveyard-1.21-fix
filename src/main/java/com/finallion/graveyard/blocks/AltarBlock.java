@@ -115,7 +115,7 @@ public class AltarBlock extends Block {
                                 BlockPos iteratorPos = new BlockPos(corner.offset(i, k, j));
                                 BlockState blockState = world.getBlockState(iteratorPos);
 
-                                if (blockState.getBlock() instanceof OminousBoneStaffFragment) {
+                                if (blockState.getBlock() instanceof OminousBoneStaffFragmentBlock) {
                                     world.setBlock(iteratorPos, Blocks.AIR.defaultBlockState(), 3);
                                 }
                             }

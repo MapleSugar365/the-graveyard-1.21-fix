@@ -6,6 +6,7 @@ import com.finallion.graveyard.blockentities.render.BrazierBlockEntityRenderer;
 import com.finallion.graveyard.blockentities.render.GravestoneBlockEntityRenderer;
 import com.finallion.graveyard.blockentities.render.OssuaryBlockEntityRenderer;
 import com.finallion.graveyard.blockentities.render.SarcophagusBlockEntityRenderer;
+import com.finallion.graveyard.blocks.SarcophagusBlock;
 import com.finallion.graveyard.client.gui.OssuaryScreen;
 import com.finallion.graveyard.entities.models.CorruptedIllagerModel;
 import com.finallion.graveyard.entities.renders.*;
@@ -36,6 +37,8 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.common.EventBusSubscriber;
+
+import java.util.function.Supplier;
 
 @EventBusSubscriber(modid = TheGraveyard.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class TheGraveyardClient {
@@ -115,8 +118,8 @@ public class TheGraveyardClient {
         event.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(TheGraveyard.MOD_ID, "item/sarcophagus_base")));
         event.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(TheGraveyard.MOD_ID, "item/sarcophagus_lid")));
 
-        for (Block block : TGBlocks.getCoffins()) {
-            String woodType = block.getDescriptionId().split("\\.")[2];
+        for (Supplier<SarcophagusBlock> block : TGBlocks.COFFINS) {
+            String woodType = block.get().getDescriptionId().split("\\.")[2];
             event.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(TheGraveyard.MOD_ID, "item/" + woodType + "_base")));
             event.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(TheGraveyard.MOD_ID, "item/" + woodType + "_lid")));
         }

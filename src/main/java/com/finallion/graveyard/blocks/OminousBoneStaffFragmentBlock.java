@@ -23,11 +23,11 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.Nullable;
 
-public class OminousBoneStaffFragment extends Block {
+public class OminousBoneStaffFragmentBlock extends Block {
     public static final DirectionProperty FACING;
     public static final BooleanProperty WATERLOGGED;
 
-    public OminousBoneStaffFragment() {
+    public OminousBoneStaffFragmentBlock() {
         super(BlockBehaviour.Properties.of().noOcclusion().noCollission().sound(SoundType.BONE_BLOCK).lightLevel((light) -> 7));
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
     }

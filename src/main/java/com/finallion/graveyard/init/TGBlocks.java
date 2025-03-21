@@ -11,14 +11,12 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
 
 public class TGBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.createBlocks(TheGraveyard.MOD_ID);
-    public static List<Block> coffins = new ArrayList<>();
 
     public static final ResourceLocation POLISHED_BASALT_GRAVESTONE_TEXTURE = ResourceLocation.fromNamespaceAndPath(TheGraveyard.MOD_ID, "textures/entity/gravestone/polished_basalt.png");
     public static final ResourceLocation COBBLESTONE_GRAVESTONE_TEXTURE = ResourceLocation.fromNamespaceAndPath(TheGraveyard.MOD_ID, "textures/entity/gravestone/cobblestone.png");
@@ -36,66 +34,66 @@ public class TGBlocks {
 
     public static final Supplier<Block> TG_ROOTED_DIRT = BLOCKS.register("tg_rooted_dirt", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.ROOTED_DIRT).lootFrom(() -> Blocks.ROOTED_DIRT)));
     public static final Supplier<Block> TG_TUFF = BLOCKS.register("tg_tuff", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.TUFF).lootFrom(() -> Blocks.TUFF)));
-    public static final Supplier<Block> TG_MOSS_BLOCK = BLOCKS.register("tg_moss_block", () -> new TGMossBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MOSS_BLOCK).lootFrom(() -> Blocks.MOSS_BLOCK)));
-    public static final Supplier<Block> TG_DEEPSLATE = BLOCKS.register("tg_deepslate", () -> new TGDeepslateBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE).lootFrom(() -> Blocks.DEEPSLATE)));
+    public static final Supplier<TGMossBlock> TG_MOSS_BLOCK = BLOCKS.register("tg_moss_block", () -> new TGMossBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MOSS_BLOCK).lootFrom(() -> Blocks.MOSS_BLOCK)));
+    public static final Supplier<TGDeepslateBlock> TG_DEEPSLATE = BLOCKS.register("tg_deepslate", () -> new TGDeepslateBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE).lootFrom(() -> Blocks.DEEPSLATE)));
 
     // helper blocks that get don't get replaced on world generation, generate ores or generate trees on
-    public static final Supplier<Block> TG_GRASS_BLOCK = BLOCKS.register("tg_grass_block", () -> new TGGrassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK).lootFrom(() -> Blocks.GRASS_BLOCK)));
-    public static final Supplier<Block> TG_DIRT = BLOCKS.register("tg_dirt", () -> new TGStoneBlock(() -> Blocks.DIRT, BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT).lootFrom(() -> Blocks.DIRT)));
-    public static final Supplier<Block> TG_COARSE_DIRT = BLOCKS.register("tg_coarse_dirt", () -> new TGStoneBlock(() -> Blocks.COARSE_DIRT, BlockBehaviour.Properties.ofFullCopy(Blocks.COARSE_DIRT).lootFrom(() -> Blocks.COARSE_DIRT)));
-    public static final Supplier<Block> TG_ANDESITE = BLOCKS.register("tg_andesite", () -> new TGStoneBlock(() -> Blocks.ANDESITE, BlockBehaviour.Properties.ofFullCopy(Blocks.ANDESITE).lootFrom(() -> Blocks.ANDESITE)));
-    public static final Supplier<Block> TG_GRANITE = BLOCKS.register("tg_granite", () -> new TGStoneBlock(() -> Blocks.GRANITE, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).lootFrom(() -> Blocks.GRANITE)));
-    public static final Supplier<Block> TG_DIORITE = BLOCKS.register("tg_diorite", () -> new TGStoneBlock(() -> Blocks.DIORITE, BlockBehaviour.Properties.ofFullCopy(Blocks.DIORITE).lootFrom(() -> Blocks.DIORITE)));
-    public static final Supplier<Block> TG_STONE = BLOCKS.register("tg_stone", () -> new TGStoneBlock(() -> Blocks.STONE, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).lootFrom(() -> Blocks.STONE)));
-    public static final Supplier<Block> TG_PODZOL = BLOCKS.register("tg_podzol", () -> new TGStoneBlock(() -> Blocks.PODZOL, BlockBehaviour.Properties.ofFullCopy(Blocks.PODZOL).lootFrom(() -> Blocks.PODZOL)));
+    public static final Supplier<TGGrassBlock> TG_GRASS_BLOCK = BLOCKS.register("tg_grass_block", () -> new TGGrassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK).lootFrom(() -> Blocks.GRASS_BLOCK)));
+    public static final Supplier<TGStoneBlock> TG_DIRT = BLOCKS.register("tg_dirt", () -> new TGStoneBlock(() -> Blocks.DIRT, BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT).lootFrom(() -> Blocks.DIRT)));
+    public static final Supplier<TGStoneBlock> TG_COARSE_DIRT = BLOCKS.register("tg_coarse_dirt", () -> new TGStoneBlock(() -> Blocks.COARSE_DIRT, BlockBehaviour.Properties.ofFullCopy(Blocks.COARSE_DIRT).lootFrom(() -> Blocks.COARSE_DIRT)));
+    public static final Supplier<TGStoneBlock> TG_ANDESITE = BLOCKS.register("tg_andesite", () -> new TGStoneBlock(() -> Blocks.ANDESITE, BlockBehaviour.Properties.ofFullCopy(Blocks.ANDESITE).lootFrom(() -> Blocks.ANDESITE)));
+    public static final Supplier<TGStoneBlock> TG_GRANITE = BLOCKS.register("tg_granite", () -> new TGStoneBlock(() -> Blocks.GRANITE, BlockBehaviour.Properties.ofFullCopy(Blocks.GRANITE).lootFrom(() -> Blocks.GRANITE)));
+    public static final Supplier<TGStoneBlock> TG_DIORITE = BLOCKS.register("tg_diorite", () -> new TGStoneBlock(() -> Blocks.DIORITE, BlockBehaviour.Properties.ofFullCopy(Blocks.DIORITE).lootFrom(() -> Blocks.DIORITE)));
+    public static final Supplier<TGStoneBlock> TG_STONE = BLOCKS.register("tg_stone", () -> new TGStoneBlock(() -> Blocks.STONE, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).lootFrom(() -> Blocks.STONE)));
+    public static final Supplier<TGStoneBlock> TG_PODZOL = BLOCKS.register("tg_podzol", () -> new TGStoneBlock(() -> Blocks.PODZOL, BlockBehaviour.Properties.ofFullCopy(Blocks.PODZOL).lootFrom(() -> Blocks.PODZOL)));
 
 
-    public static final Supplier<Block> DARK_IRON_BARS = BLOCKS.register("dark_iron_bars", () -> new DarkIronBars(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion()));
-    public static final Supplier<Block> SOUL_FIRE_BRAZIER = BLOCKS.register("soul_fire_brazier", () -> new BrazierBlock(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion().lightLevel(BrazierBlock.STATE_TO_LUMINANCE).sound(SoundType.METAL), ParticleTypes.SOUL_FIRE_FLAME));
-    public static final Supplier<Block> FIRE_BRAZIER = BLOCKS.register("fire_brazier", () -> new BrazierBlock(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion().lightLevel(BrazierBlock.STATE_TO_LUMINANCE).sound(SoundType.METAL), ParticleTypes.FLAME));
-    public static final Supplier<Block> PEDESTAL = BLOCKS.register("pedestal", () -> new PedestalBlock(BlockBehaviour.Properties.of().strength(1.0F).sound(SoundType.DEEPSLATE)));
-    public static final Supplier<Block> CANDLE_HOLDER = BLOCKS.register("candle_holder", () -> new CandleHolderBlock(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion().sound(SoundType.METAL)));
-    public static final Supplier<Block> DARK_IRON_TRAPDOOR = BLOCKS.register("dark_iron_trapdoor", () -> new TGTrapDoorBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F).sound(SoundType.METAL).noOcclusion()));
-    public static final Supplier<Block> DARK_IRON_DOOR = BLOCKS.register("dark_iron_door", () -> new TGDoorBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F).sound(SoundType.METAL).noOcclusion()));
+    public static final Supplier<DarkIronBars> DARK_IRON_BARS = BLOCKS.register("dark_iron_bars", () -> new DarkIronBars(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion()));
+    public static final Supplier<BrazierBlock> SOUL_FIRE_BRAZIER = BLOCKS.register("soul_fire_brazier", () -> new BrazierBlock(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion().lightLevel(BrazierBlock.STATE_TO_LUMINANCE).sound(SoundType.METAL), ParticleTypes.SOUL_FIRE_FLAME));
+    public static final Supplier<BrazierBlock> FIRE_BRAZIER = BLOCKS.register("fire_brazier", () -> new BrazierBlock(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion().lightLevel(BrazierBlock.STATE_TO_LUMINANCE).sound(SoundType.METAL), ParticleTypes.FLAME));
+    public static final Supplier<PedestalBlock> PEDESTAL = BLOCKS.register("pedestal", () -> new PedestalBlock(BlockBehaviour.Properties.of().strength(1.0F).sound(SoundType.DEEPSLATE)));
+    public static final Supplier<CandleHolderBlock> CANDLE_HOLDER = BLOCKS.register("candle_holder", () -> new CandleHolderBlock(BlockBehaviour.Properties.of().strength(1.0F).noOcclusion().sound(SoundType.METAL)));
+    public static final Supplier<TGTrapDoorBlock> DARK_IRON_TRAPDOOR = BLOCKS.register("dark_iron_trapdoor", () -> new TGTrapDoorBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F).sound(SoundType.METAL).noOcclusion()));
+    public static final Supplier<TGDoorBlock> DARK_IRON_DOOR = BLOCKS.register("dark_iron_door", () -> new TGDoorBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F).sound(SoundType.METAL).noOcclusion()));
     public static final Supplier<Block> DARK_IRON_BLOCK = BLOCKS.register("dark_iron_block", () -> new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F, 6.0F).sound(SoundType.METAL)));
-    public static final Supplier<Block> SKULL_WITH_RIB_CAGE = BLOCKS.register("skull_with_rib_cage", BoneDisplayBlock::new);
-    public static final Supplier<Block> LEANING_SKELETON = BLOCKS.register("leaning_skeleton", BoneDisplayBlock::new);
-    public static final Supplier<Block> SKULL_PILE = BLOCKS.register("skull_pile", BoneDisplayBlock::new);
-    public static final Supplier<Block> LYING_SKELETON = BLOCKS.register("lying_skeleton", BoneDisplayBlock::new);
-    public static final Supplier<Block> WITHER_SKULL_WITH_RIB_CAGE = BLOCKS.register("wither_skull_with_rib_cage", BoneDisplayBlock::new);
-    public static final Supplier<Block> LEANING_WITHER_SKELETON = BLOCKS.register("leaning_wither_skeleton", BoneDisplayBlock::new);
-    public static final Supplier<Block> WITHER_SKULL_PILE = BLOCKS.register("wither_skull_pile", BoneDisplayBlock::new);
-    public static final Supplier<Block> LYING_WITHER_SKELETON = BLOCKS.register("lying_wither_skeleton", BoneDisplayBlock::new);
-    public static final Supplier<Block> CREEPER_SKELETON = BLOCKS.register("creeper_skeleton", BoneDisplayBlock::new);
-    public static final Supplier<Block> SKELETON_HAND = BLOCKS.register("skeleton_hand", BoneDisplayBlock::new);
-    public static final Supplier<Block> WITHER_SKELETON_HAND = BLOCKS.register("wither_skeleton_hand", BoneDisplayBlock::new);
-    public static final Supplier<Block> BONE_REMAINS = BLOCKS.register("bone_remains", BoneDisplayBlock::new);
-    public static final Supplier<Block> WITHER_BONE_REMAINS = BLOCKS.register("wither_bone_remains", BoneDisplayBlock::new);
-    public static final Supplier<Block> LATERALLY_LYING_SKELETON = BLOCKS.register("laterally_lying_skeleton", BoneDisplayBlock::new);
-    public static final Supplier<Block> LATERALLY_LYING_WITHER_SKELETON = BLOCKS.register("laterally_lying_wither_skeleton", BoneDisplayBlock::new);
-    public static final Supplier<Block> SKULL_ON_PIKE = BLOCKS.register("skull_on_pike", BoneDisplayBlock::new);
-    public static final Supplier<Block> WITHER_SKULL_ON_PIKE = BLOCKS.register("wither_skull_on_pike", BoneDisplayBlock::new);
-    public static final Supplier<Block> TORSO_PILE = BLOCKS.register("torso_pile", BoneDisplayBlock::new);
-    public static final Supplier<Block> WITHER_TORSO_PILE = BLOCKS.register("wither_torso_pile", BoneDisplayBlock::new);
-    public static final Supplier<Block> HANGED_SKELETON = BLOCKS.register("hanged_skeleton", BoneDisplayBlock::new);
-    public static final Supplier<Block> HANGED_WITHER_SKELETON = BLOCKS.register("hanged_wither_skeleton", BoneDisplayBlock::new);
+    public static final Supplier<BoneDisplayBlock> SKULL_WITH_RIB_CAGE = BLOCKS.register("skull_with_rib_cage", BoneDisplayBlock::new);
+    public static final Supplier<BoneDisplayBlock> LEANING_SKELETON = BLOCKS.register("leaning_skeleton", BoneDisplayBlock::new);
+    public static final Supplier<BoneDisplayBlock> SKULL_PILE = BLOCKS.register("skull_pile", BoneDisplayBlock::new);
+    public static final Supplier<BoneDisplayBlock> LYING_SKELETON = BLOCKS.register("lying_skeleton", BoneDisplayBlock::new);
+    public static final Supplier<BoneDisplayBlock> WITHER_SKULL_WITH_RIB_CAGE = BLOCKS.register("wither_skull_with_rib_cage", BoneDisplayBlock::new);
+    public static final Supplier<BoneDisplayBlock> LEANING_WITHER_SKELETON = BLOCKS.register("leaning_wither_skeleton", BoneDisplayBlock::new);
+    public static final Supplier<BoneDisplayBlock> WITHER_SKULL_PILE = BLOCKS.register("wither_skull_pile", BoneDisplayBlock::new);
+    public static final Supplier<BoneDisplayBlock> LYING_WITHER_SKELETON = BLOCKS.register("lying_wither_skeleton", BoneDisplayBlock::new);
+    public static final Supplier<BoneDisplayBlock> CREEPER_SKELETON = BLOCKS.register("creeper_skeleton", BoneDisplayBlock::new);
+    public static final Supplier<BoneDisplayBlock> SKELETON_HAND = BLOCKS.register("skeleton_hand", BoneDisplayBlock::new);
+    public static final Supplier<BoneDisplayBlock> WITHER_SKELETON_HAND = BLOCKS.register("wither_skeleton_hand", BoneDisplayBlock::new);
+    public static final Supplier<BoneDisplayBlock> BONE_REMAINS = BLOCKS.register("bone_remains", BoneDisplayBlock::new);
+    public static final Supplier<BoneDisplayBlock> WITHER_BONE_REMAINS = BLOCKS.register("wither_bone_remains", BoneDisplayBlock::new);
+    public static final Supplier<BoneDisplayBlock> LATERALLY_LYING_SKELETON = BLOCKS.register("laterally_lying_skeleton", BoneDisplayBlock::new);
+    public static final Supplier<BoneDisplayBlock> LATERALLY_LYING_WITHER_SKELETON = BLOCKS.register("laterally_lying_wither_skeleton", BoneDisplayBlock::new);
+    public static final Supplier<BoneDisplayBlock> SKULL_ON_PIKE = BLOCKS.register("skull_on_pike", BoneDisplayBlock::new);
+    public static final Supplier<BoneDisplayBlock> WITHER_SKULL_ON_PIKE = BLOCKS.register("wither_skull_on_pike", BoneDisplayBlock::new);
+    public static final Supplier<BoneDisplayBlock> TORSO_PILE = BLOCKS.register("torso_pile", BoneDisplayBlock::new);
+    public static final Supplier<BoneDisplayBlock> WITHER_TORSO_PILE = BLOCKS.register("wither_torso_pile", BoneDisplayBlock::new);
+    public static final Supplier<BoneDisplayBlock> HANGED_SKELETON = BLOCKS.register("hanged_skeleton", BoneDisplayBlock::new);
+    public static final Supplier<BoneDisplayBlock> HANGED_WITHER_SKELETON = BLOCKS.register("hanged_wither_skeleton", BoneDisplayBlock::new);
 
 
-    public static final Supplier<Block> VASE_BLOCK = BLOCKS.register("vase_block", () -> new VaseBlock());
+    public static final Supplier<VaseBlock> VASE_BLOCK = BLOCKS.register("vase_block", VaseBlock::new);
 
-    public static final Supplier<Block> GRAVESTONE = BLOCKS.register("gravestone", () -> new GravestoneBlock(POLISHED_BASALT_GRAVESTONE_TEXTURE));
-    public static final Supplier<Block> COBBLESTONE_GRAVESTONE = BLOCKS.register("cobblestone_gravestone", () -> new GravestoneBlock(COBBLESTONE_GRAVESTONE_TEXTURE));
-    public static final Supplier<Block> MOSSY_COBBLESTONE_GRAVESTONE = BLOCKS.register("mossy_cobblestone_gravestone", () -> new GravestoneBlock(MOSSY_COBBLESTONE_GRAVESTONE_TEXTURE));
-    public static final Supplier<Block> DEEPSLATE_GRAVESTONE = BLOCKS.register("deepslate_gravestone", () -> new GravestoneBlock(DEEPSLATE_GRAVESTONE_TEXTURE));
-    public static final Supplier<Block> BLACKSTONE_GRAVESTONE = BLOCKS.register("blackstone_gravestone", () -> new GravestoneBlock(BLACKSTONE_GRAVESTONE_TEXTURE));
-    public static final Supplier<Block> CRACKED_BLACKSTONE_GRAVESTONE = BLOCKS.register("cracked_blackstone_gravestone", () -> new GravestoneBlock(CRACKED_BLACKSTONE_GRAVESTONE_TEXTURE));
-    public static final Supplier<Block> STONE_BRICKS_GRAVESTONE = BLOCKS.register("stone_bricks_gravestone", () -> new GravestoneBlock(STONE_BRICKS_GRAVESTONE_TEXTURE));
-    public static final Supplier<Block> MOSSY_STONE_BRICKS_GRAVESTONE = BLOCKS.register("mossy_stone_bricks_gravestone", () -> new GravestoneBlock(MOSSY_STONE_BRICKS_GRAVESTONE_TEXTURE));
-    public static final Supplier<Block> BRICKS_GRAVESTONE = BLOCKS.register("bricks_gravestone", () -> new GravestoneBlock(BRICKS_GRAVESTONE_TEXTURE));
-    public static final Supplier<Block> SANDSTONE_GRAVESTONE = BLOCKS.register("sandstone_gravestone", () -> new GravestoneBlock(SANDSTONE_GRAVESTONE_TEXTURE));
-    public static final Supplier<Block> RED_SANDSTONE_GRAVESTONE = BLOCKS.register("red_sandstone_gravestone", () -> new GravestoneBlock(RED_SANDSTONE_GRAVESTONE_TEXTURE));
-    public static final Supplier<Block> GILDED_BLACKSTONE_GRAVESTONE = BLOCKS.register("gilded_blackstone_gravestone", () -> new GravestoneBlock(GILDED_BLACKSTONE_GRAVESTONE_TEXTURE));
-    public static final Supplier<Block> QUARTZ_BRICKS_GRAVESTONE = BLOCKS.register("quartz_bricks_gravestone", () -> new GravestoneBlock(QUARTZ_BRICKS_GRAVESTONE_TEXTURE));
+    public static final Supplier<GravestoneBlock> GRAVESTONE = BLOCKS.register("gravestone", () -> new GravestoneBlock(POLISHED_BASALT_GRAVESTONE_TEXTURE));
+    public static final Supplier<GravestoneBlock> COBBLESTONE_GRAVESTONE = BLOCKS.register("cobblestone_gravestone", () -> new GravestoneBlock(COBBLESTONE_GRAVESTONE_TEXTURE));
+    public static final Supplier<GravestoneBlock> MOSSY_COBBLESTONE_GRAVESTONE = BLOCKS.register("mossy_cobblestone_gravestone", () -> new GravestoneBlock(MOSSY_COBBLESTONE_GRAVESTONE_TEXTURE));
+    public static final Supplier<GravestoneBlock> DEEPSLATE_GRAVESTONE = BLOCKS.register("deepslate_gravestone", () -> new GravestoneBlock(DEEPSLATE_GRAVESTONE_TEXTURE));
+    public static final Supplier<GravestoneBlock> BLACKSTONE_GRAVESTONE = BLOCKS.register("blackstone_gravestone", () -> new GravestoneBlock(BLACKSTONE_GRAVESTONE_TEXTURE));
+    public static final Supplier<GravestoneBlock> CRACKED_BLACKSTONE_GRAVESTONE = BLOCKS.register("cracked_blackstone_gravestone", () -> new GravestoneBlock(CRACKED_BLACKSTONE_GRAVESTONE_TEXTURE));
+    public static final Supplier<GravestoneBlock> STONE_BRICKS_GRAVESTONE = BLOCKS.register("stone_bricks_gravestone", () -> new GravestoneBlock(STONE_BRICKS_GRAVESTONE_TEXTURE));
+    public static final Supplier<GravestoneBlock> MOSSY_STONE_BRICKS_GRAVESTONE = BLOCKS.register("mossy_stone_bricks_gravestone", () -> new GravestoneBlock(MOSSY_STONE_BRICKS_GRAVESTONE_TEXTURE));
+    public static final Supplier<GravestoneBlock> BRICKS_GRAVESTONE = BLOCKS.register("bricks_gravestone", () -> new GravestoneBlock(BRICKS_GRAVESTONE_TEXTURE));
+    public static final Supplier<GravestoneBlock> SANDSTONE_GRAVESTONE = BLOCKS.register("sandstone_gravestone", () -> new GravestoneBlock(SANDSTONE_GRAVESTONE_TEXTURE));
+    public static final Supplier<GravestoneBlock> RED_SANDSTONE_GRAVESTONE = BLOCKS.register("red_sandstone_gravestone", () -> new GravestoneBlock(RED_SANDSTONE_GRAVESTONE_TEXTURE));
+    public static final Supplier<GravestoneBlock> GILDED_BLACKSTONE_GRAVESTONE = BLOCKS.register("gilded_blackstone_gravestone", () -> new GravestoneBlock(GILDED_BLACKSTONE_GRAVESTONE_TEXTURE));
+    public static final Supplier<GravestoneBlock> QUARTZ_BRICKS_GRAVESTONE = BLOCKS.register("quartz_bricks_gravestone", () -> new GravestoneBlock(QUARTZ_BRICKS_GRAVESTONE_TEXTURE));
 
     public static final Supplier<UrnBlock> BLACK_URN = BLOCKS.register("black_urn", () -> new UrnBlock());
     public static final Supplier<UrnBlock> BROWN_URN = BLOCKS.register("brown_urn", () -> new UrnBlock());
@@ -131,47 +129,40 @@ public class TGBlocks {
     public static final Supplier<UrnBlock> SMALL_GREEN_URN = BLOCKS.register("small_green_urn", () -> new UrnBlock());
     public static final Supplier<UrnBlock> SMALL_LIME_URN = BLOCKS.register("small_lime_urn", () -> new UrnBlock());
 
-    public static final Supplier<Block> SARCOPHAGUS = BLOCKS.register("sarcophagus", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().noOcclusion().strength(1.5F), false, "sarcophagus_lid", "sarcophagus_base"));
-    public static final Supplier<Block> OAK_COFFIN = BLOCKS.register("oak_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "oak_coffin_lid", "oak_coffin_base"));
-    public static final Supplier<Block> SPRUCE_COFFIN = BLOCKS.register("spruce_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "spruce_coffin_lid", "spruce_coffin_base"));
-    public static final Supplier<Block> BIRCH_COFFIN = BLOCKS.register("birch_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "birch_coffin_lid", "birch_coffin_base"));
-    public static final Supplier<Block> DARK_OAK_COFFIN = BLOCKS.register("dark_oak_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "dark_oak_coffin_lid", "dark_oak_coffin_base"));
-    public static final Supplier<Block> JUNGLE_COFFIN = BLOCKS.register("jungle_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "jungle_coffin_lid", "jungle_coffin_base"));
-    public static final Supplier<Block> ACACIA_COFFIN = BLOCKS.register("acacia_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "acacia_coffin_lid", "acacia_coffin_base"));
-    public static final Supplier<Block> WARPED_COFFIN = BLOCKS.register("warped_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "warped_coffin_lid", "warped_coffin_base"));
-    public static final Supplier<Block> CRIMSON_COFFIN = BLOCKS.register("crimson_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "crimson_coffin_lid", "crimson_coffin_base"));
-    public static final Supplier<Block> MANGROVE_COFFIN = BLOCKS.register("mangrove_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "mangrove_coffin_lid", "mangrove_coffin_base"));
-    public static final Supplier<Block> BAMBOO_COFFIN = BLOCKS.register("bamboo_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "bamboo_coffin_lid", "bamboo_coffin_base"));
-    public static final Supplier<Block> CHERRY_COFFIN = BLOCKS.register("cherry_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "cherry_coffin_lid", "cherry_coffin_base"));
+    public static final Supplier<SarcophagusBlock> SARCOPHAGUS = BLOCKS.register("sarcophagus", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().noOcclusion().strength(1.5F), false, "sarcophagus_lid", "sarcophagus_base"));
+    public static final Supplier<SarcophagusBlock> OAK_COFFIN = BLOCKS.register("oak_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "oak_coffin_lid", "oak_coffin_base"));
+    public static final Supplier<SarcophagusBlock> SPRUCE_COFFIN = BLOCKS.register("spruce_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "spruce_coffin_lid", "spruce_coffin_base"));
+    public static final Supplier<SarcophagusBlock> BIRCH_COFFIN = BLOCKS.register("birch_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "birch_coffin_lid", "birch_coffin_base"));
+    public static final Supplier<SarcophagusBlock> DARK_OAK_COFFIN = BLOCKS.register("dark_oak_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "dark_oak_coffin_lid", "dark_oak_coffin_base"));
+    public static final Supplier<SarcophagusBlock> JUNGLE_COFFIN = BLOCKS.register("jungle_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "jungle_coffin_lid", "jungle_coffin_base"));
+    public static final Supplier<SarcophagusBlock> ACACIA_COFFIN = BLOCKS.register("acacia_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "acacia_coffin_lid", "acacia_coffin_base"));
+    public static final Supplier<SarcophagusBlock> WARPED_COFFIN = BLOCKS.register("warped_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "warped_coffin_lid", "warped_coffin_base"));
+    public static final Supplier<SarcophagusBlock> CRIMSON_COFFIN = BLOCKS.register("crimson_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "crimson_coffin_lid", "crimson_coffin_base"));
+    public static final Supplier<SarcophagusBlock> MANGROVE_COFFIN = BLOCKS.register("mangrove_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "mangrove_coffin_lid", "mangrove_coffin_base"));
+    public static final Supplier<SarcophagusBlock> BAMBOO_COFFIN = BLOCKS.register("bamboo_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "bamboo_coffin_lid", "bamboo_coffin_base"));
+    public static final Supplier<SarcophagusBlock> CHERRY_COFFIN = BLOCKS.register("cherry_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "cherry_coffin_lid", "cherry_coffin_base"));
+    public static final List<Supplier<SarcophagusBlock>> COFFINS = List.of(
+            OAK_COFFIN,
+            SPRUCE_COFFIN,
+            DARK_OAK_COFFIN,
+            BIRCH_COFFIN,
+            JUNGLE_COFFIN,
+            ACACIA_COFFIN,
+            CRIMSON_COFFIN,
+            WARPED_COFFIN,
+            MANGROVE_COFFIN,
+            BAMBOO_COFFIN,
+            CHERRY_COFFIN
+    );
 
+    public static final Supplier<AltarBlock> ALTAR = BLOCKS.register("altar", () -> new AltarBlock(BlockBehaviour.Properties.of().strength(-1.0F, 3600000.0F).noLootTable()));
+    public static final Supplier<AltarSideBlock> ALTAR_SIDE = BLOCKS.register("altar_side", () -> new AltarSideBlock(BlockBehaviour.Properties.of().strength(50.0F, 1200.0F).noLootTable()));
+    public static final Supplier<AltarCornerBlock> ALTAR_CORNER = BLOCKS.register("altar_corner", () -> new AltarCornerBlock(BlockBehaviour.Properties.of().strength(50.0F, 1200.0F).noLootTable()));
+    public static final Supplier<AltarCenterBlock> ALTAR_CENTER = BLOCKS.register("altar_center", () -> new AltarCenterBlock(BlockBehaviour.Properties.of().strength(50.0F, 1200.0F).noLootTable()));
 
-    public static final Supplier<Block> ALTAR = BLOCKS.register("altar", () -> new AltarBlock(BlockBehaviour.Properties.of().strength(-1.0F, 3600000.0F).noLootTable()));
-    public static final Supplier<Block> ALTAR_SIDE = BLOCKS.register("altar_side", () -> new AltarSideBlock(BlockBehaviour.Properties.of().strength(50.0F, 1200.0F).noLootTable()));
-    public static final Supplier<Block> ALTAR_CORNER = BLOCKS.register("altar_corner", () -> new AltarCornerBlock(BlockBehaviour.Properties.of().strength(50.0F, 1200.0F).noLootTable()));
-    public static final Supplier<Block> ALTAR_CENTER = BLOCKS.register("altar_center", () -> new AltarCenterBlock(BlockBehaviour.Properties.of().strength(50.0F, 1200.0F).noLootTable()));
+    public static final Supplier<OminousBoneStaffFragmentBlock> LOWER_BONE_STAFF = BLOCKS.register("lower_bone_staff", OminousBoneStaffFragmentBlock::new);
+    public static final Supplier<OminousBoneStaffFragmentBlock> MIDDLE_BONE_STAFF = BLOCKS.register("middle_bone_staff", OminousBoneStaffFragmentBlock::new);
+    public static final Supplier<OminousBoneStaffFragmentBlock> UPPER_BONE_STAFF = BLOCKS.register("upper_bone_staff", OminousBoneStaffFragmentBlock::new);
 
-    public static final Supplier<Block> LOWER_BONE_STAFF = BLOCKS.register("lower_bone_staff", OminousBoneStaffFragment::new);
-    public static final Supplier<Block> MIDDLE_BONE_STAFF = BLOCKS.register("middle_bone_staff", OminousBoneStaffFragment::new);
-    public static final Supplier<Block> UPPER_BONE_STAFF = BLOCKS.register("upper_bone_staff", OminousBoneStaffFragment::new);
-
-    public static final Supplier<Block> OSSUARY = BLOCKS.register("ossuary", () -> new OssuaryBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().noOcclusion().strength(3.5F)));
-
-
-    public static List<Block> getCoffins() {
-        coffins.add(OAK_COFFIN.get());
-        coffins.add(SPRUCE_COFFIN.get());
-        coffins.add(DARK_OAK_COFFIN.get());
-        coffins.add(BIRCH_COFFIN.get());
-        coffins.add(JUNGLE_COFFIN.get());
-        coffins.add(ACACIA_COFFIN.get());
-        coffins.add(CRIMSON_COFFIN.get());
-        coffins.add(WARPED_COFFIN.get());
-        coffins.add(MANGROVE_COFFIN.get());
-        coffins.add(BAMBOO_COFFIN.get());
-        coffins.add(CHERRY_COFFIN.get());
-
-        return coffins;
-    }
-
-
+    public static final Supplier<OssuaryBlock> OSSUARY = BLOCKS.register("ossuary", () -> new OssuaryBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().noOcclusion().strength(3.5F)));
 }
