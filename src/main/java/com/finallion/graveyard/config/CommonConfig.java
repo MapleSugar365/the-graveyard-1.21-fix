@@ -82,7 +82,6 @@ public class CommonConfig {
     public final ModConfigSpec.BooleanValue enableMossParticle;
     public final ModConfigSpec.IntValue particleFrequency;
 
-    public final ModConfigSpec.BooleanValue urnHasDoubleInventory;
     public final ModConfigSpec.BooleanValue disableWitherSkeletonSpawner;
     public final ModConfigSpec.BooleanValue enableBossMusic;
 
@@ -251,7 +250,6 @@ public class CommonConfig {
         builder.pop();
 
         builder.push("The Graveyard - Additional Config");
-        this.urnHasDoubleInventory = builder.define("urn.urnHasDoubleInventory", true);
         this.enableBossMusic = builder.define("bossMusic.enableBossMusic", true);
         this.disableWitherSkeletonSpawner = builder.define("spawner.disableWitherSkeletonSpawner", false);
         builder.pop();

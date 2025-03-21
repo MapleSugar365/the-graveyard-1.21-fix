@@ -1,11 +1,11 @@
 package com.finallion.graveyard.blockentities;
 
-import com.finallion.graveyard.config.GraveyardConfig;
 import com.finallion.graveyard.init.TGSounds;
-import com.finallion.graveyard.init.TGTileEntities;
+import com.finallion.graveyard.init.TGBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
@@ -20,52 +20,51 @@ import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BarrelBlock;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class UrnBlockEntity extends RandomizableContainerBlockEntity {
-    private static final int EVENT_SET_OPEN_COUNT = 1;
-    private NonNullList<ItemStack> items = NonNullList.withSize(54, ItemStack.EMPTY);
+    private static final int CONTAINER_SIZE = 54;
+
+    private NonNullList<ItemStack> items = NonNullList.withSize(CONTAINER_SIZE, ItemStack.EMPTY);
 
     private final ContainerOpenersCounter openersCounter = new ContainerOpenersCounter() {
-        protected void onOpen(Level p_155357_, BlockPos p_155358_, BlockState p_155359_) {
-            UrnBlockEntity.playSound(p_155357_, p_155358_, p_155359_, TGSounds.URN_OPEN.get());
+        protected void onOpen(Level level, BlockPos pos, BlockState state) {
+            UrnBlockEntity.this.playSound(state, TGSounds.URN_OPEN.get());
+            UrnBlockEntity.this.updateBlockState(state, true);
         }
 
-        protected void onClose(Level p_155367_, BlockPos p_155368_, BlockState p_155369_) {
-            UrnBlockEntity.playSound(p_155367_, p_155368_, p_155369_, TGSounds.URN_CLOSE.get());
+        protected void onClose(Level level, BlockPos pos, BlockState state) {
+            UrnBlockEntity.this.playSound(state, TGSounds.URN_CLOSE.get());
+            UrnBlockEntity.this.updateBlockState(state, false);
         }
 
-        protected void openerCountChanged(Level p_155361_, BlockPos p_155362_, BlockState p_155363_, int p_155364_, int p_155365_) {
+        protected void openerCountChanged(Level level, BlockPos pos, BlockState state, int eventId, int eventParam) {
 
         }
 
-        protected boolean isOwnContainer(Player p_155355_) {
-            if (!(p_155355_.containerMenu instanceof ChestMenu)) {
-                return false;
+        protected boolean isOwnContainer(Player player) {
+            if (player.containerMenu instanceof ChestMenu) {
+                Container container = ((ChestMenu) player.containerMenu).getContainer();
+                return container == UrnBlockEntity.this || container instanceof CompoundContainer && ((CompoundContainer) container).contains(UrnBlockEntity.this);
             } else {
-                Container container = ((ChestMenu)p_155355_.containerMenu).getContainer();
-                return container == UrnBlockEntity.this || container instanceof CompoundContainer && ((CompoundContainer)container).contains(UrnBlockEntity.this);
+                return false;
             }
         }
     };
 
-    protected UrnBlockEntity(BlockEntityType<?> p_155327_, BlockPos p_155328_, BlockState p_155329_) {
-        super(p_155327_, p_155328_, p_155329_);
+    public UrnBlockEntity(BlockPos pos, BlockState blockState) {
+        super(TGBlockEntities.URN_BLOCK_ENTITY.get(), pos, blockState);
     }
 
-    public UrnBlockEntity(BlockPos p_155331_, BlockState p_155332_) {
-        this(TGTileEntities.URN_BLOCK_ENTITY.get(), p_155331_, p_155332_);
-    }
+    @Override
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
+        if (!this.trySaveLootTable(tag)) {
+            ContainerHelper.saveAllItems(tag, this.items, registries);
+        }
 
-    public int getContainerSize() {
-        return 54;
-    }
-
-    protected Component getDefaultName() {
-        return Component.translatable("container.urn");
     }
 
     @Override
@@ -79,49 +78,42 @@ public class UrnBlockEntity extends RandomizableContainerBlockEntity {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        if (!this.trySaveLootTable(tag)) {
-            ContainerHelper.saveAllItems(tag, this.items, registries);
-        }
-
+    public int getContainerSize() {
+        return CONTAINER_SIZE;
     }
 
-
-    static void playSound(Level p_155339_, BlockPos p_155340_, BlockState p_155341_, SoundEvent p_155342_) {
-        double d0 = (double)p_155340_.getX() + 0.5D;
-        double d1 = (double)p_155340_.getY() + 0.5D;
-        double d2 = (double)p_155340_.getZ() + 0.5D;
-
-        p_155339_.playSound((Player)null, d0, d1, d2, p_155342_, SoundSource.BLOCKS, 0.5F, p_155339_.random.nextFloat() * 0.1F + 0.9F);
-
-    }
-
+    @Override
     protected NonNullList<ItemStack> getItems() {
         return this.items;
     }
 
-    protected void setItems(NonNullList<ItemStack> p_59110_) {
-        this.items = p_59110_;
+    @Override
+    protected void setItems(NonNullList<ItemStack> items) {
+        this.items = items;
     }
 
-    protected AbstractContainerMenu createMenu(int p_59082_, Inventory p_59083_) {
-        if (GraveyardConfig.COMMON.urnHasDoubleInventory.get()) {
-            return ChestMenu.sixRows(p_59082_, p_59083_, this);
+    @Override
+    protected Component getDefaultName() {
+        return Component.translatable("container.urn");
+    }
+
+    @Override
+    protected AbstractContainerMenu createMenu(int id, Inventory player) {
+        return ChestMenu.sixRows(id, player, this);
+    }
+
+    @Override
+    public void startOpen(Player player) {
+        if (!this.remove && !player.isSpectator()) {
+            this.openersCounter.incrementOpeners(player, this.getLevel(), this.getBlockPos(), this.getBlockState());
         }
-        return ChestMenu.threeRows(p_59082_, p_59083_, this);
-    }
-
-    public void startOpen(Player p_58616_) {
-        if (!this.remove && !p_58616_.isSpectator()) {
-            this.openersCounter.incrementOpeners(p_58616_, this.getLevel(), this.getBlockPos(), this.getBlockState());
-        }
 
     }
 
-    public void stopOpen(Player p_58614_) {
-        if (!this.remove && !p_58614_.isSpectator()) {
-            this.openersCounter.decrementOpeners(p_58614_, this.getLevel(), this.getBlockPos(), this.getBlockState());
+    @Override
+    public void stopOpen(Player player) {
+        if (!this.remove && !player.isSpectator()) {
+            this.openersCounter.decrementOpeners(player, this.getLevel(), this.getBlockPos(), this.getBlockState());
         }
 
     }
@@ -133,10 +125,15 @@ public class UrnBlockEntity extends RandomizableContainerBlockEntity {
 
     }
 
-    void updateBlockState(BlockState p_58607_, boolean p_58608_) {
-        this.level.setBlock(this.getBlockPos(), p_58607_.setValue(BarrelBlock.OPEN, Boolean.valueOf(p_58608_)), 3);
+    void updateBlockState(BlockState state, boolean open) {
+        this.level.setBlock(this.getBlockPos(), state.setValue(BarrelBlock.OPEN, Boolean.valueOf(open)), 3);
     }
 
-
-
+    void playSound(BlockState state, SoundEvent sound) {
+        Vec3i vec3i = state.getValue(BarrelBlock.FACING).getNormal();
+        double d0 = (double) this.worldPosition.getX() + 0.5 + (double) vec3i.getX() / 2.0;
+        double d1 = (double) this.worldPosition.getY() + 0.5 + (double) vec3i.getY() / 2.0;
+        double d2 = (double) this.worldPosition.getZ() + 0.5 + (double) vec3i.getZ() / 2.0;
+        this.level.playSound(null, d0, d1, d2, sound, SoundSource.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 0.9F);
+    }
 }

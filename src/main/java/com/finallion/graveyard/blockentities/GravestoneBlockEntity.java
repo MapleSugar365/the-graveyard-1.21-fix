@@ -1,6 +1,6 @@
 package com.finallion.graveyard.blockentities;
 
-import com.finallion.graveyard.init.TGTileEntities;
+import com.finallion.graveyard.init.TGBlockEntities;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.logging.LogUtils;
 import net.minecraft.commands.CommandSource;
@@ -42,7 +42,7 @@ public class GravestoneBlockEntity extends BlockEntity {
     private boolean isWaxed;
 
     public GravestoneBlockEntity(BlockPos p_155700_, BlockState p_155701_) {
-        this(TGTileEntities.GRAVESTONE_BLOCK_ENTITY.get(), p_155700_, p_155701_);
+        this(TGBlockEntities.GRAVESTONE_BLOCK_ENTITY.get(), p_155700_, p_155701_);
     }
 
     public GravestoneBlockEntity(BlockEntityType p_249609_, BlockPos p_248914_, BlockState p_249550_) {

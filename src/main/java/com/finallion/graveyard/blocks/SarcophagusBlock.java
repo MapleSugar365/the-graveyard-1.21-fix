@@ -5,23 +5,19 @@ import com.finallion.graveyard.blockentities.enums.SarcophagusPart;
 import com.finallion.graveyard.entities.WraithEntity;
 import com.finallion.graveyard.init.TGAdvancements;
 import com.finallion.graveyard.init.TGEntities;
-import com.finallion.graveyard.init.TGTileEntities;
+import com.finallion.graveyard.init.TGBlockEntities;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.*;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -48,7 +44,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 import java.util.function.BiPredicate;
-import java.util.function.Supplier;
 
 /*
 THINGS TO CHECK IF THE MODEL CASTS UNWANTED SHADOWS:
@@ -331,11 +326,11 @@ public class SarcophagusBlock extends BaseEntityBlock implements SimpleWaterlogg
     public DoubleBlockCombiner.NeighborCombineResult<? extends SarcophagusBlockEntity> combine(BlockState p_51544_, Level p_51545_, BlockPos p_51546_, boolean p_51547_) {
         BiPredicate<LevelAccessor, BlockPos> bipredicate;
         bipredicate = (world, pos) -> false;
-        return DoubleBlockCombiner.combineWithNeigbour(TGTileEntities.SARCOPHAGUS_BLOCK_ENTITY.get(), SarcophagusBlock::getBlockType, SarcophagusBlock::getConnectedDirection, FACING, p_51544_, p_51545_, p_51546_, bipredicate);
+        return DoubleBlockCombiner.combineWithNeigbour(TGBlockEntities.SARCOPHAGUS_BLOCK_ENTITY.get(), SarcophagusBlock::getBlockType, SarcophagusBlock::getConnectedDirection, FACING, p_51544_, p_51545_, p_51546_, bipredicate);
     }
 
     public BlockEntityType<? extends SarcophagusBlockEntity> blockEntityType() {
-        return TGTileEntities.SARCOPHAGUS_BLOCK_ENTITY.get();
+        return TGBlockEntities.SARCOPHAGUS_BLOCK_ENTITY.get();
     }
 
 }

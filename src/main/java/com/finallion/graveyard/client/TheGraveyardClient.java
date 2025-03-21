@@ -84,10 +84,10 @@ public class TheGraveyardClient {
         event.registerEntityRenderer(TGEntities.NAMELESS_HANGED.get(), NamelessHangedRenderer::new);
 
 
-        event.registerBlockEntityRenderer(TGTileEntities.GRAVESTONE_BLOCK_ENTITY.get(), GravestoneBlockEntityRenderer::new);
-        event.registerBlockEntityRenderer(TGTileEntities.SARCOPHAGUS_BLOCK_ENTITY.get(), SarcophagusBlockEntityRenderer::new);
-        event.registerBlockEntityRenderer(TGTileEntities.BRAZIER_BLOCK_ENTITY.get(), (BlockEntityRendererProvider.Context in) -> new BrazierBlockEntityRenderer());
-        event.registerBlockEntityRenderer(TGTileEntities.OSSUARY_BLOCK_ENTITY.get(), (BlockEntityRendererProvider.Context in) -> new OssuaryBlockEntityRenderer());
+        event.registerBlockEntityRenderer(TGBlockEntities.GRAVESTONE_BLOCK_ENTITY.get(), GravestoneBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(TGBlockEntities.SARCOPHAGUS_BLOCK_ENTITY.get(), SarcophagusBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(TGBlockEntities.BRAZIER_BLOCK_ENTITY.get(), (BlockEntityRendererProvider.Context in) -> new BrazierBlockEntityRenderer());
+        event.registerBlockEntityRenderer(TGBlockEntities.OSSUARY_BLOCK_ENTITY.get(), (BlockEntityRendererProvider.Context in) -> new OssuaryBlockEntityRenderer());
     }
 
     @SubscribeEvent

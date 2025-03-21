@@ -2,7 +2,7 @@ package com.finallion.graveyard.blocks;
 
 import com.finallion.graveyard.blockentities.OssuaryBlockEntity;
 import com.finallion.graveyard.client.gui.OssuaryScreenHandler;
-import com.finallion.graveyard.init.TGTileEntities;
+import com.finallion.graveyard.init.TGBlockEntities;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,7 +16,6 @@ import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -54,7 +53,7 @@ public class OssuaryBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_153212_, BlockState p_153213_, BlockEntityType<T> p_153214_) {
-        return createTickerHelper(p_153214_, TGTileEntities.OSSUARY_BLOCK_ENTITY.get(), OssuaryBlockEntity::tick);
+        return createTickerHelper(p_153214_, TGBlockEntities.OSSUARY_BLOCK_ENTITY.get(), OssuaryBlockEntity::tick);
     }
 
 

@@ -3,7 +3,7 @@ package com.finallion.graveyard.blockentities;
 
 import com.finallion.graveyard.blocks.OssuaryBlock;
 import com.finallion.graveyard.init.TGSounds;
-import com.finallion.graveyard.init.TGTileEntities;
+import com.finallion.graveyard.init.TGBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -29,7 +29,7 @@ public class OssuaryBlockEntity extends BlockEntity implements GeoBlockEntity {
     private boolean playedSound = false;
 
     public OssuaryBlockEntity(BlockPos pos, BlockState state) {
-        super(TGTileEntities.OSSUARY_BLOCK_ENTITY.get(), pos, state);
+        super(TGBlockEntities.OSSUARY_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override

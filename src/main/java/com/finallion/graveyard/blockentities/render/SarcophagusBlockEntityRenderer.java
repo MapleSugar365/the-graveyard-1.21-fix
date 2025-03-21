@@ -4,7 +4,7 @@ import com.finallion.graveyard.TheGraveyard;
 import com.finallion.graveyard.blockentities.SarcophagusBlockEntity;
 import com.finallion.graveyard.blockentities.enums.SarcophagusPart;
 import com.finallion.graveyard.blocks.SarcophagusBlock;
-import com.finallion.graveyard.init.TGTileEntities;
+import com.finallion.graveyard.init.TGBlockEntities;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
@@ -96,7 +96,7 @@ public class SarcophagusBlockEntityRenderer<T extends BlockEntity & LidBlockEnti
             case NORTH -> matrixStack.translate(-1.0F, 0F, 0F);
         }
 
-        DoubleBlockCombiner.NeighborCombineResult<? extends SarcophagusBlockEntity> propertySource = DoubleBlockCombiner.combineWithNeigbour(TGTileEntities.SARCOPHAGUS_BLOCK_ENTITY.get(), SarcophagusBlock::getBlockType, SarcophagusBlock::getConnectedDirection, ChestBlock.FACING, entity.getBlockState(), entity.getLevel(), entity.getBlockPos(), (worldx, pos) -> false);
+        DoubleBlockCombiner.NeighborCombineResult<? extends SarcophagusBlockEntity> propertySource = DoubleBlockCombiner.combineWithNeigbour(TGBlockEntities.SARCOPHAGUS_BLOCK_ENTITY.get(), SarcophagusBlock::getBlockType, SarcophagusBlock::getConnectedDirection, ChestBlock.FACING, entity.getBlockState(), entity.getLevel(), entity.getBlockPos(), (worldx, pos) -> false);
         float g = 1.0F - propertySource.apply(SarcophagusBlock.opennessCombiner(entity)).get(tickDelta);
         g = 1.0F - g * g * g;
 

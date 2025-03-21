@@ -2,7 +2,7 @@ package com.finallion.graveyard.blockentities;
 
 import com.finallion.graveyard.blockentities.animation.SarcophagusLidAnimator;
 import com.finallion.graveyard.init.TGSounds;
-import com.finallion.graveyard.init.TGTileEntities;
+import com.finallion.graveyard.init.TGBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -25,7 +25,6 @@ import net.minecraft.world.level.block.entity.LidBlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.phys.AABB;
 
 public class SarcophagusBlockEntity extends RandomizableContainerBlockEntity implements LidBlockEntity {
     private static final int EVENT_SET_OPEN_COUNT = 1;
@@ -65,7 +64,7 @@ public class SarcophagusBlockEntity extends RandomizableContainerBlockEntity imp
 
 
     public SarcophagusBlockEntity(BlockPos p_155331_, BlockState p_155332_) {
-        super(TGTileEntities.SARCOPHAGUS_BLOCK_ENTITY.get(), p_155331_, p_155332_);
+        super(TGBlockEntities.SARCOPHAGUS_BLOCK_ENTITY.get(), p_155331_, p_155332_);
     }
 
     public int getContainerSize() {

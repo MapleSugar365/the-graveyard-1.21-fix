@@ -29,7 +29,7 @@ public class TheGraveyard {
         TGScreens.MENUS.register(modEventBus);
         TGRecipeTypes.RECIPE_TYPES.register(modEventBus);
         TGRecipeTypes.RECIPE_SERIALIZERS.register(modEventBus);
-        TGTileEntities.TILE_ENTITIES.register(modEventBus);
+        TGBlockEntities.BLOCK_ENTITIES.register(modEventBus);
         TGParticles.PARTICLES.register(modEventBus);
         TGBiomeModifiers.BIOME_MODIFIERS.register(modEventBus);
 
