@@ -129,18 +129,18 @@ public class TGBlocks {
     public static final Supplier<UrnBlock> SMALL_GREEN_URN = BLOCKS.register("small_green_urn", () -> new UrnBlock());
     public static final Supplier<UrnBlock> SMALL_LIME_URN = BLOCKS.register("small_lime_urn", () -> new UrnBlock());
 
-    public static final Supplier<SarcophagusBlock> SARCOPHAGUS = BLOCKS.register("sarcophagus", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().noOcclusion().strength(1.5F), false, "sarcophagus_lid", "sarcophagus_base"));
-    public static final Supplier<SarcophagusBlock> OAK_COFFIN = BLOCKS.register("oak_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "oak_coffin_lid", "oak_coffin_base"));
-    public static final Supplier<SarcophagusBlock> SPRUCE_COFFIN = BLOCKS.register("spruce_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "spruce_coffin_lid", "spruce_coffin_base"));
-    public static final Supplier<SarcophagusBlock> BIRCH_COFFIN = BLOCKS.register("birch_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "birch_coffin_lid", "birch_coffin_base"));
-    public static final Supplier<SarcophagusBlock> DARK_OAK_COFFIN = BLOCKS.register("dark_oak_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "dark_oak_coffin_lid", "dark_oak_coffin_base"));
-    public static final Supplier<SarcophagusBlock> JUNGLE_COFFIN = BLOCKS.register("jungle_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "jungle_coffin_lid", "jungle_coffin_base"));
-    public static final Supplier<SarcophagusBlock> ACACIA_COFFIN = BLOCKS.register("acacia_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "acacia_coffin_lid", "acacia_coffin_base"));
-    public static final Supplier<SarcophagusBlock> WARPED_COFFIN = BLOCKS.register("warped_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "warped_coffin_lid", "warped_coffin_base"));
-    public static final Supplier<SarcophagusBlock> CRIMSON_COFFIN = BLOCKS.register("crimson_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "crimson_coffin_lid", "crimson_coffin_base"));
-    public static final Supplier<SarcophagusBlock> MANGROVE_COFFIN = BLOCKS.register("mangrove_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "mangrove_coffin_lid", "mangrove_coffin_base"));
-    public static final Supplier<SarcophagusBlock> BAMBOO_COFFIN = BLOCKS.register("bamboo_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "bamboo_coffin_lid", "bamboo_coffin_base"));
-    public static final Supplier<SarcophagusBlock> CHERRY_COFFIN = BLOCKS.register("cherry_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, "cherry_coffin_lid", "cherry_coffin_base"));
+    public static final Supplier<SarcophagusBlock> SARCOPHAGUS = BLOCKS.register("sarcophagus", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().noOcclusion().strength(1.5F), false, itemResourceLocation("sarcophagus_lid"), itemResourceLocation("sarcophagus_base")));
+    public static final Supplier<SarcophagusBlock> OAK_COFFIN = BLOCKS.register("oak_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, itemResourceLocation("oak_coffin_lid"), itemResourceLocation("oak_coffin_base")));
+    public static final Supplier<SarcophagusBlock> SPRUCE_COFFIN = BLOCKS.register("spruce_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, itemResourceLocation("spruce_coffin_lid"), itemResourceLocation("spruce_coffin_base")));
+    public static final Supplier<SarcophagusBlock> BIRCH_COFFIN = BLOCKS.register("birch_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, itemResourceLocation("birch_coffin_lid"), itemResourceLocation("birch_coffin_base")));
+    public static final Supplier<SarcophagusBlock> DARK_OAK_COFFIN = BLOCKS.register("dark_oak_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, itemResourceLocation("dark_oak_coffin_lid"), itemResourceLocation("dark_oak_coffin_base")));
+    public static final Supplier<SarcophagusBlock> JUNGLE_COFFIN = BLOCKS.register("jungle_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, itemResourceLocation("jungle_coffin_lid"), itemResourceLocation("jungle_coffin_base")));
+    public static final Supplier<SarcophagusBlock> ACACIA_COFFIN = BLOCKS.register("acacia_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, itemResourceLocation("acacia_coffin_lid"), itemResourceLocation("acacia_coffin_base")));
+    public static final Supplier<SarcophagusBlock> WARPED_COFFIN = BLOCKS.register("warped_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, itemResourceLocation("warped_coffin_lid"), itemResourceLocation("warped_coffin_base")));
+    public static final Supplier<SarcophagusBlock> CRIMSON_COFFIN = BLOCKS.register("crimson_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, itemResourceLocation("crimson_coffin_lid"), itemResourceLocation("crimson_coffin_base")));
+    public static final Supplier<SarcophagusBlock> MANGROVE_COFFIN = BLOCKS.register("mangrove_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, itemResourceLocation("mangrove_coffin_lid"), itemResourceLocation("mangrove_coffin_base")));
+    public static final Supplier<SarcophagusBlock> BAMBOO_COFFIN = BLOCKS.register("bamboo_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, itemResourceLocation("bamboo_coffin_lid"), itemResourceLocation("bamboo_coffin_base")));
+    public static final Supplier<SarcophagusBlock> CHERRY_COFFIN = BLOCKS.register("cherry_coffin", () -> new SarcophagusBlock(BlockBehaviour.Properties.of().ignitedByLava().noOcclusion().strength(1.0F), true, itemResourceLocation("cherry_coffin_lid"), itemResourceLocation("cherry_coffin_base")));
     public static final List<Supplier<SarcophagusBlock>> COFFINS = List.of(
             OAK_COFFIN,
             SPRUCE_COFFIN,
@@ -154,6 +154,9 @@ public class TGBlocks {
             BAMBOO_COFFIN,
             CHERRY_COFFIN
     );
+    private static ResourceLocation itemResourceLocation(String name) {
+        return ResourceLocation.fromNamespaceAndPath(TheGraveyard.MOD_ID, "item/" + name);
+    }
 
     public static final Supplier<AltarBlock> ALTAR = BLOCKS.register("altar", () -> new AltarBlock(BlockBehaviour.Properties.of().strength(-1.0F, 3600000.0F).noLootTable()));
     public static final Supplier<AltarSideBlock> ALTAR_SIDE = BLOCKS.register("altar_side", () -> new AltarSideBlock(BlockBehaviour.Properties.of().strength(50.0F, 1200.0F).noLootTable()));

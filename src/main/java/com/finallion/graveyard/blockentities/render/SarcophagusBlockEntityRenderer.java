@@ -1,6 +1,5 @@
 package com.finallion.graveyard.blockentities.render;
 
-import com.finallion.graveyard.TheGraveyard;
 import com.finallion.graveyard.blockentities.SarcophagusBlockEntity;
 import com.finallion.graveyard.blockentities.enums.SarcophagusPart;
 import com.finallion.graveyard.blocks.SarcophagusBlock;
@@ -15,11 +14,10 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelManager;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.DoubleBlockCombiner;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.LidBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -43,10 +41,8 @@ public class SarcophagusBlockEntityRenderer<T extends BlockEntity & LidBlockEnti
     public void render(SarcophagusBlockEntity entity, float tickDelta, PoseStack matrixStack, MultiBufferSource vertexConsumers, int light, int overlay) {
         if (baseModel == null) {
             BlockState blockState = entity.getBlockState();
-
-            // TODO: Check if this works
-            baseModel = modelManager.getModel(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(TheGraveyard.MOD_ID, "item/" + ((SarcophagusBlock)blockState.getBlock()).getBase())));
-            lidModel = modelManager.getModel(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(TheGraveyard.MOD_ID, "item/" + ((SarcophagusBlock)blockState.getBlock()).getLid())));
+            baseModel = modelManager.getModel(((SarcophagusBlock)blockState.getBlock()).getBaseModel());
+            lidModel = modelManager.getModel(((SarcophagusBlock)blockState.getBlock()).getLidModel());
         }
 
         if (entity.getLevel() != null && entity.getBlockState().getValue(SarcophagusBlock.PART) == SarcophagusPart.HEAD) {
@@ -68,7 +64,7 @@ public class SarcophagusBlockEntityRenderer<T extends BlockEntity & LidBlockEnti
     private void renderBase(SarcophagusBlockEntity entity, PoseStack matrixStack, MultiBufferSource vertexConsumer, int light, int overlay) {
         matrixStack.pushPose();
 
-        Direction direction = entity.getBlockState().getValue(SarcophagusBlock.FACING).getOpposite();
+        Direction direction = entity.getBlockState().getValue(HorizontalDirectionalBlock.FACING).getOpposite();
         float f = direction.toYRot();
         matrixStack.mulPose(Axis.YP.rotationDegrees(-f));
 
@@ -86,7 +82,7 @@ public class SarcophagusBlockEntityRenderer<T extends BlockEntity & LidBlockEnti
     private void renderLid(SarcophagusBlockEntity entity, PoseStack matrixStack, MultiBufferSource vertexConsumer, int light, int overlay, float tickDelta) {
         matrixStack.pushPose();
 
-        Direction direction = entity.getBlockState().getValue(SarcophagusBlock.FACING).getOpposite();
+        Direction direction = entity.getBlockState().getValue(HorizontalDirectionalBlock.FACING).getOpposite();
         float f = direction.toYRot();
         matrixStack.mulPose(Axis.YP.rotationDegrees(-f));
 
