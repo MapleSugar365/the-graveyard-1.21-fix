@@ -91,6 +91,8 @@ public class TGItems {
     public static final Supplier<Item> RED_SANDSTONE_GRAVESTONE = ITEMS.register("red_sandstone_gravestone", () -> new BlockItem(TGBlocks.RED_SANDSTONE_GRAVESTONE.get(), new Item.Properties()));
     public static final Supplier<Item> QUARTZ_BRICKS_GRAVESTONE = ITEMS.register("quartz_bricks_gravestone", () -> new BlockItem(TGBlocks.QUARTZ_BRICKS_GRAVESTONE.get(), new Item.Properties()));
 
+    public static final Supplier<Item> GRAVESTONE2 = ITEMS.register("gravestone2", () -> new BlockItem(TGBlocks.GRAVESTONE2.get(), new Item.Properties()));
+
     public static final Supplier<Item> BLACK_URN = ITEMS.register("black_urn", () -> new BlockItem(TGBlocks.BLACK_URN.get(), new Item.Properties()));
     public static final Supplier<Item> BROWN_URN = ITEMS.register("brown_urn", () -> new BlockItem(TGBlocks.BROWN_URN.get(), new Item.Properties()));
     public static final Supplier<Item> WHITE_URN = ITEMS.register("white_urn", () -> new BlockItem(TGBlocks.WHITE_URN.get(), new Item.Properties()));

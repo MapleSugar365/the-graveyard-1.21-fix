@@ -3,12 +3,15 @@ package com.finallion.graveyard.init;
 
 import com.finallion.graveyard.TheGraveyard;
 import com.finallion.graveyard.blocks.*;
+import com.finallion.graveyard.world.level.block.state.GravestoneType;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.List;
@@ -94,6 +97,8 @@ public class TGBlocks {
     public static final Supplier<GravestoneBlock> RED_SANDSTONE_GRAVESTONE = BLOCKS.register("red_sandstone_gravestone", () -> new GravestoneBlock(RED_SANDSTONE_GRAVESTONE_TEXTURE));
     public static final Supplier<GravestoneBlock> GILDED_BLACKSTONE_GRAVESTONE = BLOCKS.register("gilded_blackstone_gravestone", () -> new GravestoneBlock(GILDED_BLACKSTONE_GRAVESTONE_TEXTURE));
     public static final Supplier<GravestoneBlock> QUARTZ_BRICKS_GRAVESTONE = BLOCKS.register("quartz_bricks_gravestone", () -> new GravestoneBlock(QUARTZ_BRICKS_GRAVESTONE_TEXTURE));
+
+    public static final Supplier<GravestoneBlock2> GRAVESTONE2 = BLOCKS.register("gravestone2", () -> new GravestoneBlock2(GravestoneType.MOSSY_COBBLESTONE, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).forceSolidOn().sound(SoundType.BASALT).strength(1.5F)));
 
     public static final Supplier<UrnBlock> BLACK_URN = BLOCKS.register("black_urn", () -> new UrnBlock());
     public static final Supplier<UrnBlock> BROWN_URN = BLOCKS.register("brown_urn", () -> new UrnBlock());

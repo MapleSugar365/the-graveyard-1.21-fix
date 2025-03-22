@@ -13,7 +13,8 @@
     "WorldGenRegionAccessor"
   ],
   "client": [
-    "ClientPlayNetworkHandlerMixin"
+    "ClientPlayNetworkHandlerMixin",
+    "LocalPlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

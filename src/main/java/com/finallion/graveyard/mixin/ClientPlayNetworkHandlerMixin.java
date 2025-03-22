@@ -1,8 +1,11 @@
 package com.finallion.graveyard.mixin;
 
 import com.finallion.graveyard.blockentities.GravestoneBlockEntity;
+import com.finallion.graveyard.blockentities.GravestoneBlockEntity2;
+import com.finallion.graveyard.client.gui.Gravestone2Screen;
 import com.finallion.graveyard.client.gui.GravestoneScreen;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.core.BlockPos;
@@ -30,6 +33,7 @@ public class ClientPlayNetworkHandlerMixin {
 
     @Shadow @Final private RegistryAccess.Frozen registryAccess;
 
+    // TODO: DELETE
     @Inject(method = "handleOpenSignEditor", at = @At(value = "HEAD"), cancellable = true)
     public void handleOpenSignEditor(ClientboundOpenSignEditorPacket packet, CallbackInfo info) {
         PacketUtils.ensureRunningOnSameThread(packet, (ClientGamePacketListener) this, Minecraft.getInstance());
@@ -45,6 +49,7 @@ public class ClientPlayNetworkHandlerMixin {
     }
 
 
+    // TODO: DELETE
     @Inject(method = "handleBlockEntityData", at = @At(value = "HEAD"), cancellable = true)
     public void handleBlockEntityData(ClientboundBlockEntityDataPacket p_104976_, CallbackInfo info) {
       PacketUtils.ensureRunningOnSameThread(p_104976_, (ClientGamePacketListener) this, Minecraft.getInstance());

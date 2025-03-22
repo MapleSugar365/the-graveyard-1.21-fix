@@ -117,8 +117,6 @@ public class GravestoneBlockEntityRenderer implements BlockEntityRenderer<Graves
         matrixStack.mulPose(Axis.YP.rotationDegrees(rotation));
         Minecraft.getInstance().getItemRenderer().renderStatic(new ItemStack(state.getBlock().asItem(), 1), ItemDisplayContext.GROUND, i, j, matrixStack, vertexConsumerProvider, level, 2);
 
-
-
         matrixStack.popPose();
     }
 

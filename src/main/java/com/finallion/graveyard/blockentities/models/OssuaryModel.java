@@ -21,8 +21,4 @@ public class OssuaryModel extends GeoModel<OssuaryBlockEntity> {
     public ResourceLocation getTextureResource(OssuaryBlockEntity entity) {
         return ResourceLocation.fromNamespaceAndPath(TheGraveyard.MOD_ID, "textures/block/ossuary.png");
     }
-
-
-
-
 }

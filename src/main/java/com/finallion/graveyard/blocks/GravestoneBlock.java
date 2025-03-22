@@ -74,6 +74,7 @@ public class GravestoneBlock extends StandingSignBlock {
         }
     }
 
+    @Override
     public BlockState rotate(BlockState state, Rotation rotation) {
         return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }

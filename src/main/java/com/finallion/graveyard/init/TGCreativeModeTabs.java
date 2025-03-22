@@ -44,6 +44,8 @@ public class TGCreativeModeTabs {
                 output.accept(TGItems.RED_SANDSTONE_GRAVESTONE.get());
                 output.accept(TGItems.SANDSTONE_GRAVESTONE.get());
 
+                output.accept(TGItems.GRAVESTONE2.get());
+
                 output.accept(TGItems.SKULL_WITH_RIB_CAGE.get());
                 output.accept(TGItems.LEANING_SKELETON.get());
                 output.accept(TGItems.SKULL_PILE.get());

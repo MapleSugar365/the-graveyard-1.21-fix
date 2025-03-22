@@ -4,13 +4,18 @@ package com.finallion.graveyard.client;
 import com.finallion.graveyard.TheGraveyard;
 import com.finallion.graveyard.blockentities.render.BrazierBlockEntityRenderer;
 import com.finallion.graveyard.blockentities.render.GravestoneBlockEntityRenderer;
+import com.finallion.graveyard.blockentities.render.GravestoneBlockEntity2Renderer;
 import com.finallion.graveyard.blockentities.render.OssuaryBlockEntityRenderer;
 import com.finallion.graveyard.blockentities.render.SarcophagusBlockEntityRenderer;
 import com.finallion.graveyard.blocks.SarcophagusBlock;
 import com.finallion.graveyard.client.gui.OssuaryScreen;
 import com.finallion.graveyard.entities.models.CorruptedIllagerModel;
 import com.finallion.graveyard.entities.renders.*;
-import com.finallion.graveyard.init.*;
+import com.finallion.graveyard.init.TGBlockEntities;
+import com.finallion.graveyard.init.TGBlocks;
+import com.finallion.graveyard.init.TGEntities;
+import com.finallion.graveyard.init.TGParticles;
+import com.finallion.graveyard.init.TGScreens;
 import com.finallion.graveyard.particles.GraveyardFogParticle;
 import com.finallion.graveyard.particles.GraveyardHandParticle;
 import com.finallion.graveyard.particles.GraveyardSoulParticle;
@@ -26,17 +31,16 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.GrassColor;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.fml.common.EventBusSubscriber;
 
 import java.util.function.Supplier;
 
@@ -86,7 +90,7 @@ public class TheGraveyardClient {
         event.registerEntityRenderer(TGEntities.GHOULING.get(), GhoulingRenderer::new);
         event.registerEntityRenderer(TGEntities.NAMELESS_HANGED.get(), NamelessHangedRenderer::new);
 
-
+        event.registerBlockEntityRenderer(TGBlockEntities.GRAVESTONE_BLOCK_ENTITY_2.get(), GravestoneBlockEntity2Renderer::new);
         event.registerBlockEntityRenderer(TGBlockEntities.GRAVESTONE_BLOCK_ENTITY.get(), GravestoneBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(TGBlockEntities.SARCOPHAGUS_BLOCK_ENTITY.get(), SarcophagusBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(TGBlockEntities.BRAZIER_BLOCK_ENTITY.get(), (BlockEntityRendererProvider.Context in) -> new BrazierBlockEntityRenderer());
