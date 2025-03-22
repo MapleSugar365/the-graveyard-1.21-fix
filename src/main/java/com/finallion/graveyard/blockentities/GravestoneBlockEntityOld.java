@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.UnaryOperator;
 
-public class GravestoneBlockEntity extends BlockEntity {
+public class GravestoneBlockEntityOld extends BlockEntity {
     private static final Logger LOGGER = LogUtils.getLogger();
     private static final int MAX_TEXT_LINE_WIDTH = 90;
     private static final int TEXT_LINE_HEIGHT = 10;
@@ -41,11 +41,11 @@ public class GravestoneBlockEntity extends BlockEntity {
     private SignText frontText;
     private boolean isWaxed;
 
-    public GravestoneBlockEntity(BlockPos p_155700_, BlockState p_155701_) {
+    public GravestoneBlockEntityOld(BlockPos p_155700_, BlockState p_155701_) {
         this(TGBlockEntities.GRAVESTONE_BLOCK_ENTITY.get(), p_155700_, p_155701_);
     }
 
-    public GravestoneBlockEntity(BlockEntityType p_249609_, BlockPos p_248914_, BlockState p_249550_) {
+    public GravestoneBlockEntityOld(BlockEntityType p_249609_, BlockPos p_248914_, BlockState p_249550_) {
         super(p_249609_, p_248914_, p_249550_);
         this.frontText = createDefaultSignText();
     }
@@ -221,7 +221,7 @@ public class GravestoneBlockEntity extends BlockEntity {
         return player == null || player.distanceToSqr((double)this.getBlockPos().getX(), (double)this.getBlockPos().getY(), (double)this.getBlockPos().getZ()) > 64.0D;
     }
 
-    public static void tick(Level p_277662_, BlockPos p_278050_, BlockState p_277927_, GravestoneBlockEntity p_277928_) {
+    public static void tick(Level p_277662_, BlockPos p_278050_, BlockState p_277927_, GravestoneBlockEntityOld p_277928_) {
         UUID uuid = p_277928_.getPlayerWhoMayEdit();
         if (uuid != null) {
             p_277928_.clearInvalidPlayerWhoMayEdit(p_277928_, p_277662_, uuid);
@@ -229,7 +229,7 @@ public class GravestoneBlockEntity extends BlockEntity {
 
     }
 
-    private void clearInvalidPlayerWhoMayEdit(GravestoneBlockEntity p_277656_, Level p_277853_, UUID p_277849_) {
+    private void clearInvalidPlayerWhoMayEdit(GravestoneBlockEntityOld p_277656_, Level p_277853_, UUID p_277849_) {
         if (p_277656_.playerIsTooFarAwayToEdit(p_277849_)) {
             p_277656_.setAllowedPlayerEditor(null);
         }

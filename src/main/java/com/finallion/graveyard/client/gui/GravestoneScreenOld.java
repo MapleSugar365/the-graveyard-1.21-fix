@@ -1,7 +1,7 @@
 package com.finallion.graveyard.client.gui;
 
-import com.finallion.graveyard.blockentities.GravestoneBlockEntity;
-import com.finallion.graveyard.blockentities.render.GravestoneBlockEntityRenderer;
+import com.finallion.graveyard.blockentities.GravestoneBlockEntityOld;
+import com.finallion.graveyard.blockentities.render.GravestoneBlockEntityRendererOld;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.gui.GuiGraphics;
@@ -25,8 +25,8 @@ import net.neoforged.api.distmarker.OnlyIn;
 import java.util.stream.IntStream;
 
 @OnlyIn(Dist.CLIENT)
-public class GravestoneScreen extends Screen {
-    private final GravestoneBlockEntity sign;
+public class GravestoneScreenOld extends Screen {
+    private final GravestoneBlockEntityOld sign;
     private SignRenderer.SignModel model;
     private int frame;
     private int line;
@@ -35,11 +35,11 @@ public class GravestoneScreen extends Screen {
     private final String[] messages;
     private SignText text;
 
-    public GravestoneScreen(GravestoneBlockEntity p_277842_, boolean p_277969_) {
+    public GravestoneScreenOld(GravestoneBlockEntityOld p_277842_, boolean p_277969_) {
         this(p_277842_, p_277969_, Component.translatable("gravestone.edit"));
     }
 
-    public GravestoneScreen(GravestoneBlockEntity p_277792_, boolean p_278039_, Component p_277393_) {
+    public GravestoneScreenOld(GravestoneBlockEntityOld p_277792_, boolean p_278039_, Component p_277393_) {
         super(p_277393_);
         this.sign = p_277792_;
         this.text = p_277792_.getText();
@@ -54,7 +54,7 @@ public class GravestoneScreen extends Screen {
         }).bounds(this.width / 2 - 100, this.height / 4 + 144, 200, 20).build());
         this.signField = new TextFieldHelper(() -> this.messages[this.line], this::setMessage, TextFieldHelper.createClipboardGetter(this.minecraft), TextFieldHelper.createClipboardSetter(this.minecraft), (p_280850_) -> this.minecraft.font.width(p_280850_) <= this.sign.getMaxTextLineWidth());
         this.woodType = WoodType.OAK;
-        this.model = GravestoneBlockEntityRenderer.createSignModel(this.minecraft.getEntityModels(), this.woodType);
+        this.model = GravestoneBlockEntityRendererOld.createSignModel(this.minecraft.getEntityModels(), this.woodType);
     }
 
     private void setMessage(String p_277913_) {
@@ -123,7 +123,7 @@ public class GravestoneScreen extends Screen {
         guiGraphics.pose().pushPose();
         guiGraphics.pose().scale(0.6666667F, -0.6666667F, -0.6666667F);
         MultiBufferSource.BufferSource irendertypebuffer$impl = this.minecraft.renderBuffers().bufferSource();
-        VertexConsumer ivertexbuilder = GravestoneBlockEntityRenderer.getConsumer(irendertypebuffer$impl, sign.getBlockState().getBlock());
+        VertexConsumer ivertexbuilder = GravestoneBlockEntityRendererOld.getConsumer(irendertypebuffer$impl, sign.getBlockState().getBlock());
         this.model.stick.visible = false;
         this.model.root.render(guiGraphics.pose(), ivertexbuilder, 15728880, OverlayTexture.NO_OVERLAY);
 

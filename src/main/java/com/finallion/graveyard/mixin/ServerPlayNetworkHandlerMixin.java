@@ -1,20 +1,13 @@
 package com.finallion.graveyard.mixin;
 
-import com.finallion.graveyard.TheGraveyard;
-import com.finallion.graveyard.blockentities.GravestoneBlockEntity;
+import com.finallion.graveyard.blockentities.GravestoneBlockEntityOld;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.Connection;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ServerboundSignUpdatePacket;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.FilteredText;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.SignBlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -38,11 +31,11 @@ public class ServerPlayNetworkHandlerMixin {
 
         if (serverlevel.hasChunkAt(blockpos)) {
             BlockEntity blockentity = serverlevel.getBlockEntity(blockpos);
-            if (!(blockentity instanceof GravestoneBlockEntity) ) {
+            if (!(blockentity instanceof GravestoneBlockEntityOld) ) {
                 return;
             }
 
-            GravestoneBlockEntity signblockentity = (GravestoneBlockEntity) blockentity;
+            GravestoneBlockEntityOld signblockentity = (GravestoneBlockEntityOld) blockentity;
             signblockentity.updateSignText(this.player, signText);
             info.cancel();
         }

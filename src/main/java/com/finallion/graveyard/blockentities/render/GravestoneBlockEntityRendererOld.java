@@ -1,8 +1,8 @@
 package com.finallion.graveyard.blockentities.render;
 
 import com.finallion.graveyard.TheGraveyard;
-import com.finallion.graveyard.blockentities.GravestoneBlockEntity;
-import com.finallion.graveyard.blocks.GravestoneBlock;
+import com.finallion.graveyard.blockentities.GravestoneBlockEntityOld;
+import com.finallion.graveyard.blocks.GravestoneBlockOld;
 import com.finallion.graveyard.init.TGBlocks;
 import com.google.common.collect.Maps;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -40,18 +40,18 @@ import java.util.List;
 
 
 @OnlyIn(Dist.CLIENT)
-public class GravestoneBlockEntityRenderer implements BlockEntityRenderer<GravestoneBlockEntity> {
+public class GravestoneBlockEntityRendererOld implements BlockEntityRenderer<GravestoneBlockEntityOld> {
     private static final int RENDER_DISTANCE = Mth.square(16);
     private final Font font;
     private static final HashMap<Block, RenderType> LAYERS = Maps.newHashMap();
     private static RenderType defaultLayer;
 
-    public GravestoneBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
+    public GravestoneBlockEntityRendererOld(BlockEntityRendererProvider.Context ctx) {
         this.font = ctx.getFont();
     }
 
 
-    public void render(GravestoneBlockEntity signBlockEntity, float f, PoseStack matrixStack, MultiBufferSource vertexConsumerProvider, int p_112501_, int p_112502_) {
+    public void render(GravestoneBlockEntityOld signBlockEntity, float f, PoseStack matrixStack, MultiBufferSource vertexConsumerProvider, int p_112501_, int p_112502_) {
         BlockState blockState = signBlockEntity.getBlockState();
         matrixStack.pushPose();
 
@@ -59,7 +59,7 @@ public class GravestoneBlockEntityRenderer implements BlockEntityRenderer<Graves
         // offset on block
         matrixStack.translate(0.5D, 0.25D, 0.5D);
 
-        float rotation = -(blockState.getValue(GravestoneBlock.FACING).toYRot());
+        float rotation = -(blockState.getValue(GravestoneBlockOld.FACING).toYRot());
         //float h = -((float)((Integer)blockState.getStructure(SignBlock.ROTATION) * 360) / 16.0F);
         matrixStack.mulPose(Axis.YP.rotationDegrees(rotation));
         matrixStack.pushPose();
@@ -113,7 +113,7 @@ public class GravestoneBlockEntityRenderer implements BlockEntityRenderer<Graves
         matrixStack.translate(0.5, 0.43, 0.5);
         matrixStack.scale(2.28F, 2.15F, 2.28F);
 
-        float rotation = -((float)state.getValue(GravestoneBlock.FACING).toYRot());
+        float rotation = -((float)state.getValue(GravestoneBlockOld.FACING).toYRot());
         matrixStack.mulPose(Axis.YP.rotationDegrees(rotation));
         Minecraft.getInstance().getItemRenderer().renderStatic(new ItemStack(state.getBlock().asItem(), 1), ItemDisplayContext.GROUND, i, j, matrixStack, vertexConsumerProvider, level, 2);
 
@@ -121,7 +121,7 @@ public class GravestoneBlockEntityRenderer implements BlockEntityRenderer<Graves
     }
 
 
-    private static boolean isOutlineVisible(GravestoneBlockEntity p_173642_, int p_173643_) {
+    private static boolean isOutlineVisible(GravestoneBlockEntityOld p_173642_, int p_173643_) {
         if (p_173643_ == DyeColor.BLACK.getTextColor()) {
             return true;
         } else {

@@ -1,6 +1,6 @@
 package com.finallion.graveyard.blocks;
 
-import com.finallion.graveyard.blockentities.GravestoneBlockEntity;
+import com.finallion.graveyard.blockentities.GravestoneBlockEntityOld;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.CommonComponents;
@@ -27,7 +27,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.StandingSignBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SignText;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
@@ -46,7 +45,7 @@ import java.util.List;
 import java.util.UUID;
 
 
-public class GravestoneBlock extends StandingSignBlock {
+public class GravestoneBlockOld extends StandingSignBlock {
     public static final IntegerProperty ROTATION = BlockStateProperties.ROTATION_16;
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty FLOOR = BlockStateProperties.BOTTOM;
@@ -54,7 +53,7 @@ public class GravestoneBlock extends StandingSignBlock {
     private static final VoxelShape SHAPE_FACING_NS = Block.box(0.0D, 0.0D, 4.0D, 16.0D, 16.0D, 12.0D);
     private final ResourceLocation texture;
 
-    public GravestoneBlock(ResourceLocation texture) {
+    public GravestoneBlockOld(ResourceLocation texture) {
         super(WoodType.OAK, Properties.of().noCollission().noOcclusion().sound(SoundType.BASALT).strength(1.5F));
         this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(FLOOR, true).setValue(WATERLOGGED, false).setValue(ROTATION, 0));
         this.texture = texture;
@@ -93,7 +92,7 @@ public class GravestoneBlock extends StandingSignBlock {
         SignApplicator signapplicator = signapplicator2;
         boolean flag1 = signapplicator != null && p_56281_.mayBuild();
         BlockEntity $$12 = p_56279_.getBlockEntity(p_56280_);
-        if ($$12 instanceof GravestoneBlockEntity signblockentity) {
+        if ($$12 instanceof GravestoneBlockEntityOld signblockentity) {
             if (!p_56279_.isClientSide) {
                 SignText signtext = signblockentity.getText();
                 boolean flag = signblockentity.executeClickCommandsIfPresent(p_56281_, p_56279_, p_56280_);
@@ -138,14 +137,14 @@ public class GravestoneBlock extends StandingSignBlock {
         return InteractionResult.PASS;
     }
 
-    private boolean hasEditableText(Player p_279394_, GravestoneBlockEntity p_279187_) {
+    private boolean hasEditableText(Player p_279394_, GravestoneBlockEntityOld p_279187_) {
         SignText signtext = p_279187_.getText();
         return Arrays.stream(signtext.getMessages(p_279394_.isTextFilteringEnabled())).allMatch((p_279411_) -> {
             return p_279411_.equals(CommonComponents.EMPTY) || p_279411_.getContents() instanceof PlainTextContents.LiteralContents;
         });
     }
 
-    public boolean useDyeOnSign(Level world, GravestoneBlockEntity signBlockEntity, DyeColor color) {
+    public boolean useDyeOnSign(Level world, GravestoneBlockEntityOld signBlockEntity, DyeColor color) {
         if (signBlockEntity.updateText((text) -> text.setColor(color))) {
             world.playSound(null, signBlockEntity.getBlockPos(), SoundEvents.DYE_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
             return true;
@@ -154,7 +153,7 @@ public class GravestoneBlock extends StandingSignBlock {
         }
     }
 
-    public boolean useInkOnSign(Level world, GravestoneBlockEntity signBlockEntity) {
+    public boolean useInkOnSign(Level world, GravestoneBlockEntityOld signBlockEntity) {
         if (signBlockEntity.updateText((text) -> {
             return text.setHasGlowingText(false);
         })) {
@@ -165,7 +164,7 @@ public class GravestoneBlock extends StandingSignBlock {
         }
     }
 
-    public boolean useGlowInkOnSign(Level world, GravestoneBlockEntity signBlockEntity) {
+    public boolean useGlowInkOnSign(Level world, GravestoneBlockEntityOld signBlockEntity) {
         if (signBlockEntity.updateText((text) -> text.setHasGlowingText(true))) {
             world.playSound(null, signBlockEntity.getBlockPos(), SoundEvents.GLOW_INK_SAC_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
             return true;
@@ -174,7 +173,7 @@ public class GravestoneBlock extends StandingSignBlock {
         }
     }
 
-    public boolean useWaxOnSign(Level world, GravestoneBlockEntity signBlockEntity) {
+    public boolean useWaxOnSign(Level world, GravestoneBlockEntityOld signBlockEntity) {
         if (signBlockEntity.setWaxed(true)) {
             world.levelEvent(null, 3003, signBlockEntity.getBlockPos(), 0);
             return true;
@@ -183,18 +182,18 @@ public class GravestoneBlock extends StandingSignBlock {
         }
     }
 
-    private boolean otherPlayerIsEditingSign(Player p_277952_, GravestoneBlockEntity p_277599_) {
+    private boolean otherPlayerIsEditingSign(Player p_277952_, GravestoneBlockEntityOld p_277599_) {
         UUID uuid = p_277599_.getPlayerWhoMayEdit();
         return uuid != null && !uuid.equals(p_277952_.getUUID());
     }
 
 
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new GravestoneBlockEntity(pos, state);
+        return new GravestoneBlockEntityOld(pos, state);
     }
 
     private void openScreen(Level world, BlockPos pos, Player placer) {
-        GravestoneBlockEntity sign = (GravestoneBlockEntity) world.getBlockEntity(pos);
+        GravestoneBlockEntityOld sign = (GravestoneBlockEntityOld) world.getBlockEntity(pos);
         if (!world.isClientSide) {
             sign.setAllowedPlayerEditor(placer.getUUID());
             ((ServerPlayer) placer).connection.send(new ClientboundOpenSignEditorPacket(pos, true));
@@ -202,7 +201,7 @@ public class GravestoneBlock extends StandingSignBlock {
     }
 
 
-    public void openEditScreen(Player player, GravestoneBlockEntity blockEntity, Level world, BlockPos pos, BlockState state) {
+    public void openEditScreen(Player player, GravestoneBlockEntityOld blockEntity, Level world, BlockPos pos, BlockState state) {
         blockEntity.setAllowedPlayerEditor(player.getUUID());
         openScreen(world, pos, player);
     }

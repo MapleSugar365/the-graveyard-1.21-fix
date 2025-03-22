@@ -1,17 +1,13 @@
 package com.finallion.graveyard.mixin;
 
-import com.finallion.graveyard.blockentities.GravestoneBlockEntity;
-import com.finallion.graveyard.blockentities.GravestoneBlockEntity2;
-import com.finallion.graveyard.client.gui.Gravestone2Screen;
-import com.finallion.graveyard.client.gui.GravestoneScreen;
+import com.finallion.graveyard.blockentities.GravestoneBlockEntityOld;
+import com.finallion.graveyard.client.gui.GravestoneScreenOld;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.PacketUtils;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -39,11 +35,11 @@ public class ClientPlayNetworkHandlerMixin {
         PacketUtils.ensureRunningOnSameThread(packet, (ClientGamePacketListener) this, Minecraft.getInstance());
         BlockPos blockpos = packet.getPos();
         BlockEntity blockentity = this.level.getBlockEntity(blockpos);
-        if (blockentity instanceof GravestoneBlockEntity) {
+        if (blockentity instanceof GravestoneBlockEntityOld) {
             BlockState blockstate = this.level.getBlockState(blockpos);
-            GravestoneBlockEntity signblockentity1 = new GravestoneBlockEntity(blockpos, blockstate);
+            GravestoneBlockEntityOld signblockentity1 = new GravestoneBlockEntityOld(blockpos, blockstate);
             signblockentity1.setLevel(this.level);
-            Minecraft.getInstance().setScreen(new GravestoneScreen((GravestoneBlockEntity) blockentity,  false));
+            Minecraft.getInstance().setScreen(new GravestoneScreenOld((GravestoneBlockEntityOld) blockentity,  false));
             info.cancel();
         }
     }
@@ -55,10 +51,10 @@ public class ClientPlayNetworkHandlerMixin {
       PacketUtils.ensureRunningOnSameThread(p_104976_, (ClientGamePacketListener) this, Minecraft.getInstance());
       BlockPos blockpos = p_104976_.getPos();
       BlockEntity blockEntity = this.level.getBlockEntity(blockpos);
-        if (blockEntity instanceof GravestoneBlockEntity) {
+        if (blockEntity instanceof GravestoneBlockEntityOld) {
             CompoundTag tag = p_104976_.getTag();
             if (tag != null) {
-                ((GravestoneBlockEntity) blockEntity).loadAdditional(tag, this.registryAccess);
+                ((GravestoneBlockEntityOld) blockEntity).loadAdditional(tag, this.registryAccess);
             }
             info.cancel();
         }
