@@ -12,7 +12,6 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
-
 @Mod("graveyard")
 public class TheGraveyard {
     public static final String MOD_ID = "graveyard";
@@ -32,22 +31,23 @@ public class TheGraveyard {
         TGBlockEntities.BLOCK_ENTITIES.register(modEventBus);
         TGParticles.PARTICLES.register(modEventBus);
         TGBiomeModifiers.BIOME_MODIFIERS.register(modEventBus);
+        TGStructureType.STRUCTURE_TYPES.register(modEventBus);
 
         modEventBus.addListener(this::setupClient);
 
-        modContainer.registerConfig(ModConfig.Type.COMMON, GraveyardConfig.COMMON_SPEC, MOD_ID + "-1.19.x-common.toml");
+        modContainer.registerConfig(ModConfig.Type.COMMON, GraveyardConfig.COMMON_SPEC, MOD_ID + "-common.toml");
     }
 
     public void setupClient(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             /* CHANGING ITEM TEXTURE */
-            ItemProperties.register(TGItems.VIAL_OF_BLOOD.get(), ResourceLocation.withDefaultNamespace("charged"), (stack, world, entity, seed) -> {
-                if (entity != null && stack.is(TGItems.VIAL_OF_BLOOD.get())) {
-                    return VialOfBlood.getBlood(stack);
-                }
-                return 0.0F;
-            });
-
+            ItemProperties.register(TGItems.VIAL_OF_BLOOD.get(), ResourceLocation.withDefaultNamespace("charged"),
+                    (stack, world, entity, seed) -> {
+                        if (entity != null && stack.is(TGItems.VIAL_OF_BLOOD.get())) {
+                            return VialOfBlood.getBlood(stack);
+                        }
+                        return 0.0F;
+                    });
         });
     }
 }

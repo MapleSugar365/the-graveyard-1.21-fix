@@ -31,23 +31,24 @@ import java.util.Optional;
 
 public class TGJigsawStructure extends Structure {
 
-    public static final MapCodec<TGJigsawStructure> CODEC = RecordCodecBuilder.mapCodec(instance ->
-            instance.group(
-                    Structure.StructureSettings.CODEC.forGetter(feature -> feature.config),
-                    StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(config -> config.startPool),
-                    ResourceLocation.CODEC.optionalFieldOf("start_jigsaw_name").forGetter(config -> config.startJigsawName),
-                    Codec.intRange(0, 7).fieldOf("size").forGetter(config -> config.size),
-                    HeightProvider.CODEC.fieldOf("start_height").forGetter(config -> config.startHeight),
-                    Codec.BOOL.fieldOf("use_expansion_hack").forGetter(config -> config.useExpansionHack),
-                    Heightmap.Types.CODEC.optionalFieldOf("project_start_to_heightmap").forGetter(structure -> structure.projectStartToHeightmap),
-                    Codec.intRange(1, 128).fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter),
-                    Codec.INT.fieldOf("terrain_check_size").forGetter(structure -> structure.terrainCheckSize),
-                    Codec.INT.fieldOf("max_height_difference").forGetter(structure -> structure.maxHeightDifference),
-                    Codec.STRING.listOf().fieldOf("whitelist").orElse(new ArrayList<>()).forGetter(config -> config.whitelist),
-                    Codec.STRING.listOf().fieldOf("mod_whitelist").orElse(new ArrayList<>()).forGetter(config -> config.blacklist),
-                    Codec.STRING.fieldOf("structure_name").forGetter(config -> config.structureName))
-                    .apply(instance, TGJigsawStructure::new));
-
+    public static final MapCodec<TGJigsawStructure> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            Structure.StructureSettings.CODEC.forGetter(feature -> feature.config),
+            StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(config -> config.startPool),
+            ResourceLocation.CODEC.optionalFieldOf("start_jigsaw_name").forGetter(config -> config.startJigsawName),
+            Codec.intRange(0, 7).fieldOf("size").forGetter(config -> config.size),
+            HeightProvider.CODEC.fieldOf("start_height").forGetter(config -> config.startHeight),
+            Codec.BOOL.fieldOf("use_expansion_hack").forGetter(config -> config.useExpansionHack),
+            Heightmap.Types.CODEC.optionalFieldOf("project_start_to_heightmap")
+                    .forGetter(structure -> structure.projectStartToHeightmap),
+            Codec.intRange(1, 128).fieldOf("max_distance_from_center")
+                    .forGetter(structure -> structure.maxDistanceFromCenter),
+            Codec.INT.fieldOf("terrain_check_size").forGetter(structure -> structure.terrainCheckSize),
+            Codec.INT.fieldOf("max_height_difference").forGetter(structure -> structure.maxHeightDifference),
+            Codec.STRING.listOf().fieldOf("whitelist").orElse(new ArrayList<>()).forGetter(config -> config.whitelist),
+            Codec.STRING.listOf().fieldOf("mod_whitelist").orElse(new ArrayList<>())
+                    .forGetter(config -> config.blacklist),
+            Codec.STRING.fieldOf("structure_name").forGetter(config -> config.structureName))
+            .apply(instance, TGJigsawStructure::new));
 
     public final Holder<StructureTemplatePool> startPool;
     public final Optional<ResourceLocation> startJigsawName;
@@ -63,7 +64,10 @@ public class TGJigsawStructure extends Structure {
     public final String structureName;
     protected final Structure.StructureSettings config;
 
-    public TGJigsawStructure(Structure.StructureSettings config, Holder<StructureTemplatePool> startPool, Optional<ResourceLocation> startJigsawName, int size, HeightProvider startHeight, Boolean useExpansionHack, Optional<Heightmap.Types> projectStartToHeightmap, int maxDistanceFromCenter, int terrainCheckSize, int maxHeightDifference, List<String> whitelist, List<String> blacklist, String structureName) {
+    public TGJigsawStructure(Structure.StructureSettings config, Holder<StructureTemplatePool> startPool,
+            Optional<ResourceLocation> startJigsawName, int size, HeightProvider startHeight, Boolean useExpansionHack,
+            Optional<Heightmap.Types> projectStartToHeightmap, int maxDistanceFromCenter, int terrainCheckSize,
+            int maxHeightDifference, List<String> whitelist, List<String> blacklist, String structureName) {
         super(config);
         this.config = config;
         this.startPool = startPool;
@@ -80,21 +84,27 @@ public class TGJigsawStructure extends Structure {
         this.structureName = structureName;
     }
 
-    public TGJigsawStructure(Structure.StructureSettings config, Holder<StructureTemplatePool> startPool, int size, HeightProvider startHeight, boolean useExpansionHack, Heightmap.Types projectStartToHeightmap, int terrainCheckSize, int maxHeightDifference, List<String> whitelist, List<String> blacklist, String structureName) {
-        this(config, startPool, Optional.empty(), size, startHeight, useExpansionHack, Optional.of(projectStartToHeightmap), 80, terrainCheckSize, maxHeightDifference, whitelist, blacklist, structureName);
+    public TGJigsawStructure(Structure.StructureSettings config, Holder<StructureTemplatePool> startPool, int size,
+            HeightProvider startHeight, boolean useExpansionHack, Heightmap.Types projectStartToHeightmap,
+            int terrainCheckSize, int maxHeightDifference, List<String> whitelist, List<String> blacklist,
+            String structureName) {
+        this(config, startPool, Optional.empty(), size, startHeight, useExpansionHack,
+                Optional.of(projectStartToHeightmap), 80, terrainCheckSize, maxHeightDifference, whitelist, blacklist,
+                structureName);
     }
 
-    public TGJigsawStructure(Structure.StructureSettings config, Holder<StructureTemplatePool> startPool, int size, HeightProvider startHeight, boolean useExpansionHack, int terrainCheckSize, int maxHeightDifference, List<String> whitelist, List<String> blacklist, String structureName) {
-        this(config, startPool, Optional.empty(), size, startHeight, useExpansionHack, Optional.empty(), 80, terrainCheckSize, maxHeightDifference, whitelist, blacklist, structureName);
+    public TGJigsawStructure(Structure.StructureSettings config, Holder<StructureTemplatePool> startPool, int size,
+            HeightProvider startHeight, boolean useExpansionHack, int terrainCheckSize, int maxHeightDifference,
+            List<String> whitelist, List<String> blacklist, String structureName) {
+        this(config, startPool, Optional.empty(), size, startHeight, useExpansionHack, Optional.empty(), 80,
+                terrainCheckSize, maxHeightDifference, whitelist, blacklist, structureName);
     }
-
 
     @Override
     public Optional<Structure.GenerationStub> findGenerationPoint(Structure.GenerationContext context) {
         if (!canGenerate(structureName)) {
             return Optional.empty();
         }
-
 
         BlockPos blockpos = context.chunkPos().getMiddleBlockPosition(0);
 
@@ -125,12 +135,12 @@ public class TGJigsawStructure extends Structure {
             if (!TGJigsawStructure.canGenerateInTheAir(context, whitelist, blacklist)) {
                 return Optional.empty();
             }
-        }else {
-            if (!TGJigsawStructure.canGenerate(context, terrainCheckSize, blockpos, maxHeightDifference, whitelist, blacklist)) {
+        } else {
+            if (!TGJigsawStructure.canGenerate(context, terrainCheckSize, blockpos, maxHeightDifference, whitelist,
+                    blacklist)) {
                 return Optional.empty();
             }
         }
-
 
         return JigsawPlacement.addPieces(
                 context,
@@ -145,16 +155,18 @@ public class TGJigsawStructure extends Structure {
                 JigsawStructure.DEFAULT_LIQUID_SETTINGS);
     }
 
-    private static boolean canGenerateUnderground(Structure.GenerationContext context, List<String> whitelist, List<String> blacklist) {
+    private static boolean canGenerateUnderground(Structure.GenerationContext context, List<String> whitelist,
+            List<String> blacklist) {
         return true;
     }
 
-    private static boolean canGenerateInTheAir(Structure.GenerationContext context, List<String> whitelist, List<String> blacklist) {
+    private static boolean canGenerateInTheAir(Structure.GenerationContext context, List<String> whitelist,
+            List<String> blacklist) {
         return true;
     }
 
-
-    private static boolean canGenerate(Structure.GenerationContext context, int size, BlockPos centerOfChunk, int maxHeightDifference, List<String> whitelist, List<String> blacklist) {
+    private static boolean canGenerate(Structure.GenerationContext context, int size, BlockPos centerOfChunk,
+            int maxHeightDifference, List<String> whitelist, List<String> blacklist) {
         if (!isTerrainFlat(context, centerOfChunk, size, maxHeightDifference)) {
             return false;
         }
@@ -162,36 +174,53 @@ public class TGJigsawStructure extends Structure {
         return true;
     }
 
-
-    protected static boolean isTerrainFlat(Structure.GenerationContext context, BlockPos centerChunk, int size, int maxHeightDifference) {
+    protected static boolean isTerrainFlat(Structure.GenerationContext context, BlockPos centerChunk, int size,
+            int maxHeightDifference) {
         ChunkGenerator generator = context.chunkGenerator();
         LevelHeightAccessor heightLimitView = context.heightAccessor();
         int chunkX = centerChunk.getX();
         int chunkZ = centerChunk.getZ();
         RandomState noiseConfig = context.randomState();
 
-        int i1 = generator.getFirstOccupiedHeight(chunkX, chunkZ, Heightmap.Types.WORLD_SURFACE_WG, heightLimitView, noiseConfig);
-        int j1 = generator.getFirstOccupiedHeight(chunkX, chunkZ + size, Heightmap.Types.WORLD_SURFACE_WG, heightLimitView, noiseConfig);
-        int k1 = generator.getFirstOccupiedHeight(chunkX + size, chunkZ, Heightmap.Types.WORLD_SURFACE_WG, heightLimitView, noiseConfig);
-        int o1 = generator.getFirstOccupiedHeight(chunkX, chunkZ - size, Heightmap.Types.WORLD_SURFACE_WG, heightLimitView, noiseConfig);
-        int p1 = generator.getFirstOccupiedHeight(chunkX - size, chunkZ, Heightmap.Types.WORLD_SURFACE_WG, heightLimitView, noiseConfig);
-        //int l1 = generator.getFirstOccupiedHeight(chunkX + size, chunkZ + size, Heightmap.Types.WORLD_SURFACE_WG, heightLimitView, noiseConfig);
-        //int m1 = generator.getFirstOccupiedHeight(chunkX - size, chunkZ - size, Heightmap.Types.WORLD_SURFACE_WG, heightLimitView, noiseConfig);
-        //int n1 = generator.getFirstOccupiedHeight(chunkX + size, chunkZ - size, Heightmap.Types.WORLD_SURFACE_WG, heightLimitView, noiseConfig);
-        //int q1 = generator.getFirstOccupiedHeight(chunkX - size, chunkZ + size, Heightmap.Types.WORLD_SURFACE_WG, heightLimitView, noiseConfig);
+        int i1 = generator.getFirstOccupiedHeight(chunkX, chunkZ, Heightmap.Types.WORLD_SURFACE_WG, heightLimitView,
+                noiseConfig);
+        int j1 = generator.getFirstOccupiedHeight(chunkX, chunkZ + size, Heightmap.Types.WORLD_SURFACE_WG,
+                heightLimitView, noiseConfig);
+        int k1 = generator.getFirstOccupiedHeight(chunkX + size, chunkZ, Heightmap.Types.WORLD_SURFACE_WG,
+                heightLimitView, noiseConfig);
+        int o1 = generator.getFirstOccupiedHeight(chunkX, chunkZ - size, Heightmap.Types.WORLD_SURFACE_WG,
+                heightLimitView, noiseConfig);
+        int p1 = generator.getFirstOccupiedHeight(chunkX - size, chunkZ, Heightmap.Types.WORLD_SURFACE_WG,
+                heightLimitView, noiseConfig);
+        // int l1 = generator.getFirstOccupiedHeight(chunkX + size, chunkZ + size,
+        // Heightmap.Types.WORLD_SURFACE_WG, heightLimitView, noiseConfig);
+        // int m1 = generator.getFirstOccupiedHeight(chunkX - size, chunkZ - size,
+        // Heightmap.Types.WORLD_SURFACE_WG, heightLimitView, noiseConfig);
+        // int n1 = generator.getFirstOccupiedHeight(chunkX + size, chunkZ - size,
+        // Heightmap.Types.WORLD_SURFACE_WG, heightLimitView, noiseConfig);
+        // int q1 = generator.getFirstOccupiedHeight(chunkX - size, chunkZ + size,
+        // Heightmap.Types.WORLD_SURFACE_WG, heightLimitView, noiseConfig);
 
         NoiseColumn sample1 = generator.getBaseColumn(chunkX, chunkZ, heightLimitView, noiseConfig);
         NoiseColumn sample2 = generator.getBaseColumn(chunkX, chunkZ + size, heightLimitView, noiseConfig);
         NoiseColumn sample3 = generator.getBaseColumn(chunkX + size, chunkZ, heightLimitView, noiseConfig);
         NoiseColumn sample4 = generator.getBaseColumn(chunkX, chunkZ - size, heightLimitView, noiseConfig);
         NoiseColumn sample5 = generator.getBaseColumn(chunkX - size, chunkZ, heightLimitView, noiseConfig);
-        //VerticalBlockSample sample6 = generator.getColumnSample(chunkX + size, chunkZ + size, heightLimitView, noiseConfig);
-        //VerticalBlockSample sample7 = generator.getColumnSample(chunkX - size, chunkZ - size, heightLimitView, noiseConfig);
-        //VerticalBlockSample sample8 = generator.getColumnSample(chunkX + size, chunkZ - size, heightLimitView, noiseConfig);
-        //VerticalBlockSample sample9 = generator.getColumnSample(chunkX - size, chunkZ + size, heightLimitView, noiseConfig);
+        // VerticalBlockSample sample6 = generator.getColumnSample(chunkX + size, chunkZ
+        // + size, heightLimitView, noiseConfig);
+        // VerticalBlockSample sample7 = generator.getColumnSample(chunkX - size, chunkZ
+        // - size, heightLimitView, noiseConfig);
+        // VerticalBlockSample sample8 = generator.getColumnSample(chunkX + size, chunkZ
+        // - size, heightLimitView, noiseConfig);
+        // VerticalBlockSample sample9 = generator.getColumnSample(chunkX - size, chunkZ
+        // + size, heightLimitView, noiseConfig);
 
         // subtract -1 if getHeightOnGround
-        if (sample1.getBlock(i1).getFluidState().is(FluidTags.WATER) || sample2.getBlock(j1).getFluidState().is(FluidTags.WATER) || sample3.getBlock(k1).getFluidState().is(FluidTags.WATER) || sample4.getBlock(o1).getFluidState().is(FluidTags.WATER) || sample5.getBlock(p1).getFluidState().is(FluidTags.WATER)) {
+        if (sample1.getBlock(i1).getFluidState().is(FluidTags.WATER)
+                || sample2.getBlock(j1).getFluidState().is(FluidTags.WATER)
+                || sample3.getBlock(k1).getFluidState().is(FluidTags.WATER)
+                || sample4.getBlock(o1).getFluidState().is(FluidTags.WATER)
+                || sample5.getBlock(p1).getFluidState().is(FluidTags.WATER)) {
             return false;
         }
 
@@ -206,7 +235,7 @@ public class TGJigsawStructure extends Structure {
     }
 
     public StructureType<?> type() {
-        return TGStructureType.TG_JIGSAW;
+        return TGStructureType.TG_JIGSAW.get();
     }
 
     private boolean canGenerate(String name) {
