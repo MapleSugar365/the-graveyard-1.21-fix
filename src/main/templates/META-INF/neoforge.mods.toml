@@ -7,7 +7,7 @@ loaderVersion = "${loader_version_range}"
 # The license for you mod.
 license = "${mod_license}"
 # A URL to refer people to when problems occur with this mod
-issueTrackerURL="https://github.com/finallion/The-Graveyard-FORGE/issues" #optional
+issueTrackerURL="https://github.com/MapleSugar365/the-graveyard-1.21-fix/issues" #optional
 
 [[mods]]
 # The modid of the mod
