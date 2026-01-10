@@ -16,7 +16,7 @@ public class TGCreativeModeTabs {
     public static final Supplier<CreativeModeTab> ITEMS_TAB = CREATIVE_MODE_TAB.register("items_tab", () ->
             new CreativeModeTab.Builder(CreativeModeTab.Row.TOP,0)
             .icon(() -> new ItemStack(Items.SKELETON_SKULL))
-            .title(Component.literal("The Graveyard"))
+            .title(Component.translatable("itemGroup.graveyard_group"))
             .displayItems((featureFlags, output) -> {
                 output.accept(TGItems.INCARNATED_EVIL_MUSIC_DISC.get());
 
