@@ -7,6 +7,7 @@ import com.finallion.graveyard.advancements.KillHordeTrigger;
 import com.finallion.graveyard.advancements.KillWhileBlindedTrigger;
 import com.finallion.graveyard.advancements.KilledByBoneDaggerTrigger;
 import com.finallion.graveyard.advancements.SpawnWraithTrigger;
+import com.finallion.graveyard.advancements.VisitAtNightTrigger;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -23,4 +24,5 @@ public class TGAdvancements {
     public static Supplier<KillHordeTrigger> KILL_HORDE = TRIGGER_TYPES.register("kill_horde", KillHordeTrigger::new);
     public static Supplier<SpawnWraithTrigger> SPAWN_WRAITH = TRIGGER_TYPES.register("spawn_wraith", SpawnWraithTrigger::new);
     public static Supplier<EquipCoffinTrigger> EQUIP_COFFIN = TRIGGER_TYPES.register("equip_coffin", EquipCoffinTrigger::new);
+    public static Supplier<VisitAtNightTrigger> VISIT_AT_NIGHT = TRIGGER_TYPES.register("visit_at_night", VisitAtNightTrigger::new);
 }
