@@ -5,6 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.structure.Structure;
 
 public class TGTags {
     public static final TagKey<Biome> GHOUL_SPAWNS = biomeTag("ghoul_spawns");
@@ -12,10 +13,15 @@ public class TGTags {
     public static final TagKey<Biome> REAPER_SPAWNS = biomeTag("reaper_spawns");
     public static final TagKey<Biome> REVENANT_SPAWNS = biomeTag("revenant_spawns");
     public static final TagKey<Biome> SKELETON_CREEPER_SPAWNS = biomeTag("skeleton_creeper_spawns");
+    public static final TagKey<Structure> GRAVEYARD_STRUCTURES = structureTag("graveyard_structures");
 
 
     public static TagKey<Biome> biomeTag(String name) {
         return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(TheGraveyard.MOD_ID, name));
+    }
+
+    public static TagKey<Structure> structureTag(String name) {
+        return TagKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(TheGraveyard.MOD_ID, name));
     }
 
 }

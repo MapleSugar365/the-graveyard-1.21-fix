@@ -4,6 +4,7 @@ import com.finallion.graveyard.TheGraveyard;
 import com.finallion.graveyard.entities.horde.GraveyardHordeSpawner;
 import com.finallion.graveyard.init.TGAdvancements;
 import com.finallion.graveyard.util.TGFileWriterReader;
+import com.finallion.graveyard.util.TGTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
@@ -13,7 +14,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.levelgen.structure.Structure;
@@ -34,12 +34,11 @@ import java.util.Optional;
 @EventBusSubscriber(modid = TheGraveyard.MOD_ID)
 public class TGServerEvents {
     private static Map<ResourceLocation, GraveyardHordeSpawner> spawners = new HashMap<>();
-    private static final TagKey<Structure> GRAVEYARD_STRUCTURES = TagKey.create(Registries.STRUCTURE,ResourceLocation.fromNamespaceAndPath(TheGraveyard.MOD_ID, "graveyard_structures"));
 
 
     private static boolean isPlayerInGraveyardStructure(ServerLevel level, BlockPos pos) {
         Registry<Structure> registry = level.registryAccess().registryOrThrow(Registries.STRUCTURE);
-        Optional<HolderSet.Named<Structure>> tag = registry.getTag(GRAVEYARD_STRUCTURES);
+        Optional<HolderSet.Named<Structure>> tag = registry.getTag(TGTags.GRAVEYARD_STRUCTURES);
         if (tag.isEmpty()) return false;
 
         StructureManager structureManager = level.structureManager();
