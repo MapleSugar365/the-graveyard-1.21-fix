@@ -75,8 +75,6 @@ public class SarcophagusBlock extends BaseEntityBlock implements SimpleWaterlogg
     public final boolean isCoffin;
     public final ResourceLocation lidModelLocation;
     public final ResourceLocation baseModelLocation;
-    public BakedModel lidModel;
-    public BakedModel baseModel;
 
     public SarcophagusBlock(Properties properties, boolean isCoffin, ResourceLocation lidModelLocation, ResourceLocation baseModelLocation) {
         super(properties);
@@ -260,11 +258,11 @@ public class SarcophagusBlock extends BaseEntityBlock implements SimpleWaterlogg
     }
 
     public BakedModel getLidModel() {
-        return lidModel != null ? lidModel : (lidModel = Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(lidModelLocation)));
+        return Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(lidModelLocation));
     }
 
     public BakedModel getBaseModel() {
-        return baseModel != null ? baseModel : (baseModel = Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(baseModelLocation)));
+        return Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(baseModelLocation));
     }
 
     // Adapted from BedBlock#getBlockType
