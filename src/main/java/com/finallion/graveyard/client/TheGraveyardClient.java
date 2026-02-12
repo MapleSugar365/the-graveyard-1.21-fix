@@ -18,6 +18,7 @@ import com.finallion.graveyard.init.TGScreens;
 import com.finallion.graveyard.particles.GraveyardFogParticle;
 import com.finallion.graveyard.particles.GraveyardHandParticle;
 import com.finallion.graveyard.particles.GraveyardSoulParticle;
+import com.finallion.graveyard.util.ClientModelManager;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -126,6 +127,11 @@ public class TheGraveyardClient {
             event.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(TheGraveyard.MOD_ID, "item/" + woodType + "_lid")));
         }
 
+    }
+
+    @SubscribeEvent
+    public static void onModelBake(ModelEvent.ModifyBakingResult event) {
+        ClientModelManager.clearCache();
     }
 
 }

@@ -4,6 +4,7 @@ import com.finallion.graveyard.blockentities.SarcophagusBlockEntity;
 import com.finallion.graveyard.blockentities.enums.SarcophagusPart;
 import com.finallion.graveyard.blocks.SarcophagusBlock;
 import com.finallion.graveyard.init.TGBlockEntities;
+import com.finallion.graveyard.util.ClientModelManager;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -58,8 +59,11 @@ public class SarcophagusBlockEntityRenderer implements BlockEntityRenderer<Sarco
             case NORTH -> matrixStack.translate(-1.0F, 0F, 0F);
         }
 
-        BakedModel model = ((SarcophagusBlock) entity.getBlockState().getBlock()).getBaseModel();
-        modelBlockRenderer.renderModel(matrixStack.last(), vertexConsumer.getBuffer(ItemBlockRenderTypes.getRenderType(entity.getBlockState(), true)), entity.getBlockState(), model, 1.0F, 1.0F, 1.0F, light, overlay);
+        SarcophagusBlock sarcophagusBlock = (SarcophagusBlock) entity.getBlockState().getBlock();
+        BakedModel model = ClientModelManager.getCachedModel(sarcophagusBlock.baseModelLocation);
+        if (model != null) {
+            modelBlockRenderer.renderModel(matrixStack.last(), vertexConsumer.getBuffer(ItemBlockRenderTypes.getRenderType(entity.getBlockState(), true)), entity.getBlockState(), model, 1.0F, 1.0F, 1.0F, light, overlay);
+        }
 
         matrixStack.popPose();
     }
@@ -84,10 +88,12 @@ public class SarcophagusBlockEntityRenderer implements BlockEntityRenderer<Sarco
         matrixStack.translate(g * 0.3, g * 0.3, 0.0F); // lid offset to the ground and away from body
         matrixStack.mulPose(Axis.ZN.rotationDegrees(g * 45)); // lid rotation
 
-        BakedModel model = ((SarcophagusBlock) entity.getBlockState().getBlock()).getLidModel();
-        modelBlockRenderer.renderModel(matrixStack.last(), vertexConsumer.getBuffer(ItemBlockRenderTypes.getRenderType(entity.getBlockState(), true)), entity.getBlockState(), model, 1.0F, 1.0F, 1.0F, light, overlay);
+        SarcophagusBlock sarcophagusBlock = (SarcophagusBlock) entity.getBlockState().getBlock();
+        BakedModel model = ClientModelManager.getCachedModel(sarcophagusBlock.lidModelLocation);
+        if (model != null) {
+            modelBlockRenderer.renderModel(matrixStack.last(), vertexConsumer.getBuffer(ItemBlockRenderTypes.getRenderType(entity.getBlockState(), true)), entity.getBlockState(), model, 1.0F, 1.0F, 1.0F, light, overlay);
+        }
 
         matrixStack.popPose();
     }
 }
-

@@ -10,9 +10,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -255,14 +252,6 @@ public class SarcophagusBlock extends BaseEntityBlock implements SimpleWaterlogg
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
         return level.isClientSide ? createTickerHelper(blockEntityType, TGBlockEntities.SARCOPHAGUS_BLOCK_ENTITY.get(), SarcophagusBlockEntity::lidAnimateTick) : null;
-    }
-
-    public BakedModel getLidModel() {
-        return Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(lidModelLocation));
-    }
-
-    public BakedModel getBaseModel() {
-        return Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(baseModelLocation));
     }
 
     // Adapted from BedBlock#getBlockType
