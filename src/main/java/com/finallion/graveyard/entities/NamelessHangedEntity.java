@@ -140,8 +140,8 @@ public class NamelessHangedEntity extends AbstractVillager implements GeoEntity 
         }
 
         if (this.isAlive() && !this.isTrading() && level().isNight()) {
-            if (!this.getOffers().isEmpty()) {
-                if (!this.level().isClientSide) {
+            if (!this.level().isClientSide) {
+                if (!this.getOffers().isEmpty()) {
                     this.setTradingPlayer(player);
                     this.openTradingScreen(player, this.getDisplayName(), 1);
                     level().playSound(null, player.blockPosition(), TGSounds.NAMELESS_HANGED_INTERACT.get(), SoundSource.HOSTILE, 0.6F, 1.0F);
