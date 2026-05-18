@@ -174,7 +174,7 @@ public class CommonConfig {
         this.enableReaper = builder.define("reaper.enabled", true);
         this.weightReaper = builder.defineInRange("reaper.weight", 10, 0, 100);
         this.minGroupSizeReaper = builder.defineInRange("reaper.minGroupSizeReaper", 2, 1, 100);
-        this.maxGroupSizeReaper = builder.defineInRange("reaper.maxGroupSizeGhoul", 3, 1, 100);
+        this.maxGroupSizeReaper = builder.defineInRange("reaper.maxGroupSizeReaper", 3, 1, 100);
         this.reaperCanBurnInSunlight = builder.define("reaper.canBurnInSunlight", true);
         this.reaperCanBeWithered = builder.define("reaper.canBeWithered", true);
 
